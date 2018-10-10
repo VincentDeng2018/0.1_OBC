@@ -1,4 +1,4 @@
-#include <absacc.h>
+//#include <absacc.h>
 
 
 #include "lcd.h"

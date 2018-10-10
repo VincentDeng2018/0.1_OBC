@@ -2333,6 +2333,102 @@
     </file>
   </group>
   <group>
+    <name>FreeRTOS</name>
+    <group>
+      <name>include</name>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\croutine.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\deprecated_definitions.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\event_groups.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\FreeRTOS.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\list.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\mpu_prototypes.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\mpu_wrappers.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\portable.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\projdefs.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\queue.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\semphr.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\StackMacros.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\task.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\FreeRTOS\include\timers.h</name>
+      </file>
+    </group>
+    <group>
+      <name>portable</name>
+      <group>
+        <name>Common</name>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\Common\mpu_wrappers.c</name>
+        </file>
+      </group>
+      <group>
+        <name>IAR</name>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\IAR\FreeRTOSConfig.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\IAR\port.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\IAR\portasm.s</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\IAR\portmacro.h</name>
+        </file>
+      </group>
+      <group>
+        <name>MemMang</name>
+        <file>
+          <name>$PROJ_DIR$\FreeRTOS\portable\MemMang\heap_2.c</name>
+        </file>
+      </group>
+    </group>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\croutine.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\event_groups.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\list.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\queue.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\tasks.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\FreeRTOS\timers.c</name>
+    </file>
+  </group>
+  <group>
     <name>HSI</name>
     <group>
       <name>CAN</name>
@@ -2358,6 +2454,30 @@
         <name>$PROJ_DIR$\HSI\GPIO\GPIO_Globals.h</name>
       </file>
     </group>
+    <group>
+      <name>LCD</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\LCD\lcd.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\LCD\lcd.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\LCD\LCD_TaskHandler.c</name>
+      </file>
+    </group>
+    <group>
+      <name>Timer</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\Timer\TIM_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Timer\TIM_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Timer\TIM_Globals.h</name>
+      </file>
+    </group>
     <file>
       <name>$PROJ_DIR$\HSI\stm32f10x_conf.h</name>
     </file>
@@ -2377,9 +2497,6 @@
       <name>CoreSupport</name>
       <file>
         <name>$PROJ_DIR$\MCAL\CoreSupport\core_cm3.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\MCAL\CoreSupport\core_cm3.h</name>
       </file>
     </group>
     <group>
@@ -2544,6 +2661,57 @@
     <file>
       <name>$PROJ_DIR$\MCAL\system_stm32f10x.h</name>
     </file>
+  </group>
+  <group>
+    <name>Module</name>
+    <group>
+      <name>CANOpenCiA418</name>
+      <group>
+        <name>CANOpenStack</name>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenBasic.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenBasic.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenLifeguard.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenNmt.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenOdTypes.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenSDO.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenState.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenState.h</name>
+        </file>
+      </group>
+      <group>
+        <name>Portable</name>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\Portable\CAN_HandlerRTOS.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\Portable\CAN_Portable.h</name>
+        </file>
+      </group>
+      <group>
+        <name>ProfileOD</name>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.cpp</name>
+        </file>
+      </group>
+    </group>
   </group>
 </project>
 

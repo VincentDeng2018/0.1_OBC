@@ -31,7 +31,6 @@
 #include "GPIO_Globals.h"
 #include "CAN_Globals.h"
 #include "CanOpenBasic.h"
-#include "LCD_Driver.h"
 #include "lcd.h"
 
 /********************************************************************************************************

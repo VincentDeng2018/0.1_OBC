@@ -23,6 +23,8 @@
 /*********************************************************************************
 * Global Functions
 *********************************************************************************/
+uint8_t ReadOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t* plength, uint8_t *pdata);
+uint8_t WriteOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t length, uint8_t *pdata);
 
 
 /*******************************************************************************

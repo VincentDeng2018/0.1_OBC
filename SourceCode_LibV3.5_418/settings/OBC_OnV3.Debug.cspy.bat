@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "E:\01_SVNServer\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5\settings\OBC_OnV3.Debug.general.xcl" --backend -f "E:\01_SVNServer\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5\settings\OBC_OnV3.Debug.driver.xcl" 
+"E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\settings\OBC_OnV3.Debug.general.xcl" --backend -f "E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\settings\OBC_OnV3.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "E:\01_SVNServer\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5\settings\OBC_OnV3.Debug.general.xcl" "--debug_file=%~1" --backend -f "E:\01_SVNServer\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5\settings\OBC_OnV3.Debug.driver.xcl" 
+"E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\settings\OBC_OnV3.Debug.general.xcl" "--debug_file=%~1" --backend -f "E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\settings\OBC_OnV3.Debug.driver.xcl" 
 
 @echo off 
 :end

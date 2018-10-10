@@ -1,14 +1,14 @@
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armproc.dll" 
+"E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armproc.dll" 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armstlink2.dll" 
+"E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armstlink2.dll" 
 
-"E:\01_SVNServer\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5\Debug\Exe\OBC_OnV3.5.out" 
+"E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Exe\OBC_OnV3.5.out" 
 
---plugin "D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armbat.dll" 
+--plugin "E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armbat.dll" 
 
---device_macro "D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\config\debugger\ST\STM32F1xx.dmac" 
+--device_macro "E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\config\debugger\ST\STM32F1xx.dmac" 
 
---flash_loader "D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\config\flashloader\ST\FlashSTM32F105xB.board" 
+--flash_loader "E:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\config\flashloader\ST\FlashSTM32F105xB.board" 
 
 
 
