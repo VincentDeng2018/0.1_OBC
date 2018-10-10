@@ -1,0 +1,646 @@
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "c8051F340.h"
+   2          #include <intrins.h>
+   3          #include <absacc.h>
+   4          #include <stdlib.h>
+   5          
+   6          #include <main.h>
+   7          #include <usb_api.h>
+   8          #include <mmc_sd\mmc_sd.h>
+   9          #include <lcd\lcd.h>
+  10          #include <tp\tp.h>
+  11          
+  12          xdata unsigned char Packet[64];   // Last packet received from host 
+  13          unsigned char f_down=0;
+  14          unsigned char f_debug=0;
+  15          unsigned char f_read=0;
+  16          unsigned char f_para=0;
+  17          unsigned char f_init=0;
+  18          unsigned char f_other=0;
+  19          unsigned char pic=0;
+  20          unsigned int  bf=0;
+  21          unsigned long int sd=1;
+  22          
+  23          unsigned char VerifyCode0=0xaa;
+  24          unsigned char VerifyCode1=0x55;
+  25          unsigned char VerifyCode2=0xff;
+  26          
+  27          /********************************************************************************/
+  28          code const UINT USB_VID = 0x10C4;
+  29          code const UINT USB_PID = 0xEA61;
+  30          code const BYTE USB_MfrStr[] = {0x1A,0x03,'S',0,'i',0,'l',0,'i',0,'c',0,'o',0,'n',0,' ',0,'L',0,'a',0,'b',
+             -0,'s',0};                       // Manufacturer String
+  31          code const BYTE USB_ProductStr[] = {0x10,0x03,'U',0,'S',0,'B',0,' ',0,'A',0,'P',0,'I',0}; // Product Desc.
+             - String
+  32          code const BYTE USB_SerialStr[] = {0x0a,0x03,'F',0,'3',0,'4',0,'0',0};
+  33          code const BYTE USB_MaxPower = 15;            // Max current = 30 mA (15 * 2)
+  34          code const BYTE USB_PwAttributes = 0x80;      // Bus-powered, remote wakeup not supported
+  35          code const UINT USB_bcdDevice = 0x0100;       // Device release number 1.00
+  36          
+  37          /********************************************************************************/
+  38          
+  39          
+  40          /*******************************************************************************/
+  41          void main(void)
+  42          {
+  43   1        #ifdef SD_PIC_DEMO_MODE
+  44   1          unsigned char n;
+  45   1        #endif
+  46   1      
+  47   1        Devices_Init();
+  48   1        //MMC_SD_ReadSingleBlock(0);
+  49   1      
+  50   1        while(KEY_STEP)
+  51   1        {
+  52   2          DispBand(); 
+  53   2          //DispStr("TEST BEGIN",0,0,BLACK,WHITE);
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 2   
+
+  54   2        
+  55   2          #ifdef READ_REG          
+                    DispRegValue(0x00,1); //
+                  #endif 
+  58   2          WaitKey();Delay(200);           
+  59   2        
+  60   2          #ifdef SLEEP_TEST
+                  EnterSLP();
+                  WaitKey();Delay(200);
+                  ExitSLP();
+                  WaitKey();Delay(200);
+                  #endif
+  66   2        
+  67   2          DispColor_SPI_2_lane(RED);
+  68   2          //DispColor(RED);
+  69   2          WaitKey();Delay(200);
+  70   2        
+  71   2          DispColor_SPI_2_lane(GREEN);
+  72   2          WaitKey();Delay(200);
+  73   2        
+  74   2          DispColor_SPI_2_lane(BLUE);
+  75   2          WaitKey();Delay(200);
+  76   2        
+  77   2          DispColor_SPI_2_lane(WHITE);
+  78   2          WaitKey();Delay(200);
+  79   2        
+  80   2          DispColor_SPI_2_lane(BLACK);
+  81   2          WaitKey();Delay(200);
+  82   2      
+  83   2          DispColor_SPI_2_lane(GRAY50);
+  84   2          WaitKey();Delay(200);
+  85   2          
+  86   2      //    Disp_GRAY_565();
+  87   2      //    WaitKey();Delay(200);
+  88   2      //      DispColor_SPI_2_lane(WHITE);
+  89   2      //    WaitKey();Delay(200);
+  90   2      // Disp_GRAY_666();
+  91   2      //    WaitKey();Delay(200);
+  92   2      // Disp_GRAY_888();
+  93   2      //    WaitKey();Delay(200);
+  94   2      
+  95   2        
+  96   2      //    DispFrame();
+  97   2      //    WaitKey();Delay(200);
+  98   2        
+  99   2          #ifdef DEBUG  
+                    Debug();
+                  #endif 
+ 102   2        
+ 103   2          #ifdef EVAL_PIC
+                    DispPic(pic_eval);
+                    WaitKey();Delay(200);
+                  #endif
+ 107   2              
+ 108   2          #ifdef EXTEND_TEST
+                    DispScaleHor1();
+                    WaitKey();Delay(200);
+                
+              //      DispScaleVer();
+              //      WaitKey();Delay(200);
+                
+              //      DispScaleVer_Red();
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 3   
+
+              //      WaitKey();Delay(200);
+                
+              //      DispScaleVer_Green();
+              //      WaitKey();Delay(200);
+                
+              //      DispScaleVer_Blue();
+              //      WaitKey();Delay(200);
+                
+              //      DispScaleVer_Gray();
+              //      WaitKey();Delay(200);
+                
+              //      DispGrayHor16();
+              //      WaitKey();Delay(200);
+                
+              //      DispGrayHor32();
+              //      WaitKey();Delay(200);
+                
+              //      DispScaleHor2();
+              //      WaitKey();Delay(200);
+                
+              //      DispSnow();
+              //      WaitKey();Delay(200);
+                
+              //      DispBlock();
+              //      WaitKey();Delay(200);
+                  #endif
+ 142   2        
+ 143   2        
+ 144   2          #ifdef SD_PIC_DEMO_MODE
+ 145   2            for(n=0;n<1;n++)
+ 146   2            {
+ 147   3              DispPicFromSD(n);
+ 148   3              WaitKey();Delay(200);
+ 149   3      
+ 150   3              #ifdef DEBUG  
+                        Debug();
+                      #endif 
+ 153   3            }
+ 154   2          //  break;
+ 155   2          #endif
+ 156   2      
+ 157   2          #ifdef SD_PIC_TEST_MODE
+                    DispPicFromSD(0);
+                    WaitKey();Delay(200);
+                    break;
+                  #endif
+ 162   2      
+ 163   2          LCD_EnterSleep();
+ 164   2          WaitKey();Delay(200);
+ 165   2      
+ 166   2      
+ 167   2        }
+ 168   1      
+ 169   1        //touch panel draw line test
+ 170   1      
+ 171   1        #ifdef TP_TEST
+                  TP_DrawLine();
+                #endif
+ 174   1      
+ 175   1        //DispStr("TEST END",0,0,BLACK,WHITE); //test end
+ 176   1        //while(1); 
+ 177   1      }
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 4   
+
+ 178          
+ 179          //----------------------------------------------------------------------
+ 180          void Delay(unsigned int dly)
+ 181          {
+ 182   1          unsigned int i,j;
+ 183   1      
+ 184   1          for(i=0;i<dly;i++)
+ 185   1            for(j=0;j<255;j++);
+ 186   1      }
+ 187          #ifdef AUTO_NEXT
+              void WaitKey(void)
+              {  
+                unsigned int i;
+              
+                for(i=0;i<300;i++)
+                {
+                  Delay(20);
+                   
+                  #ifdef CONN_USB
+                    ConnToUSB();
+                  #endif  
+              
+                  while(!KEY_STEP);
+              
+                } 
+              }
+              #endif
+ 205          
+ 206          #ifdef MANUA_NEXT
+ 207          void WaitKey(void)
+ 208          {  
+ 209   1        while(KEY_STEP)
+ 210   1        {
+ 211   2          #ifdef CONN_USB
+ 212   2          ConnToUSB();
+ 213   2          #endif
+ 214   2        }
+ 215   1          
+ 216   1        Delay(500);
+ 217   1        while(!KEY_STEP);
+ 218   1      
+ 219   1      }
+ 220          #endif
+ 221          
+ 222          //f_debug
+ 223          //0     1      2        3            £¬    4         5     6         7
+ 224          //0xaa  0x55  0xff   ÊÇ·ñÏÔÊ¾ÔÚLCD      Ö¸Áû×òÊý¾Ý  dataH    dataL   ÏÔÊ¾µÄË®Æ½Î»ÖÃ
+ 225          
+ 226          //f_read
+ 227          //0     1      2        3            £¬    4         5     6        7          8
+ 228          //0xff  0x55  0xaa   ÊÇ·ñÏÔÊ¾ÔÚLCD      ÊÇ·ñÓÐÐ§    dataH    dataL   ¶Á²ÎÊýµÄ´ÎÊý    ÏÔÊ¾µÄË®Æ½Î»ÖÃ
+ 229          //reg_data[]={dataH,dataL,dataH,dataL,dataH,dataL...  } 
+ 230          
+ 231          //f_down
+ 232          //0     1      2        3            £¬    4      5    6        7    ...  35       36
+ 233          //0xaa  0xff  0x55   ÊÇ·ñÐ´ÈED¿¨       dataH,   dataL, dataH,   dataL,  ... dataH  dataL
+ 234          
+ 235          //f_init
+ 236          //0     1      2        3    £¬            4      5    6        7    ...  35       36
+ 237          //0xff  0xaa  0x55      -               Ö¸Áû×òÊý¾Ý  dataH  dataL      -   
+ 238            
+ 239          #ifdef CONN_USB
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 5   
+
+ 240          void ConnToUSB(void)
+ 241          {
+ 242   1        unsigned char i;
+ 243   1        xdata unsigned char reg_data[24]; 
+ 244   1        xdata unsigned char para_data[64];    
+ 245   1        unsigned char dat;
+ 246   1        unsigned int  reg_index;
+ 247   1        unsigned char data_num;
+ 248   1        unsigned char st[1]={1};
+ 249   1        
+ 250   1        //DispStr("DEBUG FOR USB",0,0,BLACK,WHITE);
+ 251   1        while(f_debug)
+ 252   1        {
+ 253   2           for(i=1;i<16;i++)
+ 254   2           {
+ 255   3               if(Packet[i*4]==0x00)
+ 256   3             {
+ 257   4                WriteComm((Packet[i*4+1]<<8)|Packet[i*4+2]);  
+ 258   4             }
+ 259   3             else if(Packet[i*4]==0x01)
+ 260   3             {
+ 261   4                WriteData((Packet[i*4+1]<<8)|Packet[i*4+2]);
+ 262   4        
+ 263   4             }
+ 264   3             else if(Packet[i*4]==0x80)
+ 265   3             {
+ 266   4                //  
+ 267   4             }
+ 268   3           } 
+ 269   2           _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 270   2           _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 271   2      
+ 272   2           DispStr("USB DEBUG",0,0,BLACK,WHITE);
+ 273   2      
+ 274   2           if((Packet[3])&0x01)
+ 275   2           {
+ 276   3             for(i=1;i<16;i++)
+ 277   3             {
+ 278   4                 if(Packet[i*4]==0x00)
+ 279   4               {  
+ 280   5                DispInt((Packet[i*4+1]<<8)|Packet[i*4+2],(FONT_W*4+4)*Packet[i*4+3],(FONT_H+1)*i,GREEN,BLACK);  
+ 281   5               }
+ 282   4               else if(Packet[i*4]==0x01)
+ 283   4               {
+ 284   5                DispInt((Packet[i*4+1]<<8)|Packet[i*4+2],(FONT_W*4+4)*Packet[i*4+3],(FONT_H+1)*i,BLUE,WHITE);     
+ 285   5               }
+ 286   4               else if(Packet[i*4]==0x80)
+ 287   4               {
+ 288   5                  //  
+ 289   5               }
+ 290   4             } 
+ 291   3           }
+ 292   2           _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 293   2           _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 294   2      
+ 295   2           f_debug=0;  
+ 296   2         }
+ 297   1      
+ 298   1      
+ 299   1        //////////////////////////////////////////////////////
+ 300   1        while(f_other)
+ 301   1        { 
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 6   
+
+ 302   2             for(i=0;i<64;i+=2)
+ 303   2             {
+ 304   3             CS0=0;
+ 305   3             //RD0=1;
+ 306   3             RS=1;
+ 307   3               WriteDispData(Packet[i], Packet[i+1]);    
+ 308   3             CS0=1;
+ 309   3      
+ 310   3               buffer[bf++]=Packet[i];
+ 311   3               buffer[bf++]=Packet[i+1];
+ 312   3             if(bf==512)
+ 313   3                 {      
+ 314   4                     SD_Start();
+ 315   4               MMC_SD_WriteSingleBlock(sd++); 
+ 316   4               buffer[0]=pic;
+ 317   4                   MMC_SD_WriteSingleBlock(0);      //Í³¼ÆÍ¼Æ¬ÊýÁ¿  buffer[0]=pi
+ 318   4                   bf=0;
+ 319   4                 }
+ 320   3             } 
+ 321   2      
+ 322   2           f_other=0;  
+ 323   2             Block_Write(st, 1);
+ 324   2          }
+ 325   1      
+ 326   1        //////////////////////////////////////////////////////
+ 327   1        while(f_down)
+ 328   1        {
+ 329   2          if(Packet[3]&&0x01) //download to sd
+ 330   2          { 
+ 331   3               for(i=4;i<36;i+=2)
+ 332   3               {
+ 333   4               CS0=0;
+ 334   4               //RD0=1;
+ 335   4               RS=1;
+ 336   4                 WriteDispData(Packet[i], Packet[i+1]);    
+ 337   4               CS0=1;
+ 338   4      
+ 339   4               buffer[bf++]=Packet[i];
+ 340   4                 buffer[bf++]=Packet[i+1];
+ 341   4        
+ 342   4               if(bf==512)
+ 343   4                   {      
+ 344   5                       SD_Start();
+ 345   5                 MMC_SD_WriteSingleBlock(sd++); 
+ 346   5                 buffer[0]=pic;
+ 347   5                     MMC_SD_WriteSingleBlock(0);      
+ 348   5                     bf=0;
+ 349   5                   }
+ 350   4        
+ 351   4               } 
+ 352   3             f_down=0; 
+ 353   3             Block_Write(st, 1);
+ 354   3      
+ 355   3           }
+ 356   2           else
+ 357   2           {
+ 358   3               for(i=4;i<36;i+=2)
+ 359   3               {
+ 360   4               CS0=0;
+ 361   4               //RD0=1;
+ 362   4               RS=1;
+ 363   4                 WriteDispData(Packet[i], Packet[i+1]);    
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 7   
+
+ 364   4               CS0=1;
+ 365   4        
+ 366   4               } 
+ 367   3             f_down=0; 
+ 368   3             Block_Write(st, 1);
+ 369   3           }
+ 370   2          }
+ 371   1      
+ 372   1          //////////////////////////////////////////////////////
+ 373   1        while(f_init)
+ 374   1        {
+ 375   2             for(i=4;i<36;i+=4)
+ 376   2             {
+ 377   3               if(Packet[i]==0x00)
+ 378   3             {
+ 379   4                WriteComm((Packet[i+1]<<8)|Packet[i+2]);  
+ 380   4             }
+ 381   3             else if(Packet[i]==0x01)
+ 382   3             {
+ 383   4                WriteData((Packet[i+1]<<8)|Packet[i+2]);  
+ 384   4             }
+ 385   3             else if(Packet[i]==0x10)
+ 386   3             {
+ 387   4              //Delay(Packet[i+1]); 
+ 388   4              //Delay(Packet[i+2]); 
+ 389   4              _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 390   4              _nop_();_nop_();_nop_();_nop_(); _nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+ 391   4             }
+ 392   3             else if(Packet[i]==0x80)
+ 393   3             {
+ 394   4                //
+ 395   4             }
+ 396   3             } 
+ 397   2           f_init=0;
+ 398   2           Block_Write(st, 1);
+ 399   2        }
+ 400   1      
+ 401   1        //////////////////////////////////////////////////////
+ 402   1        while(f_read)
+ 403   1        {
+ 404   2          for(i=0;i<24;i++)
+ 405   2            reg_data[i]=0x00; 
+ 406   2      
+ 407   2          data_num = Packet[7]*2; 
+ 408   2          reg_index=(Packet[5]<<8)|Packet[6];
+ 409   2            
+ 410   2          if(Packet[4]==0x01)
+ 411   2          {
+ 412   3            WriteComm(reg_index);
+ 413   3            for(i=0;i<data_num;i=i+2)
+ 414   3            {
+ 415   4              dat=ReadData();
+ 416   4              reg_data[i]=dat>>8;
+ 417   4              reg_data[i+1]=dat;
+ 418   4            }
+ 419   3          }
+ 420   2      
+ 421   2          f_read=0;  
+ 422   2          Block_Write(reg_data,data_num);
+ 423   2      
+ 424   2          Delay(100);
+ 425   2          DispStr("USB READ",0,0,BLACK,WHITE);
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 8   
+
+ 426   2          if((Packet[3])&0x01)
+ 427   2          {
+ 428   3            DispInt(reg_index,(FONT_W*4+4)*(Packet[8]),FONT_H+1,GREEN,BLACK);
+ 429   3            for(i=0;i<data_num;i=i+2)
+ 430   3            {
+ 431   4              DispInt((reg_data[i]<<8)|reg_data[i+1],(FONT_W*4+4)*(Packet[8]),(FONT_H+1)*(i/2+2),BLUE,WHITE);     
+ 432   4            }
+ 433   3          }
+ 434   2          }
+ 435   1        //////////////////////////////////////////////////////
+ 436   1        while(f_para)
+ 437   1        {
+ 438   2          for(i=0;i<64;i++)
+ 439   2            para_data[i]=0x00;  
+ 440   2      
+ 441   2          para_data[0]=((unsigned int)ROW)>>8;
+ 442   2          para_data[1]= (unsigned int)ROW;
+ 443   2          para_data[2]=((unsigned int)COL)>>8;
+ 444   2          para_data[3]=((unsigned int)COL);
+ 445   2      
+ 446   2          f_para=0;  
+ 447   2          Block_Write(para_data,64);
+ 448   2          }
+ 449   1      }
+ 450          #endif
+ 451          
+ 452          
+ 453          void  MCU_Init(void)
+ 454          {
+ 455   1          unsigned char n;
+ 456   1        PCA0MD &= ~0x40;
+ 457   1      
+ 458   1        //OSC
+ 459   1          OSCICN = 0x83;    //Internal oscillator enabled, SYSCLK = Internal Oscillator = 12MHz
+ 460   1          CLKMUL = 0x00;    //Select internal oscillator as clock multiplier source clock
+ 461   1      
+ 462   1          CLKMUL |= 0x80;   //Enable clock multiplier
+ 463   1      
+ 464   1        for(n=0;n<255;n++);
+ 465   1      
+ 466   1        CLKMUL |= 0xC0;           //Initialize the clock multiplier
+ 467   1        while(!(CLKMUL & 0x20));  //Wait for multiplier to lock
+ 468   1          CLKSEL = 0x03;            //Change SYSCLK to (4x Multiplier    ) = 48MHz  (48MHz is as fast as F34 wil
+             -l run); 0x03;
+ 469   1         
+ 470   1          RSTSRC   |= 0x02;  
+ 471   1      
+ 472   1        //P0~P4          //set high impedance , skipped by crossbar
+ 473   1        P0MDIN |= 0xFF;          //Êý×ÖÊäÈEÎÞÄ£ÄâÊäÈE©
+ 474   1        P0MDOUT |= 0xFF;     //ÍÆÍEä³ö£¨¿ÉÑ¡¿ªÂ©Êä³ö£¬Êä³öÉèÎªÍÆÍE¬ÊäÈEèÎª¿ªÂ©£©
+ 475   1      
+ 476   1          P1MDOUT |= 0xFF;         
+ 477   1          P1MDIN |= 0xFF; 
+ 478   1      
+ 479   1          P2MDOUT |= 0xFF;        
+ 480   1        P4MDOUT |= 0xFF;         
+ 481   1      
+ 482   1        P3MDIN |= 0xFF;
+ 483   1        P3MDOUT |= 0x17;     //0001 0111
+ 484   1      
+ 485   1        //TP_PENIRQ = 1;
+ 486   1        //TP_DOUT = 1;
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 9   
+
+ 487   1      
+ 488   1          XBR0     |= 0x02;
+ 489   1          XBR1     |= 0x40;       // Enable Crossbar
+ 490   1      
+ 491   1      }
+ 492          
+ 493          void SD_Start(void)
+ 494          {
+ 495   1        static unsigned char f;
+ 496   1        
+ 497   1        if(f==0)
+ 498   1        {
+ 499   2          #ifdef USE_SD_INIT
+ 500   2            SD_Init();
+ 501   2            Delay(10);
+ 502   2          #endif
+ 503   2          f=1;
+ 504   2        }
+ 505   1      }
+ 506          
+ 507          void Devices_Init(void)
+ 508          {
+ 509   1          //MCU
+ 510   1        MCU_Init();
+ 511   1      
+ 512   1        //USB
+ 513   1        USB_Clock_Start();                     // Init USB clock *before* calling USB_Init
+ 514   1          USB_Init(USB_VID,USB_PID,USB_MfrStr,USB_ProductStr,USB_SerialStr,USB_MaxPower,USB_PwAttributes,USB_bcd
+             -Device);
+ 515   1          USB_Int_Enable();
+ 516   1      
+ 517   1        //SPI
+ 518   1        SPI0CFG   = 0x70;
+ 519   1          SPI0CN    = 0x0f;
+ 520   1      
+ 521   1        //SD
+ 522   1        #ifdef USE_SD_INIT
+ 523   1          //SD_Init();
+ 524   1        #endif
+ 525   1      
+ 526   1        //LCM
+ 527   1          LCD_Init();
+ 528   1      
+ 529   1      }
+ 530          
+ 531          void Suspend_Device(void)
+ 532          {
+ 533   1         USB_Suspend();
+ 534   1      }
+ 535          
+ 536          //----------------------------------------------------------------------
+ 537          void  USB_API_TEST_ISR(void) interrupt 17
+ 538          {
+ 539   1         unsigned char INTVAL = Get_Interrupt_Source();
+ 540   1      
+ 541   1         if (INTVAL & RX_COMPLETE)
+ 542   1         {
+ 543   2           Block_Read(Packet,64);
+ 544   2      
+ 545   2           if(Packet[0]==VerifyCode0 && Packet[1]==VerifyCode1 && Packet[2]==VerifyCode2) 
+ 546   2           {  
+ 547   3              f_debug=1;
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 10  
+
+ 548   3           }
+ 549   2           else if(Packet[0]==VerifyCode2 && Packet[1]==VerifyCode1 && Packet[2]==VerifyCode0)
+ 550   2           {
+ 551   3              f_read=1;
+ 552   3           }
+ 553   2           else if(Packet[0]==VerifyCode1 && Packet[1]==VerifyCode0 && Packet[2]==VerifyCode2)
+ 554   2           {
+ 555   3              f_para=1;
+ 556   3           }
+ 557   2           else if(Packet[0]==VerifyCode0 && Packet[1]==VerifyCode2 && Packet[2]==VerifyCode1)
+ 558   2           {
+ 559   3              f_down=1;
+ 560   3           }
+ 561   2           else if(Packet[0]==VerifyCode2 && Packet[1]==VerifyCode0 && Packet[2]==VerifyCode1)
+ 562   2           {
+ 563   3              f_init=1;
+ 564   3           }
+ 565   2           else 
+ 566   2           {
+ 567   3              f_other=1;
+ 568   3           }
+ 569   2         }
+ 570   1      
+ 571   1         if (INTVAL & TX_COMPLETE)
+ 572   1         {         
+ 573   2          
+ 574   2         }
+ 575   1            
+ 576   1         if (INTVAL & DEV_SUSPEND)
+ 577   1         {
+ 578   2              Suspend_Device();
+ 579   2         }
+ 580   1      
+ 581   1         if (INTVAL & DEV_CONFIGURED)
+ 582   1         {
+ 583   2             MCU_Init();
+ 584   2         }
+ 585   1      
+ 586   1         if (INTVAL & DEVICE_OPEN)
+ 587   1         {
+ 588   2             BlockWrite(0,COL-1,0,ROW-1);
+ 589   2         }
+ 590   1      
+ 591   1         if (INTVAL & DEVICE_CLOSE)
+ 592   1         {
+ 593   2             pic=pic+1;
+ 594   2             BlockWrite(0,COL-1,0,ROW-1);
+ 595   2         }
+ 596   1      }
+ 597          
+ 598          
+ 599          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2090    ----
+   CONSTANT SIZE    =     80    ----
+   XDATA SIZE       =     64      88
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.52.0.0   MAIN                                                              03/15/2016 15:58:24 PAGE 11  
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

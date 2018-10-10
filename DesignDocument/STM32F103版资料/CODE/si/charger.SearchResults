@@ -1,0 +1,6 @@
+---- USBWakeUp_IRQn Matches (5 in 2 files) ----
+Hw_config.c (v:\charger\2015\codes\charger\user\src):  NVIC_InitStructure.NVIC_IRQChannel = USBWakeUp_IRQn;
+Stm32f10x.h (v:\charger\2015\codes\charger\cmsis\inc):  USBWakeUp_IRQn              = 42      /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */    
+Stm32f10x.h (v:\charger\2015\codes\charger\cmsis\inc):  USBWakeUp_IRQn              = 42      /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */  
+Stm32f10x.h (v:\charger\2015\codes\charger\cmsis\inc):  USBWakeUp_IRQn              = 42,     /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */
+Stm32f10x.h (v:\charger\2015\codes\charger\cmsis\inc):  USBWakeUp_IRQn              = 42,     /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */

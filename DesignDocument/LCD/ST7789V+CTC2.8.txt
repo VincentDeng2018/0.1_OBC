@@ -1,0 +1,79 @@
+Void ST7789VCMI24panelinitialcode(void)
+{
+//-----------------------------------ST7789V reset sequence------------------------------------//
+LCD_RESET=1;
+Delayms(1); //Delay 1ms
+LCD_RESET=0;
+Delayms(10); //Delay 10ms
+LCD_RESET=1;
+Delayms(120); //Delay 120ms
+//---------------------------------------------------------------------------------------------------//
+Write command 0x11;
+Delayms(120); //Delay 120ms
+//--------------------------------------Display Setting------------------------------------------//
+Write command 0x36;
+Write data 0x00;
+Write command 0x3a;
+Write data 0x05;
+Write command 0x35;
+Write data 0x00;
+//--------------------------------ST7789V Frame rate setting----------------------------------//
+Write command 0xb2;
+Write data 0x0c;
+Write data 0x0c;
+Write data 0x00;
+Write data 0x33;
+Write data 0x33;
+Write command 0xb7;
+Write data 0x35;
+//---------------------------------ST7789V Power setting--------------------------------------//
+Write command 0xbb;
+Write data 0x1a;
+Write command 0xc0;
+Write data 0x2c;
+Write command 0xc2;
+Write data 0x01;
+Write command 0xc3;
+Write data 0x0f;
+Write command 0xc4;
+Write data 0x20;
+Write command 0xc6;
+Write data 0x0f;
+Write command 0xd0;
+Write data 0xa4;
+Write data 0xa1;
+//--------------------------------ST7789V gamma setting---------------------------------------//
+Write command 0xe0;
+Write data 0xd0;
+Write data 0x01;
+Write data 0x08;
+Write data 0x0f;
+Write data 0x11;
+Write data 0x2a;
+Write data 0x36;
+Write data 0x55;
+Write data 0x44;
+Write data 0x4a;
+Write data 0x2b;
+Write data 0x1c;
+Write data 0x26;
+Write data 0x28;
+Write command 0xe1;
+Write data 0xd0;
+Write data 0x02;
+Write data 0x07;
+Write data 0x0a;
+Write data 0x0b;
+Write data 0x18;
+Write data 0x34;
+Write data 0x43;
+Write data 0x4a;
+Write data 0x2b;
+Write data 0x1b;
+Write data 0x1c;
+Write data 0x26;
+Write data 0x28;
+
+
+
+Write command 0x29;

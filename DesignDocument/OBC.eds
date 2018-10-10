@@ -1,0 +1,615 @@
+[FileInfo]
+EDSVersion=4.0
+FileName=OBC.eds
+FileVersion=0x01
+FileRevision=0x01
+Description=<no entry>
+CreationTime=09:18 PM
+CreationDate=08-05-2018
+CreatedBy=<VincentDeng>
+ModificationTime=10:42 PM
+ModificationDate=08-08-2018
+ModifiedBy=<no entry>
+
+[DeviceInfo]
+VendorName=<no entry>
+VendorNumber=0x00000000
+ProductName=<no entry>
+ProductNumber=0x00000000
+RevisionNumber=0x00000000
+OrderCode=<no entry>
+BaudRate_10=0
+BaudRate_20=0
+BaudRate_50=0
+BaudRate_125=0
+BaudRate_250=0
+BaudRate_500=0
+BaudRate_800=0
+BaudRate_1000=0
+SimpleBootUpMaster=0
+SimpleBootUpSlave=1
+Granularity=0x00
+DynamicChannelsSupported=0x00000002
+GroupMessaging=0
+LSS_Supported=0
+NrOfRXPDO=1
+NrOfTXPDO=0
+CompactPDO=0x00
+
+[Comments]
+Lines=0
+
+[DummyUsage]
+Dummy0001=0
+Dummy0002=1
+Dummy0003=1
+Dummy0004=1
+Dummy0005=1
+Dummy0006=1
+Dummy0007=1
+
+[DynamicChannels]
+
+[MandatoryObjects]
+SupportedObjects=0x0006
+1=0x1000
+2=0x1001
+3=0x1018
+4=0x1400
+5=0x1600
+6=0x6000
+
+[ManufacturerObjects]
+SupportedObjects=0x0000
+
+[OptionalObjects]
+SupportedObjects=0x0010
+1=0x1009
+2=0x100A
+3=0x100C
+4=0x100D
+5=0x1010
+6=0x1011
+7=0x1012
+8=0x1013
+9=0x1014
+10=0x1015
+11=0x1016
+12=0x1017
+13=0x1200
+14=0x1201
+15=0x1280
+16=0x1281
+
+[1000]
+ParameterName=Device type
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=419
+
+[1001]
+ParameterName=Error register
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1009]
+ParameterName=Manufacturer hardware version
+ObjectType=7
+AccessType=CONST
+DataType=0x0009
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=manufacturer hardware version
+
+[100A]
+ParameterName=Manufacturer software version
+ObjectType=7
+AccessType=CONST
+DataType=0x0009
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=manufacturer software version
+
+[100C]
+ParameterName=Guard time
+ObjectType=7
+AccessType=RW
+DataType=0x0006
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[100D]
+ParameterName=Life time factor
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1010]
+SubNumber=0x02
+ParameterName=Store parameters
+ObjectType=8
+ObjFlags=0x00000000
+
+[1010sub0]
+ParameterName=Largest sub-index supported
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=127
+DefaultValue=1
+
+[1010sub1]
+ParameterName=Save all parameters
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1011]
+SubNumber=0x02
+ParameterName=Restore default parameters
+ObjectType=8
+ObjFlags=0x00000000
+
+[1011sub0]
+ParameterName=Largest sub-index supported
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=127
+DefaultValue=1
+
+[1011sub1]
+ParameterName=Restore all default parameters
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1012]
+ParameterName=COB-ID TIME message
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+DefaultValue=0x100
+
+[1013]
+ParameterName=High resolution time stamp
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1014]
+ParameterName=COB-ID EMCY message
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+DefaultValue=$NODEID+0x80
+
+[1015]
+ParameterName=Inhibit time EMCY message
+ObjectType=7
+AccessType=RW
+DataType=0x0006
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1016]
+SubNumber=0x02
+ParameterName=Consumer heartbeat time
+ObjectType=8
+ObjFlags=0x00000000
+
+[1016sub0]
+ParameterName=Number of entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+DefaultValue=1
+
+[1016sub1]
+ParameterName=Consumer heartbeat time of Node-ID 1
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=0
+HighLimit=0x007FFFFF
+DefaultValue=0
+
+[1017]
+ParameterName=Producer heartbeat time
+ObjectType=7
+AccessType=RW
+DataType=0x0006
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1018]
+SubNumber=0x04
+ParameterName=Identity Object
+ObjectType=9
+ObjFlags=0x00000000
+
+[1018sub0]
+ParameterName=number of entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=4
+DefaultValue=3
+
+[1018sub1]
+ParameterName=Vendor ID
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0x00000000
+
+[1018sub2]
+ParameterName=Product code
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0x00000000
+
+[1018sub3]
+ParameterName=Revision number
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0x00000000
+
+[1200]
+SubNumber=0x03
+ParameterName=1. Server SDO parameter
+ObjectType=9
+ObjFlags=0x00000000
+
+[1200sub0]
+ParameterName=Number of supported entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=2
+HighLimit=2
+DefaultValue=2
+
+[1200sub1]
+ParameterName=COB-ID Client -> Server (rx)
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=$NODEID+0x600
+
+[1200sub2]
+ParameterName=COB-ID Server -> Client (tx)
+ObjectType=7
+AccessType=RO
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=$NODEID+0x580
+
+[1201]
+SubNumber=0x03
+ParameterName=2. Server SDO parameter
+ObjectType=9
+ObjFlags=0x00000000
+
+[1201sub0]
+ParameterName=Number of supported entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=2
+HighLimit=3
+DefaultValue=2
+
+[1201sub1]
+ParameterName=COB-ID Client -> Server (rx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1201sub2]
+ParameterName=COB-ID Server -> Client (tx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1280]
+SubNumber=0x04
+ParameterName=1. Client SDO parameter
+ObjectType=9
+ObjFlags=0x00000000
+
+[1280sub0]
+ParameterName=Number of supported entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=3
+HighLimit=3
+DefaultValue=3
+
+[1280sub1]
+ParameterName=COB-ID Client -> Server (tx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1280sub2]
+ParameterName=COB-ID Server -> Client (rx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1280sub3]
+ParameterName=Node-ID of the SDO Server
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=127
+
+[1281]
+SubNumber=0x04
+ParameterName=2. Client SDO parameter
+ObjectType=9
+ObjFlags=0x00000000
+
+[1281sub0]
+ParameterName=Number of supported entries
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=3
+HighLimit=3
+DefaultValue=3
+
+[1281sub1]
+ParameterName=COB-ID Client -> Server (tx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1281sub2]
+ParameterName=COB-ID Server -> Client (rx)
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=0xFFFFFFFF
+
+[1281sub3]
+ParameterName=Node-ID of the SDO Server
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+LowLimit=1
+HighLimit=127
+
+[1400]
+SubNumber=0x07
+ParameterName=RPDO1 communication parameter
+ObjectType=8
+ObjFlags=0x00000000
+
+[1400sub0]
+ParameterName=number of elements
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=6
+
+[1400sub1]
+ParameterName=COB-ID used by RPDO
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0x80000000
+
+[1400sub2]
+ParameterName=transmission type
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0xFF
+
+[1400sub3]
+ParameterName=inhibit time
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[1400sub4]
+ParameterName=compatibility entry
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[1400sub5]
+ParameterName=event-timer
+ObjectType=7
+AccessType=RW
+DataType=0x0006
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1400sub6]
+ParameterName=SYNC start value
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[1600]
+SubNumber=0x07
+ParameterName=RPDO1 mapping parameter
+ObjectType=8
+ObjFlags=0x00000000
+
+[1600sub0]
+ParameterName=number of elements
+ObjectType=7
+AccessType=RO
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=6
+
+[1600sub1]
+ParameterName=COB-ID used by RPDO
+ObjectType=7
+AccessType=RW
+DataType=0x0007
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0x80000000
+
+[1600sub2]
+ParameterName=transmission type
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0xFF
+
+[1600sub3]
+ParameterName=inhibit time
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[1600sub4]
+ParameterName=compatibility entry
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[1600sub5]
+ParameterName=event-timer
+ObjectType=7
+AccessType=RW
+DataType=0x0006
+PDOMapping=0
+ObjFlags=0x00000000
+DefaultValue=0
+
+[1600sub6]
+ParameterName=SYNC start value
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+
+[6000]
+ParameterName=<empty>
+ObjectType=7
+AccessType=RW
+DataType=0x0005
+PDOMapping=0
+ObjFlags=0x00000000
+

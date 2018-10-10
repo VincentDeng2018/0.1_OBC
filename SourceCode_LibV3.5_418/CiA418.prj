@@ -1,0 +1,27 @@
+[Project ID]
+Signature=UE Proj: v.1
+[Project Information]
+Compilable=1
+Use Relative Directory=1
+Relative to Project File=1
+Project Directory=E:\DYH\01_EmbeddedSoftware\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418
+Include Sub Directories=1
+Project Tagfile=
+Project Wordfile=
+Filter=
+Using VCS=0
+Save Account=0
+Create Tagfile=0
+CTags Legacy Support=0
+[Files]
+0=E:\DYH\01_EmbeddedSoftware\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\
+[uemakeXp]
+ReleaseMode=0
+[Debug Settings]
+Program Arguments=
+Symbol Paths=
+Working Directory=
+Selected Debugger=0
+Source Paths=
+[Group Filter]
+E:\DYH\01_EmbeddedSoftware\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\=*.asm;*.c;*.s;*.map;*.h;
