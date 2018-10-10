@@ -19,6 +19,10 @@
 #ifndef _CANOPENBASIC_H
 #define _CANOPENBASIC_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+   
 #include  <stdint.h>
 #include "CAN_Portable.h"
 #include "CanOpenState.h"
@@ -199,4 +203,8 @@ extern void ProceedExpSdoRxData(stCanMessage_t *pMsg);
 /* OD read / write API */
 extern uint8_t ReadOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t* plength, uint8_t *pdata);
 extern uint8_t WriteOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t length, uint8_t *pdata);
+
+#ifdef __cplusplus
+}
+#endif
 #endif
