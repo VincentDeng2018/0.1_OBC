@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3475927920</fileChecksum>
+  <fileChecksum>3676807935</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -1031,10 +1031,6 @@
           <name>ICCARM</name>
           <file> 179 108 241 168 23 5 155 0 160 151 161 240 239 270 159 97 91 92 93 95 96 112 113 180 114 111 178 177 99 181 123 144 120 145 125 126 133 87</file>
         </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 144 168 108 270 91 5 23 114 241 240 96 177 126 123 159 161 93 113 178 181 145 87 179 97 155 151 0 160 239 92 95 112 180 111 99 120 125 133</file>
-        </tool>
       </inputs>
     </file>
     <file>
@@ -1754,10 +1750,6 @@
     <forcedrebuild>
       <name>$PROJ_DIR$\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.c</name>
       <tool>ICCARM</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>[MULTI_TOOL]</name>
-      <tool>ILINK</tool>
     </forcedrebuild>
     <forcedrebuild>
       <name>$PROJ_DIR$\APP\TSK_TaskCommonApi.c</name>
