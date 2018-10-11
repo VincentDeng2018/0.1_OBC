@@ -59,6 +59,11 @@
                 <ExpandedNode>OBC_OnV3.5/HSI</ExpandedNode>
                 <ExpandedNode>OBC_OnV3.5/MCAL</ExpandedNode>
                 <ExpandedNode>OBC_OnV3.5/Module</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/CANOpenStack</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/Portable</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/ProfileOD</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/Output</ExpandedNode>
               </NodeDict>
             </Session>
           </Tab>
@@ -105,10 +110,9 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>14</YPos2>
-          <SelStart2>969</SelStart2>
-          <SelEnd2>969</SelEnd2>
+          <SelStart2>1003</SelStart2>
+          <SelEnd2>1003</SelEnd2>
         </Tab>
-        <ActiveTab>3</ActiveTab>
         <Tab>
           <Factory>TextEditor</Factory>
           <Filename>$WS_DIR$\MCAL\DeviceSupport\startup_stm32f10x_cl.s</Filename>
@@ -145,6 +149,31 @@
           <SelStart2>47644</SelStart2>
           <SelEnd2>47644</SelEnd2>
         </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\..\..\..\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.cpp</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>0</YPos2>
+          <SelStart2>0</SelStart2>
+          <SelEnd2>0</SelEnd2>
+        </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.cpp</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>0</YPos2>
+          <SelStart2>695</SelStart2>
+          <SelEnd2>695</SelEnd2>
+        </Tab>
+        <ActiveTab>8</ActiveTab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>
