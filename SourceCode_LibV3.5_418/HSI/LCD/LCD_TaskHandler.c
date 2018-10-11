@@ -20,6 +20,7 @@
 #include "lcd.h"
 #include "FreeRTOS.h"
 #include "semphr.h"
+#include "task.h"
 
 
 /*********************************************************************************

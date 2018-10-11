@@ -3,7 +3,7 @@
 <Workspace>
   <ConfigDictionary>
     <CurrentConfigs>
-      <Project>OBC_OnV3.5/Debug</Project>
+      <Project>OBC_OnV3.5/CiA419</Project>
     </CurrentConfigs>
   </ConfigDictionary>
   <Desktop>
@@ -26,9 +26,10 @@
         <ColumnWidth0>20</ColumnWidth0>
         <ColumnWidth1>1477</ColumnWidth1>
       </Debug-Log>
+      <TerminalIO/>
     </Static>
     <Windows>
-      <Wnd2>
+      <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-10912-22659</Identity>
@@ -44,8 +45,8 @@
           </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
-      </Wnd2>
-      <Wnd3>
+      </Wnd0>
+      <Wnd1>
         <Tabs>
           <Tab>
             <Identity>TabID-21661-22662</Identity>
@@ -63,7 +64,7 @@
           </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
-      </Wnd3>
+      </Wnd1>
     </Windows>
     <Editor>
       <Pane>
@@ -83,7 +84,67 @@
           <SelStart2>661</SelStart2>
           <SelEnd2>661</SelEnd2>
         </Tab>
-        <ActiveTab>1</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\HSI\LCD\lcd.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>614</YPos2>
+          <SelStart2>13104</SelStart2>
+          <SelEnd2>13107</SelEnd2>
+        </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\HSI\LCD\LCD_TaskHandler.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>14</YPos2>
+          <SelStart2>969</SelStart2>
+          <SelEnd2>969</SelEnd2>
+        </Tab>
+        <ActiveTab>3</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\MCAL\DeviceSupport\startup_stm32f10x_cl.s</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>144</YPos2>
+          <SelStart2>7618</SelStart2>
+          <SelEnd2>7618</SelEnd2>
+        </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\APP\main.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>2</YPos2>
+          <SelStart2>1123</SelStart2>
+          <SelEnd2>1123</SelEnd2>
+        </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\FreeRTOS\tasks.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>1212</YPos2>
+          <SelStart2>47644</SelStart2>
+          <SelEnd2>47644</SelEnd2>
+        </Tab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>
@@ -107,11 +168,11 @@
       <Left>
         <Row0>
           <Sizes>
-            <Wnd3>
+            <Wnd1>
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>538</Bottom>
+                <Bottom>446</Bottom>
                 <Right>392</Right>
                 <x>-2</x>
                 <y>-2</y>
@@ -120,9 +181,9 @@
                 <sizeHorzCX>130208</sizeHorzCX>
                 <sizeHorzCY>256082</sizeHorzCY>
                 <sizeVertCX>256510</sizeVertCX>
-                <sizeVertCY>691421</sizeVertCY>
+                <sizeVertCY>573624</sizeVertCY>
               </Rect>
-            </Wnd3>
+            </Wnd1>
           </Sizes>
         </Row0>
       </Left>
@@ -134,22 +195,22 @@
       <Bottom>
         <Row0>
           <Sizes>
-            <Wnd2>
+            <Wnd0>
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>198</Bottom>
+                <Bottom>290</Bottom>
                 <Right>1538</Right>
                 <x>-2</x>
                 <y>-2</y>
                 <xscreen>1540</xscreen>
-                <yscreen>200</yscreen>
+                <yscreen>292</yscreen>
                 <sizeHorzCX>1002604</sizeHorzCX>
-                <sizeHorzCY>256082</sizeHorzCY>
+                <sizeHorzCY>373880</sizeHorzCY>
                 <sizeVertCX>130208</sizeVertCX>
                 <sizeVertCY>256082</sizeVertCY>
               </Rect>
-            </Wnd2>
+            </Wnd0>
           </Sizes>
         </Row0>
       </Bottom>
