@@ -45,6 +45,7 @@ uint8_t CanOpenInitial(void)
     StateInitial();
     HeardBeatInitial();
     SDOInitial();
+    SyncInitial();
     
     return 1;
 }

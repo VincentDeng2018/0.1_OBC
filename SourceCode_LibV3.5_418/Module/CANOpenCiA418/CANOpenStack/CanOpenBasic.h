@@ -48,9 +48,13 @@ typedef struct
     uint32_t     NodeId;
     enNodeState NodeState;
     uint8_t     SlaveNodeFlag;
+    uint8_t     SyncState;
+    uint8_t     SyncWindowTime_ms;
+    uint16_t    SyncCyclicTime_ms;
+    uint16_t    SyncCyclicCounter_ms;
     uint16_t    HeartBeatTimer_ms;
     uint16_t    HeartBeatCounter_ms;
-
+    uint8_t     ReceivePdoFlag;
 }stCanOpenDate_t;
 
 extern stCanOpenDate_t stCanOpenDate;
@@ -172,6 +176,9 @@ extern stNodeDeviceProfile_t stNodeDeviceProfile[MAX_CAN_NODE];
 #define EXP_CMD_NACK            0x80
 
 
+/* sync parameter and setup */
+#define SYNC_START    1u
+#define SYNC_STOP     0u
 
 
 /* portable functions prototype */
@@ -203,6 +210,10 @@ extern void ProceedExpSdoRxData(stCanMessage_t *pMsg);
 /* OD read / write API */
 extern uint8_t ReadOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t* plength, uint8_t *pdata);
 extern uint8_t WriteOdMap(uint16_t OdIndex, uint8_t SubIndex, uint8_t length, uint8_t *pdata);
+
+
+/* SYNC APIs  */
+extern void SyncInitial(void);
 
 #ifdef __cplusplus
 }

@@ -201,16 +201,16 @@
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>446</Bottom>
+                <Bottom>199</Bottom>
                 <Right>392</Right>
                 <x>-2</x>
                 <y>-2</y>
                 <xscreen>200</xscreen>
                 <yscreen>200</yscreen>
-                <sizeHorzCX>130208</sizeHorzCX>
-                <sizeHorzCY>256082</sizeHorzCY>
-                <sizeVertCX>256510</sizeVertCX>
-                <sizeVertCY>573624</sizeVertCY>
+                <sizeHorzCX>176056</sizeHorzCX>
+                <sizeHorzCY>374532</sizeHorzCY>
+                <sizeVertCX>346831</sizeVertCX>
+                <sizeVertCY>376404</sizeVertCY>
               </Rect>
             </Wnd1>
           </Sizes>
@@ -229,15 +229,15 @@
                 <Top>-2</Top>
                 <Left>-2</Left>
                 <Bottom>290</Bottom>
-                <Right>1538</Right>
+                <Right>1138</Right>
                 <x>-2</x>
                 <y>-2</y>
-                <xscreen>1540</xscreen>
+                <xscreen>1140</xscreen>
                 <yscreen>292</yscreen>
-                <sizeHorzCX>1002604</sizeHorzCX>
-                <sizeHorzCY>373880</sizeHorzCY>
-                <sizeVertCX>130208</sizeVertCX>
-                <sizeVertCY>256082</sizeVertCY>
+                <sizeHorzCX>1003521</sizeHorzCX>
+                <sizeHorzCY>546816</sizeHorzCY>
+                <sizeVertCX>176056</sizeVertCX>
+                <sizeVertCY>374532</sizeVertCY>
               </Rect>
             </Wnd0>
           </Sizes>
