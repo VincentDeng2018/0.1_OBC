@@ -49,9 +49,11 @@ typedef struct
     enNodeState NodeState;
     uint8_t     SlaveNodeFlag;
     uint8_t     SyncState;
+    uint8_t     SyncTimeoutError;
     uint8_t     SyncWindowTime_ms;
     uint16_t    SyncCyclicTime_ms;
     uint16_t    SyncCyclicCounter_ms;
+    
     uint16_t    HeartBeatTimer_ms;
     uint16_t    HeartBeatCounter_ms;
     uint8_t     ReceivePdoFlag;
@@ -179,7 +181,6 @@ extern stNodeDeviceProfile_t stNodeDeviceProfile[MAX_CAN_NODE];
 /* sync parameter and setup */
 #define SYNC_START    1u
 #define SYNC_STOP     0u
-
 
 /* portable functions prototype */
 extern void CAN_TxHandlerTask(void *parameter);

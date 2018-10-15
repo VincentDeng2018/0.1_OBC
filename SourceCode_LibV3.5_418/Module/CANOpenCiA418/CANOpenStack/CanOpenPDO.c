@@ -40,3 +40,23 @@ void PDOInitial(void)
 {
     
 }
+
+
+
+/****************************************************************************
+*
+*  Function: SendPdoData
+*
+*  Purpose :    Send PDO when receive sync message
+*
+*  Parms Passed   :   Nothing
+*
+*  Returns        :   Nothing
+*
+*  Description    :   
+*
+****************************************************************************/
+void SendPdoData(void)
+{
+    
+}

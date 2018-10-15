@@ -42,6 +42,40 @@ void SyncInitial(void)
     stCanOpenDate.SyncState = SYNC_STOP;
     stCanOpenDate.SyncWindowTime_ms = 5;
     stCanOpenDate.SyncCyclicTime_ms = 2000;
+    stCanOpenDate.SyncTimeoutError = 0;
+}
+
+
+
+/****************************************************************************
+*
+*  Function: SendSyncMessage
+*
+*  Purpose :    Send sync packet when there is any other node
+*
+*  Parms Passed   :   Nothing
+*
+*  Returns        :   Nothing
+*
+*  Description    :   As default, the synchronous window is 5ms, cyclic time 2s.
+*                     Call every 1-ms
+*
+****************************************************************************/
+void SendSyncMessage(uint8_t SyncStartFlag)
+{
+    static uint8_t SyncIndex = 0;
+    
+    stCanMessage_t SyncMsg = {0};
+            
+    stCanOpenDate.HeartBeatCounter_ms = 0;
+    
+    SyncMsg.cob_id = 0x080;
+    SyncMsg.len = (uint8_t)0x01;
+    SyncMsg.rtr = 0;
+    SyncMsg.data[0] = SyncIndex;
+    SyncMsg(&SyncMsg);
+    
+    SyncIndex++;
 }
 
 
@@ -67,7 +101,7 @@ void SyncHandlder(void)
         {
             if(stCanOpenDate.ReceivePdoFlag)
             {
-                SendSyncMessage();
+                SendSyncMessage(SYNC_START);
                 stCanOpenDate.SyncCyclicCounter_ms = 0;
                 stCanOpenDate.ReceivePdoFlag = 0;
             }
@@ -78,7 +112,11 @@ void SyncHandlder(void)
           && (stCanOpenDate.ReceivePdoFlag == 0)
           )
         {
-            
+            if(++stCanOpenDate.SyncTimeoutError >= 2)
+            {
+                stCanOpenDate.SyncState = SYNC_STOP;
+                SendSyncMessage(SYNC_STOP);
+            }
         }
     }
 }
