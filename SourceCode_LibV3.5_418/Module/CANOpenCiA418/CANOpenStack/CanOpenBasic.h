@@ -27,6 +27,7 @@
 #include "CAN_Portable.h"
 #include "CanOpenState.h"
 #include "CanOpenOdTypes.h"
+#include "CanOpenConfig.h"
 
 #ifndef NULL
 #define NULL (0)
@@ -56,7 +57,10 @@ typedef struct
     
     uint16_t    HeartBeatTimer_ms;
     uint16_t    HeartBeatCounter_ms;
+    
     uint8_t     ReceivePdoFlag;
+    uint8_t     NextPDOIndex;
+    
 }stCanOpenDate_t;
 
 extern stCanOpenDate_t stCanOpenDate;

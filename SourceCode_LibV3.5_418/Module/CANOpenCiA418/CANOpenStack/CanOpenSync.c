@@ -66,14 +66,12 @@ void SendSyncMessage(uint8_t SyncStartFlag)
     static uint8_t SyncIndex = 0;
     
     stCanMessage_t SyncMsg = {0};
-            
-    stCanOpenDate.HeartBeatCounter_ms = 0;
     
     SyncMsg.cob_id = 0x080;
     SyncMsg.len = (uint8_t)0x01;
     SyncMsg.rtr = 0;
     SyncMsg.data[0] = SyncIndex;
-    SyncMsg(&SyncMsg);
+    CAN_RequestSend(&SyncMsg);
     
     SyncIndex++;
 }
