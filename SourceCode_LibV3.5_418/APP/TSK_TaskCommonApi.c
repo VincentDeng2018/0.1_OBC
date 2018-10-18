@@ -193,6 +193,8 @@ void f_TimerTask(void *pvParameters)
     const TickType_t xPeriod = pdMS_TO_TICKS( 5 );
 
     xLastWakeTime = xTaskGetTickCount();
+    
+    ADC_Initial();
 
     /* Enter the loop that defines the task behavior. */
     for( ;; )

@@ -24,6 +24,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "stm32f10x_can.h"
+#include "ADC_Globals.h"
 
 
 extern void CAN_RxIsrCallback(CanRxMsg *CanRxData);
@@ -180,5 +181,11 @@ void CAN2_RX1_IRQHandler(void)
   * @}
   */ 
 
+void DMA1_Channel1_IRQHandler(void)
+{
+    ADC_DMA_IRQHandler();
+    DMA_ClearITPendingBit(DMA1_IT_TC1);
+    DMA_ClearFlag(DMA1_FLAG_TC1);
+}
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

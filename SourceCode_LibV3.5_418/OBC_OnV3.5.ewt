@@ -3587,6 +3587,18 @@
   <group>
     <name>HSI</name>
     <group>
+      <name>ADC</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Globals.h</name>
+      </file>
+    </group>
+    <group>
       <name>CAN</name>
       <file>
         <name>$PROJ_DIR$\HSI\CAN\CAN_Config.h</name>

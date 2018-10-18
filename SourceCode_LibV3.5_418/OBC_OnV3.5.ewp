@@ -1295,6 +1295,7 @@
           <state>$PROJ_DIR$\FreeRTOS\include</state>
           <state>$PROJ_DIR$\FreeRTOS\portable\IAR</state>
           <state>$PROJ_DIR$\HSI</state>
+          <state>$PROJ_DIR$\HSI\ADC</state>
           <state>$PROJ_DIR$\HSI\CAN</state>
           <state>$PROJ_DIR$\HSI\GPIO</state>
           <state>$PROJ_DIR$\HSI\LCD</state>
@@ -3060,6 +3061,18 @@
   </group>
   <group>
     <name>HSI</name>
+    <group>
+      <name>ADC</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\ADC\ADC_Globals.h</name>
+      </file>
+    </group>
     <group>
       <name>CAN</name>
       <file>

@@ -16,7 +16,7 @@
       </Build>
       <Workspace>
         <ColumnWidths>
-          <Column0>301</Column0>
+          <Column0>302</Column0>
           <Column1>27</Column1>
           <Column2>27</Column2>
           <Column3>27</Column3>
@@ -24,52 +24,45 @@
       </Workspace>
       <Debug-Log>
         <ColumnWidth0>20</ColumnWidth0>
-        <ColumnWidth1>1477</ColumnWidth1>
+        <ColumnWidth1>1077</ColumnWidth1>
       </Debug-Log>
       <TerminalIO/>
     </Static>
     <Windows>
-      <Wnd0>
+      <Wnd2>
         <Tabs>
           <Tab>
-            <Identity>TabID-10912-22659</Identity>
+            <Identity>TabID-22229-31110</Identity>
             <TabName>Build</TabName>
             <Factory>Build</Factory>
             <Session/>
           </Tab>
           <Tab>
-            <Identity>TabID-18001-22731</Identity>
+            <Identity>TabID-8344-31166</Identity>
             <TabName>Debug Log</TabName>
             <Factory>Debug-Log</Factory>
             <Session/>
           </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
-      </Wnd0>
-      <Wnd1>
+      </Wnd2>
+      <Wnd3>
         <Tabs>
           <Tab>
-            <Identity>TabID-21661-22662</Identity>
+            <Identity>TabID-210-31113</Identity>
             <TabName>Workspace</TabName>
             <Factory>Workspace</Factory>
             <Session>
               <NodeDict>
                 <ExpandedNode>OBC_OnV3.5</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/FreeRTOS</ExpandedNode>
                 <ExpandedNode>OBC_OnV3.5/HSI</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/MCAL</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Module</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/CANOpenStack</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/Portable</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Module/CANOpenCiA418/ProfileOD</ExpandedNode>
-                <ExpandedNode>OBC_OnV3.5/Output</ExpandedNode>
+                <ExpandedNode>OBC_OnV3.5/HSI/ADC</ExpandedNode>
               </NodeDict>
             </Session>
           </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
-      </Wnd1>
+      </Wnd3>
     </Windows>
     <Editor>
       <Pane>
@@ -79,51 +72,15 @@
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\FreeRTOS\list.c</Filename>
+          <Filename>$WS_DIR$\HSI\ADC\ADC_Globals.h</Filename>
           <XPos>0</XPos>
           <YPos>0</YPos>
           <SelStart>0</SelStart>
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
-          <YPos2>0</YPos2>
-          <SelStart2>661</SelStart2>
-          <SelEnd2>661</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\HSI\LCD\lcd.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>614</YPos2>
-          <SelStart2>13104</SelStart2>
-          <SelEnd2>13107</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\HSI\LCD\LCD_TaskHandler.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>14</YPos2>
-          <SelStart2>1003</SelStart2>
-          <SelEnd2>1003</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\MCAL\DeviceSupport\startup_stm32f10x_cl.s</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>144</YPos2>
-          <SelStart2>7618</SelStart2>
-          <SelEnd2>7618</SelEnd2>
+          <YPos2>7</YPos2>
+          <SelStart2>1647</SelStart2>
+          <SelEnd2>1647</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -137,43 +94,19 @@
           <SelStart2>1123</SelStart2>
           <SelEnd2>1123</SelEnd2>
         </Tab>
+        <ActiveTab>2</ActiveTab>
         <Tab>
           <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\FreeRTOS\tasks.c</Filename>
+          <Filename>$WS_DIR$\HSI\ADC\ADC_Driver.c</Filename>
           <XPos>0</XPos>
           <YPos>0</YPos>
           <SelStart>0</SelStart>
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
-          <YPos2>1212</YPos2>
-          <SelStart2>47644</SelStart2>
-          <SelEnd2>47644</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\..\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.cpp</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>0</YPos2>
+          <YPos2>36</YPos2>
           <SelStart2>0</SelStart2>
           <SelEnd2>0</SelEnd2>
         </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.cpp</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>0</YPos2>
-          <SelStart2>695</SelStart2>
-          <SelEnd2>695</SelEnd2>
-        </Tab>
-        <ActiveTab>8</ActiveTab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>
@@ -188,31 +121,34 @@
       <Top>
         <Row0>
           <Sizes>
-            <Toolbar-0710C6B8>
+            <Toolbar-05DD5A30>
               <key>iaridepm.enu1</key>
-            </Toolbar-0710C6B8>
+            </Toolbar-05DD5A30>
           </Sizes>
         </Row0>
+        <Row1>
+          <Sizes/>
+        </Row1>
       </Top>
       <Left>
         <Row0>
           <Sizes>
-            <Wnd1>
+            <Wnd3>
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>199</Bottom>
-                <Right>392</Right>
+                <Bottom>459</Bottom>
+                <Right>376</Right>
                 <x>-2</x>
                 <y>-2</y>
                 <xscreen>200</xscreen>
                 <yscreen>200</yscreen>
-                <sizeHorzCX>176056</sizeHorzCX>
-                <sizeHorzCY>374532</sizeHorzCY>
-                <sizeVertCX>346831</sizeVertCX>
-                <sizeVertCY>376404</sizeVertCY>
+                <sizeHorzCX>130208</sizeHorzCX>
+                <sizeHorzCY>256082</sizeHorzCY>
+                <sizeVertCX>246094</sizeVertCX>
+                <sizeVertCY>590269</sizeVertCY>
               </Rect>
-            </Wnd1>
+            </Wnd3>
           </Sizes>
         </Row0>
       </Left>
@@ -224,22 +160,22 @@
       <Bottom>
         <Row0>
           <Sizes>
-            <Wnd0>
+            <Wnd2>
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>290</Bottom>
-                <Right>1138</Right>
+                <Bottom>277</Bottom>
+                <Right>1538</Right>
                 <x>-2</x>
                 <y>-2</y>
-                <xscreen>1140</xscreen>
-                <yscreen>292</yscreen>
-                <sizeHorzCX>1003521</sizeHorzCX>
-                <sizeHorzCY>546816</sizeHorzCY>
-                <sizeVertCX>176056</sizeVertCX>
-                <sizeVertCY>374532</sizeVertCY>
+                <xscreen>1540</xscreen>
+                <yscreen>279</yscreen>
+                <sizeHorzCX>1002604</sizeHorzCX>
+                <sizeHorzCY>357234</sizeHorzCY>
+                <sizeVertCX>130208</sizeVertCX>
+                <sizeVertCY>256082</sizeVertCY>
               </Rect>
-            </Wnd0>
+            </Wnd2>
           </Sizes>
         </Row0>
       </Bottom>
