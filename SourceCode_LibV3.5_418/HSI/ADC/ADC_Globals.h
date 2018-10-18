@@ -30,10 +30,13 @@ typedef enum
     ADC_I_SET,
     ADC_C_SET,
     ADC_I_CHG,
+    ADC_V_CHG,
     ADC_TEMP1,
     ADC_TEMP2,
-    ADC_U_BAT,
+    ADC_U_PACK,
     ADC_U_OUT,
+    ADC_U_BAT_POS,
+    ADC_U_BAT_NEG,
     ADC_END
 }enAdcIndex;
 

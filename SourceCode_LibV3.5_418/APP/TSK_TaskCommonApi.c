@@ -45,6 +45,7 @@ extern void LCD_TaskHandler(void *pvParameters);
 #define CAN_RX_TASK_PRIORITY                ( tskIDLE_PRIORITY + 4 )
 #define CAN_TX_TASK_PRIORITY                ( tskIDLE_PRIORITY + 3 )
 #define LCD_TASK_PRIORITY                ( tskIDLE_PRIORITY + 1 )
+#define ADC_TASK_PRIORITY                ( tskIDLE_PRIORITY + 1 )
 
 /* Define stack size for all the tasks */
 #define TIMER_TASK_STACK_SIZE             configMINIMAL_STACK_SIZE
@@ -52,6 +53,7 @@ extern void LCD_TaskHandler(void *pvParameters);
 #define CAN_RX_STACK_SIZE                 (configMINIMAL_STACK_SIZE << 1)
 #define CAN_TX_STACK_SIZE                 (configMINIMAL_STACK_SIZE << 1)
 #define LCD_STACK_SIZE                    (configMINIMAL_STACK_SIZE << 1)
+#define ADC_STACK_SIZE                    (configMINIMAL_STACK_SIZE << 1)
 
 /* Define the task index */
 enum TSK_ID
@@ -127,6 +129,16 @@ UserDefineTask s_arrayUserDefineTasks[TSK_ID_END] =
     {
         LCD_TaskHandler,
         "LDC_TASK",
+        LCD_STACK_SIZE,
+        (void*)0x0,
+        LCD_TASK_PRIORITY,
+        (void*)0x0,
+    },
+    
+    /* Task 5: ADC task */
+    {
+        ADC_TaskHandler,
+        "ADC_TASK",
         LCD_STACK_SIZE,
         (void*)0x0,
         LCD_TASK_PRIORITY,
