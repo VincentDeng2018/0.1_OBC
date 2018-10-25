@@ -3635,6 +3635,18 @@
       </file>
     </group>
     <group>
+      <name>PWM</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Globals.h</name>
+      </file>
+    </group>
+    <group>
       <name>Timer</name>
       <file>
         <name>$PROJ_DIR$\HSI\Timer\TIM_Config.h</name>

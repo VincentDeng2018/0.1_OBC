@@ -35,6 +35,8 @@ void f_DelayForX_us(const uint32_t s_u32delayTime_us);
 void f_TimerTask(void *pvParameters);
 void f_StateMachineTask(void *pvParameters);
 extern void LCD_TaskHandler(void *pvParameters);
+extern void ADC_TaskHandler(void *pvParameters);
+
 
 /*******************************************************************************
 * Macros
@@ -64,6 +66,7 @@ enum TSK_ID
     CAN_RX_ID,
     CAN_TX_ID,
     LCD_TASK_ID,
+    ADC_TASK_ID,
     TSK_ID_END
 };
 
@@ -134,7 +137,7 @@ UserDefineTask s_arrayUserDefineTasks[TSK_ID_END] =
         LCD_TASK_PRIORITY,
         (void*)0x0,
     },
-    
+
     /* Task 5: ADC task */
     {
         ADC_TaskHandler,
@@ -144,6 +147,7 @@ UserDefineTask s_arrayUserDefineTasks[TSK_ID_END] =
         LCD_TASK_PRIORITY,
         (void*)0x0,
     },
+
 };
 
 /*******************************************************************************
@@ -205,8 +209,6 @@ void f_TimerTask(void *pvParameters)
     const TickType_t xPeriod = pdMS_TO_TICKS( 5 );
 
     xLastWakeTime = xTaskGetTickCount();
-    
-    ADC_Initial();
 
     /* Enter the loop that defines the task behavior. */
     for( ;; )

@@ -5526,7 +5526,7 @@ void Disp_GRAY_666(void)
 		}
 	}
 }
-for(i=0;i<ROW%32;i++)
+        for(i=0;i<ROW%32;i++)
 	{
 	    for(j=0;j<COL;j++)
 		{

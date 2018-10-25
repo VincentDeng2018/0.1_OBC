@@ -1,11 +1,11 @@
 /******************************************************************************************************
-*            LCD_TaskHandler.c
+*            ADC_TaskHandler.c
 ******************************************************************************************************
 *
 *
 ******************************************************************************************************
 ******************************************************************************************************
-*    FILE NAME: LCD_TaskHandler.c
+*    FILE NAME: ADC_TaskHandler.c
 *
 *    DESCRIPTION: Define task related API, array, etc
 *
@@ -17,7 +17,7 @@
 *    HISTORY:  V1.0      DYH       Initial Version                       2018/5/24 21:51:24
 ******************************************************************************************************/
 
-#include "lcd.h"
+#include "ADC_Globals.h"
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "task.h"
@@ -36,87 +36,85 @@
 /*******************************************************************************
 * Macros
 *******************************************************************************/
-typedef enum
-{
-    LCD_INIT = 0x0,
-    LCD_TESTING,
-    LCD_RUNNING, /* Plot voltage and current curve for last charge */
-    LCD_SLEEP
-}enLcdState;
 
 
 /*******************************************************************************
 * Data Struct Define
 *******************************************************************************/
-
+stAdcMeters_t stAdcMeters = {0};
 
 /*******************************************************************************
 * Local Variables
 *******************************************************************************/
-static SemaphoreHandle_t LCD_TaskSem = NULL;
-static enLcdState LCD_PresentState = LCD_INIT;
+static SemaphoreHandle_t ADC_TaskSem = NULL;
+static uint8_t ADC_ConverterPhase = 0u;
 
-
-void PlotChargeCurve(void)
+const U16 cawdAD2CelTab[158] =
 {
-    /* draw Double Y and X line */
-    //DrawLine(10, 11, 40, 320 - 20, BLACK);
-    //DrawLine(10, 240 - 20, 320 - 21, 320 - 20, BLACK);
-    //DrawLine(10, 240 - 20, 160 - 21, 160 - 20, BLACK);
-    
-    //DrawLine(30, 80, 50, 100, BLACK);
-    
-    /* Write text to the x,y */
-    
-    /* Company title */
-    DispStr("PowerFirst Technology Co.LTD.", 3, 3,
-                  BLACK, WHITE); // ord:0~95
-    DrawLine(2, 240-2, 20, 21, BLACK); 
-    
-    DispStr("Model:xxxxx BattType:12V 10A", 3, 25,
-                  BLACK, WHITE); // ord:0~95
-    DispStr("ChrgCfg:xxxxx Status:Float", 3, 45,
-                  BLACK, WHITE); // ord:0~95
-    
-}
+    /* -30 ~ 127 */
+    3726,3702,3677,3651,3623,3596,3566,3536,3505,3472,
+    3439,3405,3369,3333,3296,3258,3219,3180,3140,3098,
+    3056,3012,2966,2919,2872,2823,2774,2724,2673,2622,
+    2570,2519,2468,2416,2365,2313,2262,2211,2159,2108,
+    2057,2007,1957,1908,1859,1810,1762,1715,1669,1623,
+    1578,1534,1490,1448,1406,1365,1324,1285,1246,1208,
+    1171,1136,1101,1067,1033,1001,970,940,910,881,
+    854,827,801,776,752,728,706,684,662,641,
+    621,602,583,565,547,530,514,498,482,467,
+    452,438,425,412,399,386,375,363,352,341,
+    331,321,311,301,292,283,275,267,259,251,
+    243,236,229,222,216,210,204,198,192,186,
+    181,176,171,166,161,156,152,148,143,139,
+    135,132,128,125,121,118,115,112,109,107,
+    104,101,99,96,94,91,89,87,85,83,
+    81,79,77,75,74,72,70,68
+};
 
-void LCD_TaskHandler(void *pvParameters)
+void ADC_TaskHandler(void *pvParameters)
 {
-    LCD_TaskSem = xSemaphoreCreateBinary();
+    ADC_TaskSem = xSemaphoreCreateBinary();
 
-    if(LCD_TaskSem == NULL)
+    if(ADC_TaskSem == NULL)
     {
         while(1);
     }
 
     for(;;)
     {
-        xSemaphoreTake(LCD_TaskSem, portMAX_DELAY);
+        xSemaphoreTake(ADC_TaskSem, portMAX_DELAY);
         {
-            switch(LCD_PresentState)
+            ADC_ConverterPhase++;
+            
+            /* some ADC result don't need to update every sample */ 
+            switch(ADC_ConverterPhase)
             {
-                case LCD_INIT:
+                case 0u:
                 {
-                    LCD_PresentState = LCD_TESTING;
-                    LCD_Init();
+                    /* 16.83V = 4096 */
+                    stAdcMeters.U_Batt_mV = DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG];
                     break;
                 }
 
-                case LCD_TESTING:
+                case 1u:
                     //DispBand();
                     PlotChargeCurve();
                     //DispScaleVer_Green();
                     
                     break;
 
-                case LCD_RUNNING:
+                case 2u:
                     break;
 
 
-                case LCD_SLEEP:
+                case 3u:
+                    break;
+                
+                case 4u:
+                    ADC_ConverterPhase = 0;
                     break;
 
                 default:
+                    ADC_ConverterPhase = 0;
                     break;
             }
         }
@@ -124,14 +122,43 @@ void LCD_TaskHandler(void *pvParameters)
 }
 
 
-void LCD_TaskTrigger(void)
+void ADC_TaskTrigger(void)
 {
-    xSemaphoreGive(LCD_TaskSem);
+    xSemaphoreGive(ADCs_TaskSem);
 }
 
-void Delay(uint16_t x_ms)
+/****************************************************************
+* Function:		GetTempCelVal
+* Description:	根据AD值计算摄氏温度值
+* Input:		
+* Output:		
+* Return:		
+* Other:		
+****************************************************************/
+uint8_t GetTempCelVal(uint16_t wdADVal)
 {
-    vTaskDelay(x_ms);
+    int8_t cCelVal;
+    uint16_t i;
+    
+    if (wdADVal >= cawdAD2CelTab[0])
+    {
+        cCelVal = -30;
+    }
+    else if (wdADVal <= cawdAD2CelTab[157])
+    {
+        cCelVal = 127;
+    }
+    else
+    {
+        for (i = 0; i<158; i++)
+        {
+            if (wdADVal >= cawdAD2CelTab[i])
+            {
+                cCelVal = i - 30;
+                break;
+            }
+        }
+    }
+    
+    return cCelVal;
 }
-
-

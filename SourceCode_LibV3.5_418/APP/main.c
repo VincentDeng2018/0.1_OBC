@@ -24,6 +24,7 @@
 
 #include "TSK_TaskCommonApi.h"
 #include "GPIO_Globals.h"
+#include "ADC_Globals.h"
 
 extern void CAN_Initial(void);
 
@@ -34,6 +35,7 @@ int main(void)
     SystemInit();
     GPIO_Initial();
     CAN_Initial();
+    ADC_Initial();
 
     /* disable interrupt until task create finish */
     TSK_CreateTasks();

@@ -316,10 +316,12 @@
           <state>$PROJ_DIR$\FreeRTOS\include</state>
           <state>$PROJ_DIR$\FreeRTOS\portable\IAR</state>
           <state>$PROJ_DIR$\HSI</state>
+          <state>$PROJ_DIR$\HSI\ADC</state>
           <state>$PROJ_DIR$\HSI\CAN</state>
           <state>$PROJ_DIR$\HSI\GPIO</state>
           <state>$PROJ_DIR$\HSI\LCD</state>
           <state>$PROJ_DIR$\HSI\Timer</state>
+          <state>$PROJ_DIR$\HSI\PWM</state>
           <state>$PROJ_DIR$\MCAL</state>
           <state>$PROJ_DIR$\MCAL\CoreSupport</state>
           <state>$PROJ_DIR$\MCAL\DeviceSupport</state>
@@ -3107,6 +3109,18 @@
       </file>
       <file>
         <name>$PROJ_DIR$\HSI\LCD\LCD_TaskHandler.c</name>
+      </file>
+    </group>
+    <group>
+      <name>PWM</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\PWM\PWM_Globals.h</name>
       </file>
     </group>
     <group>

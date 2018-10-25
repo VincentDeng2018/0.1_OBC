@@ -12,6 +12,8 @@ E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\FreeRTOS\portab
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI
 -I
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\ADC
+-I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\CAN
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\GPIO
@@ -19,6 +21,8 @@ E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\GPIO
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\LCD
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\Timer
+-I
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\PWM
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\MCAL
 -I
@@ -50,6 +54,8 @@ E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\FreeRTOS\portab
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI
 -I
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\ADC
+-I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\CAN
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\GPIO
@@ -57,6 +63,8 @@ E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\GPIO
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\LCD
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\Timer
+-I
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\HSI\PWM
 -I
 E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\MCAL
 -I
