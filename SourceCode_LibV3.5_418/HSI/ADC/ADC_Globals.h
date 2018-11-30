@@ -30,7 +30,7 @@ typedef enum
     ADC_I_SET,
     ADC_C_SET,
     ADC_I_CHG,
-    ADC_V_CHG,
+    ADC_U_SET_TEST,
     ADC_TEMP1,
     ADC_TEMP2,
     ADC_U_PACK,

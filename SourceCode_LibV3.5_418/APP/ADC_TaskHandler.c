@@ -21,6 +21,7 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "task.h"
+#include "METER_AdcSample.h"
 
 
 /*********************************************************************************
@@ -41,7 +42,6 @@
 /*******************************************************************************
 * Data Struct Define
 *******************************************************************************/
-stAdcMeters_t stAdcMeters = {0};
 
 /*******************************************************************************
 * Local Variables
@@ -49,26 +49,6 @@ stAdcMeters_t stAdcMeters = {0};
 static SemaphoreHandle_t ADC_TaskSem = NULL;
 static uint8_t ADC_ConverterPhase = 0u;
 
-const U16 cawdAD2CelTab[158] =
-{
-    /* -30 ~ 127 */
-    3726,3702,3677,3651,3623,3596,3566,3536,3505,3472,
-    3439,3405,3369,3333,3296,3258,3219,3180,3140,3098,
-    3056,3012,2966,2919,2872,2823,2774,2724,2673,2622,
-    2570,2519,2468,2416,2365,2313,2262,2211,2159,2108,
-    2057,2007,1957,1908,1859,1810,1762,1715,1669,1623,
-    1578,1534,1490,1448,1406,1365,1324,1285,1246,1208,
-    1171,1136,1101,1067,1033,1001,970,940,910,881,
-    854,827,801,776,752,728,706,684,662,641,
-    621,602,583,565,547,530,514,498,482,467,
-    452,438,425,412,399,386,375,363,352,341,
-    331,321,311,301,292,283,275,267,259,251,
-    243,236,229,222,216,210,204,198,192,186,
-    181,176,171,166,161,156,152,148,143,139,
-    135,132,128,125,121,118,115,112,109,107,
-    104,101,99,96,94,91,89,87,85,83,
-    81,79,77,75,74,72,70,68
-};
 
 void ADC_TaskHandler(void *pvParameters)
 {
@@ -88,17 +68,15 @@ void ADC_TaskHandler(void *pvParameters)
             /* some ADC result don't need to update every sample */ 
             switch(ADC_ConverterPhase)
             {
+                 /* Battery and charger voltage */
                 case 0u:
                 {
                     /* 16.83V = 4096 */
-                    stAdcMeters.U_Batt_mV = DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG];
+                    //stAdcMeters.U_Batt_mV = DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG];
                     break;
                 }
 
                 case 1u:
-                    //DispBand();
-                    PlotChargeCurve();
-                    //DispScaleVer_Green();
                     
                     break;
 
@@ -124,41 +102,5 @@ void ADC_TaskHandler(void *pvParameters)
 
 void ADC_TaskTrigger(void)
 {
-    xSemaphoreGive(ADCs_TaskSem);
-}
-
-/****************************************************************
-* Function:		GetTempCelVal
-* Description:	根据AD值计算摄氏温度值
-* Input:		
-* Output:		
-* Return:		
-* Other:		
-****************************************************************/
-uint8_t GetTempCelVal(uint16_t wdADVal)
-{
-    int8_t cCelVal;
-    uint16_t i;
-    
-    if (wdADVal >= cawdAD2CelTab[0])
-    {
-        cCelVal = -30;
-    }
-    else if (wdADVal <= cawdAD2CelTab[157])
-    {
-        cCelVal = 127;
-    }
-    else
-    {
-        for (i = 0; i<158; i++)
-        {
-            if (wdADVal >= cawdAD2CelTab[i])
-            {
-                cCelVal = i - 30;
-                break;
-            }
-        }
-    }
-    
-    return cCelVal;
+    xSemaphoreGive(ADC_TaskSem);
 }

@@ -88,4 +88,6 @@ void SPI_Initial(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(LCD_RESET_PORT, &GPIO_InitStructure);
+    
+    /************* SD card using SPI Mode *********************/
 }

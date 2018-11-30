@@ -3473,6 +3473,12 @@
   <group>
     <name>APP</name>
     <file>
+      <name>$PROJ_DIR$\APP\ADC_TaskHandler.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\APP\ADC_TaskHandler.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\APP\main.c</name>
     </file>
     <file>
@@ -3611,6 +3617,24 @@
       </file>
     </group>
     <group>
+      <name>Eval</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\Eval\stm3210x_eval.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Eval\stm3210x_eval.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Eval\stm3210x_eval_sdio_sd.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Eval\stm3210x_eval_sdio_sd.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\Eval\stm32_eval_legacy.h</name>
+      </file>
+    </group>
+    <group>
       <name>GPIO</name>
       <file>
         <name>$PROJ_DIR$\HSI\GPIO\GPIO_Config.h</name>
@@ -3630,9 +3654,6 @@
       <file>
         <name>$PROJ_DIR$\HSI\LCD\lcd.h</name>
       </file>
-      <file>
-        <name>$PROJ_DIR$\HSI\LCD\LCD_TaskHandler.c</name>
-      </file>
     </group>
     <group>
       <name>PWM</name>
@@ -3647,6 +3668,18 @@
       </file>
     </group>
     <group>
+      <name>SPI_SD_Card</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\SPI_SD_Card\SPI_MSD0_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\SPI_SD_Card\SPI_MSD0_Driver.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\SPI_SD_Card\SPI_MSD1_Driver.h</name>
+      </file>
+    </group>
+    <group>
       <name>Timer</name>
       <file>
         <name>$PROJ_DIR$\HSI\Timer\TIM_Config.h</name>
@@ -3658,6 +3691,27 @@
         <name>$PROJ_DIR$\HSI\Timer\TIM_Globals.h</name>
       </file>
     </group>
+    <group>
+      <name>UART</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\UART\UART_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\UART\UART_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\UART\UART_Globals.h</name>
+      </file>
+    </group>
+    <file>
+      <name>$PROJ_DIR$\HSI\hw_config.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\HSI\hw_config.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\HSI\platform_config.h</name>
+    </file>
     <file>
       <name>$PROJ_DIR$\HSI\stm32f10x_conf.h</name>
     </file>
@@ -3687,6 +3741,60 @@
       <file>
         <name>$PROJ_DIR$\MCAL\DeviceSupport\stm32f10x.h</name>
       </file>
+    </group>
+    <group>
+      <name>STM32_USB-FS-Device_Driver</name>
+      <group>
+        <name>inc</name>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_core.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_def.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_init.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_int.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_lib.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_mem.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_regs.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_sil.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\inc\usb_type.h</name>
+        </file>
+      </group>
+      <group>
+        <name>src</name>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_core.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_init.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_int.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_mem.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_regs.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\MCAL\STM32_USB-FS-Device_Driver\src\usb_sil.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>STM32F10x_StdPeriph_Driver</name>
@@ -3889,6 +3997,141 @@
         </file>
       </group>
     </group>
+    <group>
+      <name>Control</name>
+      <file>
+        <name>$PROJ_DIR$\Module\Control\ctrl.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\Control\db.c</name>
+      </file>
+    </group>
+    <group>
+      <name>Display</name>
+      <file>
+        <name>$PROJ_DIR$\Module\Display\display.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\Display\display.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\Display\LCD_TaskHandler.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\Display\LcdScreen.h</name>
+      </file>
+    </group>
+    <group>
+      <name>FatFs</name>
+      <group>
+        <name>inc</name>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\diskio.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\ff.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\ff_gen_drv.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\ffconf.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\integer.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\inc\sd_diskio.h</name>
+        </file>
+      </group>
+      <group>
+        <name>src</name>
+        <group>
+          <name>option</name>
+          <file>
+            <name>$PROJ_DIR$\Module\FatFs\src\option\syscall.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\Module\FatFs\src\option\unicode.c</name>
+          </file>
+        </group>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\src\diskio.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\src\ff.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\src\ff_gen_drv.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\FatFs\src\sd_diskio.c</name>
+        </file>
+      </group>
+    </group>
+    <group>
+      <name>Meters</name>
+      <file>
+        <name>$PROJ_DIR$\Module\Meters\METER_AdcSample.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\Meters\METER_AdcSample.h</name>
+      </file>
+    </group>
+    <group>
+      <name>SDCard</name>
+      <file>
+        <name>$PROJ_DIR$\Module\SDCard\mass_mal.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\SDCard\memory.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\SDCard\scsi_data.c</name>
+      </file>
+    </group>
+    <group>
+      <name>USB</name>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\communication.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\communication.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_conf.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_desc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_desc.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_endp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_istr.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_istr.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_prop.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_prop.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_pwr.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\USB\usb_pwr.h</name>
+      </file>
+    </group>
+    <file>
+      <name>$PROJ_DIR$\Module\def.h</name>
+    </file>
   </group>
 </project>
 

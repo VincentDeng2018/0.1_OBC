@@ -1,0 +1,471 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       19/Nov/2018  00:47:30
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\src\usbd_cdc_vcp.c
+#    Command line =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\src\usbd_cdc_vcp.c
+#        -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D USE_STM3210C_EVAL -D
+#        USE_USB_OTG_FS -lcN
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\List
+#        -o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\Obj
+#        --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "E:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Full.h" -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_OTG_Driver\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_Device_Library\Core\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\Common\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\STM3210C_EVAL\
+#        -Ohz --use_c++_inline -I "E:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.5\arm\CMSIS\Include\"
+#    Locale       =  Chinese (Simplified)_China.936
+#    List file    =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\List\usbd_cdc_vcp.lst
+#    Object file  =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\Obj\usbd_cdc_vcp.o
+#
+###############################################################################
+
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\src\usbd_cdc_vcp.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    usbd_cdc_vcp.c
+      4            * @author  MCD Application Team
+      5            * @version V1.2.1
+      6            * @date    17-March-2018
+      7            * @brief   Generic media access Layer.
+      8            ******************************************************************************
+      9            * @attention
+     10            *
+     11            * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
+     12            * All rights reserved.</center></h2>
+     13            *
+     14            * This software component is licensed by ST under Ultimate Liberty license
+     15            * SLA0044, the "License"; You may not use this file except in compliance with
+     16            * the License. You may obtain a copy of the License at:
+     17            *                      <http://www.st.com/SLA0044>
+     18            *
+     19            ******************************************************************************
+     20            */
+     21          
+     22          #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
+     23          #pragma     data_alignment = 4
+     24          #endif                          /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
+     25          
+     26          /* Includes ------------------------------------------------------------------ */
+     27          #include "usbd_cdc_vcp.h"
+     28          
+     29          /* Private typedef ----------------------------------------------------------- */
+     30          /* Private define ------------------------------------------------------------ */
+     31          /* Private macro ------------------------------------------------------------- */
+     32          /* Private variables --------------------------------------------------------- */
+     33          LINE_CODING linecoding = {
+     34            115200,                       /* baud rate */
+     35            0x00,                         /* stop bits-1 */
+     36            0x00,                         /* parity - none */
+     37            0x08                          /* nb. of bits 8 */
+     38          };
+     39          
+     40          
+     41          USART_InitTypeDef USART_InitStructure;
+     42          
+     43          /* These are external variables imported from CDC core to be used for IN
+     44           * transfer management. */
+     45          extern uint8_t APP_Rx_Buffer[]; /* Write CDC received data in this buffer.
+     46                                           * These data will be sent over USB IN endpoint
+     47                                           * in the CDC core functions. */
+     48          extern uint32_t APP_Rx_ptr_in;  /* Increment this pointer or roll it back to
+     49                                           * start address when writing received data in
+     50                                           * the buffer APP_Rx_Buffer. */
+     51          
+     52          /* Private function prototypes ----------------------------------------------- */
+     53          static uint16_t VCP_Init(void);
+     54          static uint16_t VCP_DeInit(void);
+     55          static uint16_t VCP_Ctrl(uint32_t Cmd, uint8_t * Buf, uint32_t Len);
+     56          static uint16_t VCP_DataTx(void);
+     57          static uint16_t VCP_DataRx(uint8_t * Buf, uint32_t Len);
+     58          
+     59          static uint16_t VCP_COMConfig(uint8_t Conf);
+     60          
+     61          CDC_IF_Prop_TypeDef VCP_fops = {
+     62            VCP_Init,
+     63            VCP_DeInit,
+     64            VCP_Ctrl,
+     65            VCP_DataTx,
+     66            VCP_DataRx
+     67          };
+     68          
+     69          /* Private functions --------------------------------------------------------- */
+     70          /**
+     71            * @brief  VCP_Init
+     72            *         Initializes the Media on the STM32
+     73            * @param  None
+     74            * @retval Result of the operation (USBD_OK in all cases)
+     75            */
+     76          static uint16_t VCP_Init(void)
+     77          {
+     78            NVIC_InitTypeDef NVIC_InitStructure;
+     79          
+     80            /* EVAL_COM1 default configuration */
+     81            /* EVAL_COM1 configured as follow: - BaudRate = 115200 baud - Word Length = 8 
+     82             * Bits - One Stop Bit - Parity Odd - Hardware flow control disabled -
+     83             * Receive and transmit enabled */
+     84            USART_InitStructure.USART_BaudRate = 115200;
+     85            USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+     86            USART_InitStructure.USART_StopBits = USART_StopBits_1;
+     87            USART_InitStructure.USART_Parity = USART_Parity_Odd;
+     88            USART_InitStructure.USART_HardwareFlowControl =
+     89              USART_HardwareFlowControl_None;
+     90            USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+     91          
+     92            /* Configure and enable the USART */
+     93            STM_EVAL_COMInit(COM1, &USART_InitStructure);
+     94          
+     95            /* Enable the USART Receive interrupt */
+     96            USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
+     97          
+     98            /* Enable USART Interrupt */
+     99            NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM1_IRQn;
+    100            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    101            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    102            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    103            NVIC_Init(&NVIC_InitStructure);
+    104          
+    105            return USBD_OK;
+    106          }
+    107          
+    108          /**
+    109            * @brief  VCP_DeInit
+    110            *         DeInitializes the Media on the STM32
+    111            * @param  None
+    112            * @retval Result of the operation (USBD_OK in all cases)
+    113            */
+    114          static uint16_t VCP_DeInit(void)
+    115          {
+    116          
+    117            return USBD_OK;
+    118          }
+    119          
+    120          
+    121          /**
+    122            * @brief  VCP_Ctrl
+    123            *         Manage the CDC class requests
+    124            * @param  Cmd: Command code            
+    125            * @param  Buf: Buffer containing command data (request parameters)
+    126            * @param  Len: Number of data to be sent (in bytes)
+    127            * @retval Result of the operation (USBD_OK in all cases)
+    128            */
+    129          static uint16_t VCP_Ctrl(uint32_t Cmd, uint8_t * Buf, uint32_t Len)
+    130          {
+    131            switch (Cmd)
+    132            {
+    133            case SEND_ENCAPSULATED_COMMAND:
+    134              /* Not needed for this driver */
+    135              break;
+    136          
+    137            case GET_ENCAPSULATED_RESPONSE:
+    138              /* Not needed for this driver */
+    139              break;
+    140          
+    141            case SET_COMM_FEATURE:
+    142              /* Not needed for this driver */
+    143              break;
+    144          
+    145            case GET_COMM_FEATURE:
+    146              /* Not needed for this driver */
+    147              break;
+    148          
+    149            case CLEAR_COMM_FEATURE:
+    150              /* Not needed for this driver */
+    151              break;
+    152          
+    153            case SET_LINE_CODING:
+    154              linecoding.bitrate =
+    155                (uint32_t) (Buf[0] | (Buf[1] << 8) | (Buf[2] << 16) | (Buf[3] << 24));
+    156              linecoding.format = Buf[4];
+    157              linecoding.paritytype = Buf[5];
+    158              linecoding.datatype = Buf[6];
+    159              /* Set the new configuration */
+    160              VCP_COMConfig(OTHER_CONFIG);
+    161              break;
+    162          
+    163            case GET_LINE_CODING:
+    164              Buf[0] = (uint8_t) (linecoding.bitrate);
+    165              Buf[1] = (uint8_t) (linecoding.bitrate >> 8);
+    166              Buf[2] = (uint8_t) (linecoding.bitrate >> 16);
+    167              Buf[3] = (uint8_t) (linecoding.bitrate >> 24);
+    168              Buf[4] = linecoding.format;
+    169              Buf[5] = linecoding.paritytype;
+    170              Buf[6] = linecoding.datatype;
+    171              break;
+    172          
+    173            case SET_CONTROL_LINE_STATE:
+    174              /* Not needed for this driver */
+    175              break;
+    176          
+    177            case SEND_BREAK:
+    178              /* Not needed for this driver */
+    179              break;
+    180          
+    181            default:
+    182              break;
+    183            }
+    184          
+    185            return USBD_OK;
+    186          }
+    187          
+    188          /**
+    189            * @brief  VCP_DataTx
+    190            *         CDC received data to be send over USB IN endpoint are managed in 
+    191            *         this function.
+    192            * @param  Buf: Buffer of data to be sent
+    193            * @param  Len: Number of data to be sent (in bytes)
+    194            * @retval Result of the operation: USBD_OK if all operations are OK else VCP_FAIL
+    195            */
+    196          static uint16_t VCP_DataTx(void)
+    197          {
+    198            if (linecoding.datatype == 7)
+    199            {
+    200              APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
+    201            }
+    202            else if (linecoding.datatype == 8)
+    203            {
+    204              APP_Rx_Buffer[APP_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
+    205            }
+    206          
+    207            APP_Rx_ptr_in++;
+    208          
+    209            /* To avoid buffer overflow */
+    210            if (APP_Rx_ptr_in == APP_RX_DATA_SIZE)
+    211            {
+    212              APP_Rx_ptr_in = 0;
+    213            }
+    214          
+    215            return USBD_OK;
+    216          }
+    217          
+    218          /**
+    219            * @brief  VCP_DataRx
+    220            *         Data received over USB OUT endpoint are sent over CDC interface 
+    221            *         through this function.
+    222            *           
+    223            *         @note
+    224            *         This function will block any OUT packet reception on USB endpoint 
+    225            *         until exiting this function. If you exit this function before transfer
+    226            *         is complete on CDC interface (ie. using DMA controller) it will result 
+    227            *         in receiving more data while previous ones are still not sent.
+    228            *                 
+    229            * @param  Buf: Buffer of data received
+    230            * @param  Len: Number of data received (in bytes)
+    231            * @retval Result of the operation: USBD_OK if all operations are OK else VCP_FAIL
+    232            */
+    233          static uint16_t VCP_DataRx(uint8_t * Buf, uint32_t Len)
+    234          {
+    235            uint32_t i;
+    236          
+    237            for (i = 0; i < Len; i++)
+    238            {
+    239              USART_SendData(EVAL_COM1, *(Buf + i));
+    240              while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET);
+    241            }
+    242          
+    243            return USBD_OK;
+    244          }
+    245          
+    246          /**
+    247            * @brief  VCP_COMConfig
+    248            *         Configure the COM Port with default values or values received from host.
+    249            * @param  Conf: can be DEFAULT_CONFIG to set the default configuration or OTHER_CONFIG
+    250            *         to set a configuration received from the host.
+    251            * @retval None.
+    252            */
+    253          static uint16_t VCP_COMConfig(uint8_t Conf)
+    254          {
+    255            if (Conf == DEFAULT_CONFIG)
+    256            {
+    257              /* EVAL_COM1 default configuration */
+    258              /* EVAL_COM1 configured as follow: - BaudRate = 115200 baud - Word Length = 
+    259               * 8 Bits - One Stop Bit - Parity Odd - Hardware flow control disabled -
+    260               * Receive and transmit enabled */
+    261              USART_InitStructure.USART_BaudRate = 115200;
+    262              USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    263              USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    264              USART_InitStructure.USART_Parity = USART_Parity_Odd;
+    265              USART_InitStructure.USART_HardwareFlowControl =
+    266                USART_HardwareFlowControl_None;
+    267              USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+    268          
+    269              /* Configure and enable the USART */
+    270              STM_EVAL_COMInit(COM1, &USART_InitStructure);
+    271          
+    272              /* Enable the USART Receive interrupt */
+    273              USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
+    274            }
+    275            else
+    276            {
+    277              /* set the Stop bit */
+    278              switch (linecoding.format)
+    279              {
+    280              case 0:
+    281                USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    282                break;
+    283              case 1:
+    284                USART_InitStructure.USART_StopBits = USART_StopBits_1_5;
+    285                break;
+    286              case 2:
+    287                USART_InitStructure.USART_StopBits = USART_StopBits_2;
+    288                break;
+    289              default:
+    290                VCP_COMConfig(DEFAULT_CONFIG);
+    291                return (USBD_FAIL);
+    292              }
+    293          
+    294              /* set the parity bit */
+    295              switch (linecoding.paritytype)
+    296              {
+    297              case 0:
+    298                USART_InitStructure.USART_Parity = USART_Parity_No;
+    299                break;
+    300              case 1:
+    301                USART_InitStructure.USART_Parity = USART_Parity_Even;
+    302                break;
+    303              case 2:
+    304                USART_InitStructure.USART_Parity = USART_Parity_Odd;
+    305                break;
+    306              default:
+    307                VCP_COMConfig(DEFAULT_CONFIG);
+    308                return (USBD_FAIL);
+    309              }
+    310          
+    311              /* set the data type : only 8bits and 9bits is supported */
+    312              switch (linecoding.datatype)
+    313              {
+    314              case 0x07:
+    315                /* With this configuration a parity (Even or Odd) should be set */
+    316                USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    317                break;
+    318              case 0x08:
+    319                if (USART_InitStructure.USART_Parity == USART_Parity_No)
+    320                {
+    321                  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    322                }
+    323                else
+    324                {
+    325                  USART_InitStructure.USART_WordLength = USART_WordLength_9b;
+    326                }
+    327          
+    328                break;
+    329              default:
+    330                VCP_COMConfig(DEFAULT_CONFIG);
+    331                return (USBD_FAIL);
+    332              }
+    333          
+    334              USART_InitStructure.USART_BaudRate = linecoding.bitrate;
+    335              USART_InitStructure.USART_HardwareFlowControl =
+    336                USART_HardwareFlowControl_None;
+    337              USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+    338          
+    339              /* Configure and enable the USART */
+    340              STM_EVAL_COMInit(COM1, &USART_InitStructure);
+    341            }
+    342            return USBD_OK;
+    343          }
+    344          
+    345          /**
+    346            * @brief  EVAL_COM_IRQHandler
+    347            *         
+    348            * @param  None.
+    349            * @retval None.
+    350            */
+    351          void EVAL_COM_IRQHandler(void)
+    352          {
+    353            if (USART_GetITStatus(EVAL_COM1, USART_IT_RXNE) != RESET)
+    354            {
+    355              /* Send the received data to the PC Host */
+    356              VCP_DataTx();
+    357            }
+    358          
+    359            /* If overrun condition occurs, clear the ORE flag and recover communication */
+    360            if (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_ORE) != RESET)
+    361            {
+    362              (void)USART_ReceiveData(EVAL_COM1);
+    363            }
+    364          }
+    365          
+    366          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   USART2_IRQHandler
+         8   -> USART_GetFlagStatus
+         8   -> USART_GetITStatus
+         0   -> USART_ReceiveData
+         8   -> VCP_DataTx
+       8   VCP_COMConfig
+         8   -> STM_EVAL_COMInit
+         8   -> USART_ITConfig
+         8   -> VCP_COMConfig
+       8   VCP_Ctrl
+         8   -> VCP_COMConfig
+      24   VCP_DataRx
+        24   -> USART_GetFlagStatus
+        24   -> USART_SendData
+      16   VCP_DataTx
+        16   -> USART_ReceiveData
+       0   VCP_DeInit
+       8   VCP_Init
+         8   -> NVIC_Init
+         8   -> STM_EVAL_COMInit
+         8   -> USART_ITConfig
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+      12  ?Subroutine0
+      14  ?Subroutine1
+      42  USART2_IRQHandler
+     128  VCP_COMConfig
+      94  VCP_Ctrl
+      42  VCP_DataRx
+      56  VCP_DataTx
+       4  VCP_DeInit
+      74  VCP_Init
+      20  VCP_fops
+      24  linecoding
+          USART_InitStructure
+
+ 
+  44 bytes in section .data
+ 482 bytes in section .text
+ 
+ 482 bytes of CODE memory
+  44 bytes of DATA memory
+
+Errors: none
+Warnings: none

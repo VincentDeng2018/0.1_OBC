@@ -2,6 +2,8 @@
 #define __LCD_h__
 #include <stdint.h>
 
+#define LANDSCAPE
+
 #ifdef DEBUG
 	#define DEBUG_X  50
 	#define DEBUG_Y  15
@@ -11,9 +13,13 @@
 	#define END 0xffff
 #endif
 
-
+#ifdef LANDSCAPE
+#define ROW  240		    //显示的行、列数
+#define COL  320
+#else
 #define ROW  320		    //显示的行、列数
 #define COL  240
+#endif
 
 #define RED    0xF800		 //定义颜色常量 
 #define GREEN  0x07E0
@@ -34,6 +40,8 @@
 #define READ_REG_LCD
 #define STRING_FUNCTION
 
+#define FONT_W_5X7    5
+#define FONT_H_5X7    7
 #ifdef  CHAR_FONT_W8_H16	
     #define  FONT_W  8
     #define  FONT_H  16
@@ -45,6 +53,28 @@
 
 #define PIC_WIDTH    160	 //预备向LCD显示区域帖箱的图片的大小
 #define PIC_HEIGHT   160
+
+typedef enum {
+    S5x7_SPACE = 0,
+    S5x7_SYM_PERIOD,
+    S5x7_ALPH_A,
+    S5x7_ALPH_V,
+    S5x7_ALPH_M,
+    S5x7_SYM_MINUS,
+    S5x7_SYM_MORE,
+    S5x7_SYM_LESS,
+    S5x7_DIG_0,
+    S5x7_DIG_1,
+    S5x7_DIG_2,
+    S5x7_DIG_3,
+    S5x7_DIG_4,
+    S5x7_DIG_5,
+    S5x7_DIG_6,
+    S5x7_DIG_7,
+    S5x7_DIG_8,
+    S5x7_DIG_9,
+    S5x7_FONT_DIG_ALPH_MAX
+} S5x7_FONT_DIG_ALPH_T;
 
 extern const unsigned int pic_eval[];
 extern const unsigned char ascii[]; 
@@ -97,6 +127,6 @@ void  DispColor_SPI_2_lane(unsigned int color);
 
 /************************* Task API *************************/
 extern void LCD_TaskHandler(void *pvParameters);
-extern void LCD_TaskTrigger(void);
 extern void Delay(uint16_t x_ms);
+extern void ClearScreen(unsigned int Xstart,unsigned int Xend,unsigned int Ystart,unsigned int Yend);
 #endif

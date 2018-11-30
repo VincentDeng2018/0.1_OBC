@@ -1,0 +1,316 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       19/Nov/2018  00:45:10
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Libraries\STM32F10x_StdPeriph_Driver\src\misc.c
+#    Command line =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Libraries\STM32F10x_StdPeriph_Driver\src\misc.c
+#        -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D USE_STM3210C_EVAL -D
+#        USE_USB_OTG_FS -lcN
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\List
+#        -o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\Obj
+#        --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "E:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Full.h" -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_OTG_Driver\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_Device_Library\Core\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Libraries\STM32_USB_Device_Library\Class\cdc\inc\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\Common\
+#        -I
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\..\..\..\..\Utilities\STM32_EVAL\STM3210C_EVAL\
+#        -Ohz --use_c++_inline -I "E:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.5\arm\CMSIS\Include\"
+#    Locale       =  Chinese (Simplified)_China.936
+#    List file    =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\List\misc.lst
+#    Object file  =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Project\USB_Device_Examples\VCP\EWARM\STM3210C-EVAL_USBD-FS\Obj\misc.o
+#
+###############################################################################
+
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\Reference\en.stm32_f105-07_f2_f4_usb-host-device_lib\Libraries\STM32F10x_StdPeriph_Driver\src\misc.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    misc.c
+      4            * @author  MCD Application Team
+      5            * @version V3.6.1
+      6            * @date    05-March-2012
+      7            * @brief   This file provides all the miscellaneous firmware functions (add-on
+      8            *          to CMSIS functions).
+      9            ******************************************************************************
+     10            * @attention
+     11            *
+     12            * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+     13            *
+     14            * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+     15            * You may not use this file except in compliance with the License.
+     16            * You may obtain a copy of the License at:
+     17            *
+     18            *        http://www.st.com/software_license_agreement_liberty_v2
+     19            *
+     20            * Unless required by applicable law or agreed to in writing, software 
+     21            * distributed under the License is distributed on an "AS IS" BASIS, 
+     22            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     23            * See the License for the specific language governing permissions and
+     24            * limitations under the License.
+     25            *
+     26            ******************************************************************************
+     27            */
+     28          
+     29          /* Includes ------------------------------------------------------------------*/
+     30          #include "misc.h"
+     31          
+     32          /** @addtogroup STM32F10x_StdPeriph_Driver
+     33            * @{
+     34            */
+     35          
+     36          /** @defgroup MISC 
+     37            * @brief MISC driver modules
+     38            * @{
+     39            */
+     40          
+     41          /** @defgroup MISC_Private_TypesDefinitions
+     42            * @{
+     43            */
+     44          
+     45          /**
+     46            * @}
+     47            */ 
+     48          
+     49          /** @defgroup MISC_Private_Defines
+     50            * @{
+     51            */
+     52          
+     53          #define AIRCR_VECTKEY_MASK    ((uint32_t)0x05FA0000)
+     54          /**
+     55            * @}
+     56            */
+     57          
+     58          /** @defgroup MISC_Private_Macros
+     59            * @{
+     60            */
+     61          
+     62          /**
+     63            * @}
+     64            */
+     65          
+     66          /** @defgroup MISC_Private_Variables
+     67            * @{
+     68            */
+     69          
+     70          /**
+     71            * @}
+     72            */
+     73          
+     74          /** @defgroup MISC_Private_FunctionPrototypes
+     75            * @{
+     76            */
+     77          
+     78          /**
+     79            * @}
+     80            */
+     81          
+     82          /** @defgroup MISC_Private_Functions
+     83            * @{
+     84            */
+     85          
+     86          /**
+     87            * @brief  Configures the priority grouping: pre-emption priority and subpriority.
+     88            * @param  NVIC_PriorityGroup: specifies the priority grouping bits length. 
+     89            *   This parameter can be one of the following values:
+     90            *     @arg NVIC_PriorityGroup_0: 0 bits for pre-emption priority
+     91            *                                4 bits for subpriority
+     92            *     @arg NVIC_PriorityGroup_1: 1 bits for pre-emption priority
+     93            *                                3 bits for subpriority
+     94            *     @arg NVIC_PriorityGroup_2: 2 bits for pre-emption priority
+     95            *                                2 bits for subpriority
+     96            *     @arg NVIC_PriorityGroup_3: 3 bits for pre-emption priority
+     97            *                                1 bits for subpriority
+     98            *     @arg NVIC_PriorityGroup_4: 4 bits for pre-emption priority
+     99            *                                0 bits for subpriority
+    100            * @retval None
+    101            */
+    102          void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
+    103          {
+    104            /* Check the parameters */
+    105            assert_param(IS_NVIC_PRIORITY_GROUP(NVIC_PriorityGroup));
+    106            
+    107            /* Set the PRIGROUP[10:8] bits according to NVIC_PriorityGroup value */
+    108            SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
+    109          }
+    110          
+    111          /**
+    112            * @brief  Initializes the NVIC peripheral according to the specified
+    113            *         parameters in the NVIC_InitStruct.
+    114            * @param  NVIC_InitStruct: pointer to a NVIC_InitTypeDef structure that contains
+    115            *         the configuration information for the specified NVIC peripheral.
+    116            * @retval None
+    117            */
+    118          void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
+    119          {
+    120            uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
+    121            
+    122            /* Check the parameters */
+    123            assert_param(IS_FUNCTIONAL_STATE(NVIC_InitStruct->NVIC_IRQChannelCmd));
+    124            assert_param(IS_NVIC_PREEMPTION_PRIORITY(NVIC_InitStruct->NVIC_IRQChannelPreemptionPriority));  
+    125            assert_param(IS_NVIC_SUB_PRIORITY(NVIC_InitStruct->NVIC_IRQChannelSubPriority));
+    126              
+    127            if (NVIC_InitStruct->NVIC_IRQChannelCmd != DISABLE)
+    128            {
+    129              /* Compute the Corresponding IRQ Priority --------------------------------*/    
+    130              tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
+    131              tmppre = (0x4 - tmppriority);
+    132              tmpsub = tmpsub >> tmppriority;
+    133          
+    134              tmppriority = (uint32_t)NVIC_InitStruct->NVIC_IRQChannelPreemptionPriority << tmppre;
+    135              tmppriority |=  NVIC_InitStruct->NVIC_IRQChannelSubPriority & tmpsub;
+    136              tmppriority = tmppriority << 0x04;
+    137                  
+    138              NVIC->IP[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority;
+    139              
+    140              /* Enable the Selected IRQ Channels --------------------------------------*/
+    141              NVIC->ISER[NVIC_InitStruct->NVIC_IRQChannel >> 0x05] =
+    142                (uint32_t)0x01 << (NVIC_InitStruct->NVIC_IRQChannel & (uint8_t)0x1F);
+    143            }
+    144            else
+    145            {
+    146              /* Disable the Selected IRQ Channels -------------------------------------*/
+    147              NVIC->ICER[NVIC_InitStruct->NVIC_IRQChannel >> 0x05] =
+    148                (uint32_t)0x01 << (NVIC_InitStruct->NVIC_IRQChannel & (uint8_t)0x1F);
+    149            }
+    150          }
+    151          
+    152          /**
+    153            * @brief  Sets the vector table location and Offset.
+    154            * @param  NVIC_VectTab: specifies if the vector table is in RAM or FLASH memory.
+    155            *   This parameter can be one of the following values:
+    156            *     @arg NVIC_VectTab_RAM
+    157            *     @arg NVIC_VectTab_FLASH
+    158            * @param  Offset: Vector Table base offset field. This value must be a multiple 
+    159            *         of 0x200.
+    160            * @retval None
+    161            */
+    162          void NVIC_SetVectorTable(uint32_t NVIC_VectTab, uint32_t Offset)
+    163          { 
+    164            /* Check the parameters */
+    165            assert_param(IS_NVIC_VECTTAB(NVIC_VectTab));
+    166            assert_param(IS_NVIC_OFFSET(Offset));  
+    167             
+    168            SCB->VTOR = NVIC_VectTab | (Offset & (uint32_t)0x1FFFFF80);
+    169          }
+    170          
+    171          /**
+    172            * @brief  Selects the condition for the system to enter low power mode.
+    173            * @param  LowPowerMode: Specifies the new mode for the system to enter low power mode.
+    174            *   This parameter can be one of the following values:
+    175            *     @arg NVIC_LP_SEVONPEND
+    176            *     @arg NVIC_LP_SLEEPDEEP
+    177            *     @arg NVIC_LP_SLEEPONEXIT
+    178            * @param  NewState: new state of LP condition. This parameter can be: ENABLE or DISABLE.
+    179            * @retval None
+    180            */
+    181          void NVIC_SystemLPConfig(uint8_t LowPowerMode, FunctionalState NewState)
+    182          {
+    183            /* Check the parameters */
+    184            assert_param(IS_NVIC_LP(LowPowerMode));
+    185            assert_param(IS_FUNCTIONAL_STATE(NewState));  
+    186            
+    187            if (NewState != DISABLE)
+    188            {
+    189              SCB->SCR |= LowPowerMode;
+    190            }
+    191            else
+    192            {
+    193              SCB->SCR &= (uint32_t)(~(uint32_t)LowPowerMode);
+    194            }
+    195          }
+    196          
+    197          /**
+    198            * @brief  Configures the SysTick clock source.
+    199            * @param  SysTick_CLKSource: specifies the SysTick clock source.
+    200            *   This parameter can be one of the following values:
+    201            *     @arg SysTick_CLKSource_HCLK_Div8: AHB clock divided by 8 selected as SysTick clock source.
+    202            *     @arg SysTick_CLKSource_HCLK: AHB clock selected as SysTick clock source.
+    203            * @retval None
+    204            */
+    205          void SysTick_CLKSourceConfig(uint32_t SysTick_CLKSource)
+    206          {
+    207            /* Check the parameters */
+    208            assert_param(IS_SYSTICK_CLK_SOURCE(SysTick_CLKSource));
+    209            if (SysTick_CLKSource == SysTick_CLKSource_HCLK)
+    210            {
+    211              SysTick->CTRL |= SysTick_CLKSource_HCLK;
+    212            }
+    213            else
+    214            {
+    215              SysTick->CTRL &= SysTick_CLKSource_HCLK_Div8;
+    216            }
+    217          }
+    218          
+    219          /**
+    220            * @}
+    221            */
+    222          
+    223          /**
+    224            * @}
+    225            */
+    226          
+    227          /**
+    228            * @}
+    229            */
+    230          
+    231          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   NVIC_Init
+       0   NVIC_PriorityGroupConfig
+       0   NVIC_SetVectorTable
+       0   NVIC_SystemLPConfig
+       0   SysTick_CLKSourceConfig
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable4
+       4  ??DataTable4_1
+       4  ??DataTable4_2
+       4  ??DataTable4_3
+       4  ??DataTable4_4
+       4  ??DataTable4_5
+       4  ??DataTable4_6
+       4  ??DataTable4_7
+       4  ??DataTable4_8
+      88  NVIC_Init
+      10  NVIC_PriorityGroupConfig
+      12  NVIC_SetVectorTable
+      18  NVIC_SystemLPConfig
+      20  SysTick_CLKSourceConfig
+
+ 
+ 184 bytes in section .text
+ 
+ 184 bytes of CODE memory
+
+Errors: none
+Warnings: none

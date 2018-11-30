@@ -52,8 +52,6 @@ void ADC_RCC_Configuration(void);
 
 void ADC_Initial(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    
     /************** RCC initial *****************/
     ADC_RCC_Configuration();
     
@@ -158,5 +156,5 @@ void ADC_NVIC_Configuration(void)
 
 void ADC_DMA_IRQHandler(void)
 {
-    
+    ADC_TaskTrigger();
 }

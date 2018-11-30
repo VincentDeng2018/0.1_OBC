@@ -25,7 +25,6 @@
 /* Chip lib include */
 /* user include */
 #include "METER_AdcSample.h"
-#include "DCDC_Control.h"
 
 
 #define ADC_VBATT_MAX_MV        16500L
@@ -51,35 +50,52 @@ void ADC_EnableAutoZero(uint16_t enableOrNot);
 /********************************************************************************
 * LOCAL FUNCTION PROTOTYPES
 ********************************************************************************/
-static void f_LvLCurrentSlowFilterCb(enAdcIndex adcIndex);
-static void f_PackVoltsSlowFilterCb(enAdcIndex adcIndex);
-static void f_LvVoltsFilterCb(enAdcIndex adcIndex);
-static void f_HvCurrrentFilterCb(enAdcIndex adcIndex);
-static void f_HvVoltsFilterCb(enAdcIndex adcIndex);
-static void f_BoardTemperatureFilterCb(enAdcIndex adcIndex);
-static void f_AuxPowerFilterCb(enAdcIndex adcIndex);
+static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex);
+static void f_KeyPressedFilterCb(enAdcIndex adcIndex);
+static void f_ISetFilterCb(enAdcIndex adcIndex);
+static void f_CSetFilterCb(enAdcIndex adcIndex);
+static void f_USetFilterCb(enAdcIndex adcIndex);
+static void f_BattTempFilterCb(enAdcIndex adcIndex);
 
 
 /********************************************************************************
 * Global VARIABLES
 ********************************************************************************/
-stAdcFilter_t stAdcFilter[ADC_END] =
+
+stTemperatureTable_t stTemperatureTable[] =
 {
-//  Raw fastG fastPre fastCur zeroCnt zeroOffset SlowShift SlowCnt SlowSum SlowFilterCb
+    {-300,   3569},
+    {-200,   3255},
+    {-100,   2860},
+    {0   ,   2414},
+    {100 ,   1963},
+    {200 ,   1549},
+    {300 ,   1198},
+    {400 ,   915 },
+    {500 ,   696 },
+    {600 ,   531 },
+    {700 ,   407 },
+    {800 ,   314 },
+    {900 ,   244 },
+    {1000,   192 },
+    {1100,   153 },
+    {1200,   122 },
+};
+#define TEMP_TABLE_LEN (sizeof(stTemperatureTable) / sizeof(stTemperatureTable_t))
 
-    {0, 2,    0,      0,      0,      0,         4,       0,      0,    &f_PackVoltsSlowFilterCb},  //T_BattMeter_100mC
-    {0, 1,    0,      0,      0,      0,         4,       0,      0,    &f_LvVoltsFilterCb},        //T_ChargeMeter_100mC
-    
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,    &f_LvLCurrentSlowFilterCb},    //U_Pack_mV
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,    &f_LvLCurrentSlowFilterCb},    //U_Batt_mV
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,    &f_LvLCurrentSlowFilterCb},    //U_ChgOutput_mV
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,    &f_LvLCurrentSlowFilterCb},    //U_KeySelected_10mV
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,    &f_LvLCurrentSlowFilterCb},    //U_ISet_10mV
-    
-    {0, 2,    0,      0,      0,      0,         4,       0,      0,    &f_HvVoltsFilterCb},        //U_CSet_10mV
-    {0, 2,    0,      0,      0,      0,         4,       0,      0,    &f_HvCurrrentFilterCb},     //I_Charge_mA
-
-    {0, 3,    0,      0,      0,      0,         4,       0,      0,    &f_BoardTemperatureFilterCb},   //U_Test_10mV
+stAdcFilter_t stAdcFilter[ADC_U_BAT_NEG] =
+{
+//  Raw fastG fastPre fastCur zeroCnt zeroOffset SlowShift SlowAccCnt SlowSum SlowAvgCnt SlowFilterCb
+    {0, 2,    0,      0,      0,      0,         6,       0,      0,  0,  &f_KeyPressedFilterCb},       //ADC_KEY
+    {0, 1,    0,      0,      0,      0,         4,       0,      0,  0,  &f_ISetFilterCb},    //ADC_I_SET
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_CSetFilterCb},    //ADC_C_SET
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattVoltsSlowFilterCb},    //ADC_I_CHG
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_USetFilterCb},    //ADC_U_SET_TEST
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattTempFilterCb},    //ADC_TEMP1
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattTempFilterCb},    //ADC_TEMP2
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattVoltsSlowFilterCb},    //ADC_U_PACK
+    {0, 2,    0,      0,      0,      0,         4,       0,      0,  0,  &f_BattVoltsSlowFilterCb},        //ADC_U_OUT
+    {0, 2,    0,      0,      0,      0,         4,       0,      0,  0,  &f_BattVoltsSlowFilterCb},     //ADC_U_BAT_POS
 };
 
 
@@ -115,7 +131,7 @@ void ADC_FilterIniital(void)
             stAdcFilter[i].SlowAvgShift = 5;
         }
         
-        stAdcFilter[i].SlowAvgCnt = 0;
+        stAdcFilter[i].SlowAvgAccCnt = 0;
         stAdcFilter[i].SlowAvgSum = 0;
     }
 }
@@ -210,6 +226,7 @@ void f_AdcFastFilter(uint16_t adcCnt, enAdcIndex index, uint16_t autoZero)
 #else
     pAdcFilter->fastCurrVal = tempVal;
 #endif
+
     /* uncomment this line to allow slow filter running if not called by ISR */
     /* call slow filter */
     f_AdcSlowFilter(index);
@@ -233,18 +250,19 @@ void f_AdcSlowFilter(enAdcIndex index)
 {
     /* sum the ADC value */
     stAdcFilter[index].SlowAvgSum += stAdcFilter[index].fastCurrVal;
-    stAdcFilter[index].SlowAvgCnt++;
+    stAdcFilter[index].SlowAvgAccCnt++;
 
     /* Average counter has arrived, then call cb function to handle them */
-    if(stAdcFilter[index].SlowAvgCnt >=  (1 << stAdcFilter[index].SlowAvgShift))
+    if(stAdcFilter[index].SlowAvgAccCnt >=  (1 << stAdcFilter[index].SlowAvgShift))
     {
+        stAdcFilter[index].SlowAvgCnt = (uint16_t)(stAdcFilter[adcIndex].SlowAvgSum >> stAdcFilter[adcIndex].SlowAvgShift); 
         if(NULL != stAdcFilter[index].SlowFilterCb)
         {
             stAdcFilter[index].SlowFilterCb(index);
         }
 
         /* Clear temp result */
-        stAdcFilter[index].SlowAvgCnt = 0;
+        stAdcFilter[index].SlowAvgAccCnt = 0;
         stAdcFilter[index].SlowAvgSum = 0;
     }
 }
@@ -277,9 +295,186 @@ void ADC_EnableAutoZero(uint16_t enableOrNot)
 
 
 /* call back function to convert ADC counter to physical value */
-static void f_PackVoltsSlowFilterCb(enAdcIndex adcIndex)
+static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex)
 {
-    uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgSum >> stAdcFilter[adcIndex].SlowAvgShift;
+    uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    
+    /* 3.3V --> 16830mV */
+    tempVal = (tempVal * 16830) >> 12;
+    
+    if(adcIndex == ADC_U_PACK)
+    {
+        stAdcMeters.U_Pack_mV = (uint16_t)tempVal;
+    }
+    else if(adcIndex == ADC_U_OUT)
+    {
+        stAdcMeters.U_ChgOutput_mV = (uint16_t)tempVal;
+    }
+    else
+    {
+        stAdcMeters.U_Batt_mV = (uint16_t)tempVal;
+    }
+}
 
-    stAdcMeters.f_PackVoltsSlowFilterCb = (uint16_t)(tempVal * (uint32_t)10 / (uint32_t)113);
+
+/* call back function to convert ADC counter to physical value */
+static void f_BattTempFilterCb(enAdcIndex adcIndex)
+{
+    int32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    int32_t a = 0;
+    
+    uint16_t i = 0;
+    
+    int16_t *pTemperature = &stAdcMeters.T_BattMeter_100mC;
+    
+    if(adcIndex == ADC_TEMP1)
+    {
+        pTemperature = &stAdcMeters.T_ChargeMeter_100mC;
+    }
+    
+    /* Y = aX + b: Y = NewTemperature_100mc, X = newAdcCounter - stTemperatureTable[i].AdcCounter
+    a = (stTemperatureTable[i+1].TBatt_100mc - stTemperatureTable[i].TBatt_100mc) /
+        (stTemperatureTable[i+1].AdcCounter - stTemperatureTable[i].AdcCounter)
+    b = stTemperatureTable[i].TBatt_100mc
+    */
+        
+    if(tempVal >= stTemperatureTable[0].AdcCounter)
+    {
+        *pTemperature = stTemperatureTable[0].TBatt_100mc;
+    }
+    else if(tempVal <= stTemperatureTable[TEMP_TABLE_LEN - 1].AdcCounter)
+    {
+        *pTemperature = stTemperatureTable[TEMP_TABLE_LEN - 1].TBatt_100mc;
+    }
+    else
+    {
+        for(i = 0; i < TEMP_TABLE_LEN; i++)
+        {
+            if(tempVal > stTemperatureTable[i].AdcCounter)
+            {
+                a = (int32_t)(stTemperatureTable[i - 1].TBatt_100mc - stTemperatureTable[i].TBatt_100mc);
+                a = a * (tempVal - (int32_t)stTemperatureTable[i - 1].AdcCounter);
+                a = a / ((int32_t)stTemperatureTable[i - 1].AdcCounter - (int32_t)stTemperatureTable[i].AdcCounter);
+                *pTemperature = (int16_t)(a + stTemperatureTable[i -1].TBatt_100mc);
+                break;
+            }
+        }
+    }
+       
+}
+
+static void f_KeyPressedFilterCb(enAdcIndex adcIndex)
+{
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    
+    //No Key= 4096 
+    //Key1  = 3097
+    //Key2  = 2048       
+    //Key3  = 1084 
+    //Key4  = 0           
+          
+    if(tempVal > 3596)
+    {
+        stAdcMeters.enKeyPressed = KEY_NONE;
+    }
+    else if(tempVal > 2572)
+    {
+        stAdcMeters.enKeyPressed = KEY_1_UP;
+    }
+    else if(tempVal > 1566)
+    {
+        stAdcMeters.enKeyPressed = KEY_2_DOWN;
+    }
+    else if(tempVal > 542)
+    {
+        stAdcMeters.enKeyPressed = KEY_3_BACK;
+    }
+    else
+    {
+        stAdcMeters.enKeyPressed = KEY_4_ENTER;
+    }
+}
+
+
+static void f_ISetFilterCb(enAdcIndex adcIndex)
+{
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    
+    //0 0    4096
+    //0 1    2707
+    //1 0    2048
+    //1 1    1630
+
+    if(tempVal > 3900)
+    {
+        stAdcMeters.ISetup = SETUP_0;
+    }
+    else if(tempVal > 2600)
+    {
+        stAdcMeters.ISetup = SETUP_1;
+    }
+    else if(tempVal > 1800)
+    {
+        stAdcMeters.ISetup = SETUP_2;
+    }
+    else
+    {
+        stAdcMeters.ISetup = SETUP_3;
+    }
+}
+
+
+static void f_CSetFilterCb(enAdcIndex adcIndex)
+{
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    
+    //0 0    4096
+    //0 1    2707
+    //1 0    2048
+    //1 1    1630
+
+    if(tempVal > 3900)
+    {
+        stAdcMeters.USetup = SETUP_0;
+    }
+    else if(tempVal > 2600)
+    {
+        stAdcMeters.USetup = SETUP_1;
+    }
+    else if(tempVal > 1800)
+    {
+        stAdcMeters.USetup = SETUP_2;
+    }
+    else
+    {
+        stAdcMeters.USetup = SETUP_3;
+    }
+}
+
+
+static void f_USetFilterCb(enAdcIndex adcIndex)
+{
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    
+    //0 0    4096
+    //0 1    2707
+    //1 0    2048
+    //1 1    1630
+
+    if(tempVal > 3900)
+    {
+        stAdcMeters.USetup = SETUP_0;
+    }
+    else if(tempVal > 2600)
+    {
+        stAdcMeters.USetup = SETUP_1;
+    }
+    else if(tempVal > 1800)
+    {
+        stAdcMeters.USetup = SETUP_2;
+    }
+    else
+    {
+        stAdcMeters.USetup = SETUP_3;
+    }
 }

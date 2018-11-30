@@ -25,6 +25,7 @@
 #include "TSK_TaskCommonApi.h"
 #include "GPIO_Globals.h"
 #include "ADC_Globals.h"
+#include "SPI_MSD0_Driver.h"
 
 extern void CAN_Initial(void);
 
@@ -36,7 +37,11 @@ int main(void)
     GPIO_Initial();
     CAN_Initial();
     ADC_Initial();
-
+    USART_Configuration();
+    //USB_Set();
+    
+    MSD0_SPI_Configuration();
+    
     /* disable interrupt until task create finish */
     TSK_CreateTasks();
     portENABLE_INTERRUPTS();

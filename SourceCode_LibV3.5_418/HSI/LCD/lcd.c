@@ -17,7 +17,7 @@
 void DelayUs(void)
 {
     unsigned int i;
-    
+
     for(i = 0; i < 200; i++);
 }
 //----------------------------------------------------------------------
@@ -45,21 +45,21 @@ void  SendDataSPI(unsigned int dat)
 void  SendData_SPI_2_lane(unsigned int dat)
 {
     unsigned int i,DATAH,DATAL;
-    
+
     DATAH=((dat&0xff00)>>8)|0X100;
     DATAL=(dat&0x00ff)|0X100;
-    
+
     for(i=0; i<9; i++)
     {
         if( (DATAH&0x0100)!=0 ) SDA_HIGH;
         else SDA_LOW;
-        
+
         //if( (DATAL&0x0100)!=0 ) RS = 1;
         //else RS = 0;
-        
+
         DATAH <<= 1;
         DATAL <<= 1;
-        
+
         SCL_LOW;
         SCL_HIGH;
     }
@@ -138,31 +138,35 @@ void LCD_Init(void)
 {
     RES_HIGH;
     Delay(5);
-    
+
     RES_LOW;
     Delay(10);
-    
+
     RES_HIGH;
     Delay(50);
-    
+
     WriteComm(0x11); //Sleep out
     Delay (120); //Delay 120ms
     //--------------------------------------Display Setting------------------------------------------//
-       
+
     WriteComm(0x36); //Memory data access control
+#ifdef LANDSCAPE
+    WriteData(0xA0);
+#else
     WriteData(0x00);
-    
+#endif
+
     WriteComm(0x3a);
     WriteData(0x05); // 05: 16-bit per pixel ,06: 18-bit per pixel
-    
+
     WriteComm(0x35); //310 1
     WriteData(0x00);
-    
+
     // WriteComm(0x21); //Display inversion On
-    
+
     WriteComm(0xe7);
     WriteData(0x00);// E7h=0X00,3-line serial;  E7h=0x10: 2 data line interface
-    
+
     //--------------------------------ST7789V Frame rate setting----------------------------------//
     WriteComm(0xb2); //porch setting
     WriteData(0x0C); //BP 05  310 2
@@ -170,7 +174,7 @@ void LCD_Init(void)
     WriteData(0x00); //disable separate porch
     WriteData(0x33); //BP + FP
     WriteData(0x33); //BP + FP
-    
+
     WriteComm(0xb7);
     WriteData(0x35);  //(5: 14.06V, 1:-7.67V)(3: 13.26V, 5:-10.43V)
     //---------------------------------ST7789V Power setting--------------------------------------//
@@ -178,33 +182,33 @@ void LCD_Init(void)
     //    WriteData(0x2f);
     //    WriteData(0x2b);
     //    WriteData(0x2f);
-    
+
     WriteComm(0xbb);  //VCOM
     WriteData(0x1A);// 35 310 4
-    
+
     WriteComm(0xc0); //LCM control
     WriteData(0x2c);
-    
+
     WriteComm(0xc2); //Command Enable
     WriteData(0x01);
-    
+
     WriteComm(0xc3);  //VRH Set GVDD :5.1V+vcom+vcom_offset+0.5v
     WriteData(0x0f);  //VRH Set GVCL :-5.1V+(vcom+vcom_offset-0.5v)
-    
+
     WriteComm(0xc4);  //VDV set :0x20 is 0V
     WriteData(0x20);
-    
+
     WriteComm(0xc6); // dot inversion and 60Hz
     WriteData(0x0F); // 0x0F: dot inversion and 60Hz
                  // 0xEF:Column inversion and 60Hz  10 310 5
-    
+
     WriteComm(0xd0); //power control
     WriteData(0xa4);
     WriteData(0xa1); //AVDD:6.8V , AVCL : -4.8V , 2.4V
-    
+
     //    WriteComm(0xe8);  //Source booster
     //    WriteData(0x83);
-    
+
     //    WriteComm(0xe9);
     //    WriteData(0x09);  //0d
     //    WriteData(0x09);  //12
@@ -225,7 +229,7 @@ void LCD_Init(void)
     WriteData(0x1C);// 14
     WriteData(0x26);//27
     WriteData(0x28);//30
-    
+
     WriteComm(0xe1);
     WriteData(0xd0);//d0
     WriteData(0x02);//0B
@@ -241,10 +245,10 @@ void LCD_Init(void)
     WriteData(0x1C);//13
     WriteData(0x26);//27
     WriteData(0x28);//30
-    
-    
+
+
     WriteComm(0x29);
-    
+
     DispColor(WHITE);
 }
 
@@ -282,6 +286,25 @@ void DispColor(unsigned int color)
             //SendDataSPI(0x0100|(color&0xFF));
             WriteData(color >> 8);
             WriteData(color);
+        }
+    }
+}
+
+void ClearScreen(unsigned int Xstart,unsigned int Xend,unsigned int Ystart,unsigned int Yend)
+{
+    unsigned int i,j;
+
+    BlockWrite(Xstart, Xend, Ystart, Yend);
+
+    CS_LOW;
+    //RS=1;
+
+    for(i = 0; i < Yend; i++)
+    {
+        for(j = 0; j < Xend; j++)
+        {
+            WriteData(WHITE >> 8);
+            WriteData(WHITE);
         }
     }
 }
@@ -326,13 +349,13 @@ void DispBand(void)
 void DispFrame(void)
 {
     unsigned int i,j;
-    
+
     BlockWrite(0,COL-1,0,ROW-1);
-    
+
     CS_LOW;
     //RD0=1;
     //RS=1;
-    
+
     SendDataSPI(RED>>8);
     SendDataSPI(RED);
     for(i=0;i<COL-2;i++)
@@ -340,21 +363,21 @@ void DispFrame(void)
         SendDataSPI(0xFF);
         SendDataSPI(0xFF);
     }
-    
+
     SendDataSPI(RED>>8);
     SendDataSPI(RED);
-    
+
     for(j=0;j<ROW-2;j++)
     {
         SendDataSPI(RED>>8);SendDataSPI(RED);
         for(i=0;i<COL-2;i++){SendDataSPI(BLACK>>8);SendDataSPI(BLACK);}
         SendDataSPI(RED>>8);SendDataSPI(RED);
     }
-    
+
     SendDataSPI(RED>>8);SendDataSPI(RED);
     for(i=0;i<COL-2;i++){SendDataSPI(0xFF);SendDataSPI(0xFF);}
     SendDataSPI(RED>>8);SendDataSPI(RED);
-    
+
     CS_HIGH;
 }
 
@@ -364,13 +387,13 @@ void DispPic(unsigned int code *picture)
     unsigned int *p;
     unsigned int  i,j; //i-row,j-col
     unsigned int  n,k; //n-row repeat count,k-col repeat count
-    
+
     BlockWrite(0,COL-1,0,ROW-1);
-    
+
     CS_LOW;
     RS =1;
     //RD0=1;
-    
+
     for(n=0;n<ROW/PIC_HEIGHT;n++)         //n-row repeat count
     {
         for(i=0;i<PIC_HEIGHT;i++)
@@ -384,7 +407,7 @@ void DispPic(unsigned int code *picture)
                     SendDataSPI(*(p+i*PIC_HEIGHT+j));
                 }
             }
-            
+
             p=picture;
             for(j=0;j<COL%PIC_WIDTH;j++)
             {
@@ -393,7 +416,7 @@ void DispPic(unsigned int code *picture)
             }
         }
     }
-    
+
     for(i=0;i<ROW%PIC_HEIGHT;i++)
     {
         p=picture;
@@ -405,7 +428,7 @@ void DispPic(unsigned int code *picture)
                 SendDataSPI(*(p+i*PIC_HEIGHT+j));
             }
         }
-        
+
         p=picture;
         for(j=0;j<COL%PIC_WIDTH;j++)
         {
@@ -413,7 +436,7 @@ void DispPic(unsigned int code *picture)
             SendDataSPI(*(p+i*PIC_HEIGHT+j));
         }
     }
-    
+
     CS_HIGH;
 }
 #endif
@@ -1163,6 +1186,81 @@ void  DispOneChar(unsigned char ord, unsigned int Xstart, unsigned int Ystart,
      }
 }
 
+const uint8_t abyFontL2R5x7[S5x7_FONT_DIG_ALPH_MAX][7] =
+{
+ // (0) A(1) V(2) M(3) -(4) >(5) <(6) 0(7) 1(8) 2(9) 3(10) 4(11) 5(12) 6(13) 7(14) 8(15) 9(16)
+
+{0x00,0x00,0x00,0x00,0x00,0x00,0x00},/*" ",0*/
+
+{0x00,0x00,0x00,0x00,0x00,0x40,0x00},/*".",0*/
+
+{0x00,0x20,0x60,0x50,0x70,0x88,0x00},/*"A",1*/
+
+{0x00,0x88,0x50,0x50,0x60,0x20,0x00},/*"V",2*/
+
+{0x00,0xD8,0xD8,0xE8,0xA8,0xA8,0x00},/*"M",3*/
+
+{0x00,0x00,0x00,0xF8,0x00,0x00,0x00},/*"-",4*/
+
+{0x00,0x80,0x60,0x18,0x20,0x40,0x00},/*">",5*/
+
+{0x00,0x10,0x20,0xC0,0x20,0x10,0x00},/*"<",6*/
+
+{0x00,0x70,0x90,0x90,0x90,0x70,0x00},/*"0",7*/
+
+{0x00,0x20,0x60,0x20,0x20,0x20,0x00},/*"1",8*/
+
+{0x00,0x70,0x10,0x10,0x20,0x70,0x00},/*"2",9*/
+
+{0x00,0x70,0x10,0x30,0x10,0x70,0x00},/*"3",10*/
+
+{0x00,0x10,0x30,0x50,0xF8,0x10,0x00},/*"4",11*/
+
+{0x00,0x70,0x80,0xF0,0x10,0x70,0x00},/*"5",12*/
+
+{0x00,0x20,0x40,0x70,0x88,0x70,0x00},/*"6",13*/
+
+{0x00,0xF8,0x10,0x20,0x20,0x40,0x00},/*"7",14*/
+
+{0x00,0x70,0x90,0x70,0x90,0x70,0x00},/*"8",15*/
+
+{0x00,0x70,0x90,0xD0,0x20,0x40,0x00},/*"9",16*/
+};
+
+void  DispOneChar_5X7(S5x7_FONT_DIG_ALPH_T ord, unsigned int Xstart, unsigned int Ystart,
+                  unsigned int TextColor, unsigned int BackColor)	 // ord:0~95
+{
+    unsigned char i,j;
+    const unsigned char  *p;
+    unsigned char dat;
+    unsigned int index;
+
+    BlockWrite(Xstart,Xstart+(FONT_W_5X7 - 1), Ystart, Ystart+(FONT_H_5X7-1));
+
+    index = ord;
+
+
+    p = &abyFontL2R5x7[index][0];
+
+    for(i = 0; i < FONT_H_5X7; i++)
+    {
+        dat = *p++;
+
+        for(j = 0; j < FONT_W_5X7; j++)
+        {
+            if((dat << j) & 0x80)
+            {
+                WriteOneDot(TextColor);
+            }
+            else
+            {
+                WriteOneDot(BackColor);
+            }
+        }
+    }
+}
+
+
 void DispStr(unsigned char *str,unsigned int Xstart,unsigned int Ystart,unsigned int TextColor,unsigned int BackColor)
 {
 
@@ -1198,12 +1296,12 @@ void DispInt(unsigned int i,unsigned int Xstart,unsigned int Ystart,unsigned int
     {
         Ystart=(Ystart-1)-FONT_H;
     }
-    
+
     DispOneChar((i>>12)%16,Xstart,Ystart,TextColor,BackColor); //ID value
     DispOneChar((i>>8)%16,Xstart+FONT_W,Ystart,TextColor,BackColor);
     DispOneChar((i>>4)%16,Xstart+FONT_W*2,Ystart,TextColor,BackColor);
     DispOneChar(i%16,Xstart+FONT_W*3,Ystart,TextColor,BackColor);
-    
+
     BlockWrite(0,COL-1,0,ROW-1);
 }
 
@@ -1401,40 +1499,18 @@ void Debug(void)
 
 void PutPixel(unsigned int x,unsigned int y,unsigned int color)
 {
-	#if 0
-	BlockWrite(x,x,y,y);
-
-	CS_LOW;
-	//RD0=1;
-	RS=1;
-
-	SendDataSPI(color>>8);
-	SendDataSPI(color);
-
-	CS_HIGH;
-	#endif
-
-	#if 1
-	unsigned char i;
-
- 	for (i=0;i<3;i++)
- 	{
-       BlockWrite(x,COL-1,y+i,ROW-1);
-	   WriteOneDot(color);
-	   WriteOneDot(color);
-    }
-
-	#endif
+    BlockWrite(x, x, y, y);
+    WriteOneDot(color);
 }
 
 void DrawLine(unsigned int Xstart,unsigned int Xend,unsigned int Ystart,unsigned int Yend,unsigned int color)
 {
     unsigned int i,j;
-    
+
     BlockWrite(Xstart,Xend,Ystart,Yend);
-    
+
     CS_LOW;
-    
+
     for(i=Ystart;i<Yend+1;i++)
     {
         for(j=Xstart;j<Xend+1;j++)
@@ -1442,7 +1518,7 @@ void DrawLine(unsigned int Xstart,unsigned int Xend,unsigned int Ystart,unsigned
             WriteOneDot(color);
         }
     }
-    
+
     CS_HIGH;
 }
 
@@ -5482,7 +5558,7 @@ void Disp_GRAY_565(void)
     unsigned int i,j,k;
     unsigned int color=0x00;
     BlockWrite(0,COL-1,0,ROW-1);
-    
+
     CS_LOW;
     //RS=1;
     //RD0=1;

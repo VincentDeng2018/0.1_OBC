@@ -23,3 +23,5 @@ Symbol Paths=
 Working Directory=
 Selected Debugger=0
 Source Paths=
+[Group Filter]
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\DesignDocument\STM32F103°æ×ÊÁÏ\CODE\=*.asm;*.c;*.s;*.map;*.h;

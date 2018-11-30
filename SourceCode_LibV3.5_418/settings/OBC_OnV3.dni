@@ -30,7 +30,7 @@ LeaveTargetRunning=_ 0
 stlinkResetStyle=0
 stlinkResetStrategy=1
 [DebugChecksum]
-Checksum=409134898
+Checksum=-543150021
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -117,7 +117,8 @@ ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Count=0
+Bp0=_ 1 "EMUL_CODE" "{$PROJ_DIR$\APP\main.c}.46.5" 0 0 1 "" 0 "" 0
+Count=1
 [Aliases]
 Count=0
 SuppressDialog=0

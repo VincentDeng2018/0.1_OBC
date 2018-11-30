@@ -44,9 +44,9 @@ EXTI_InitTypeDef EXTI_InitStructure;
 
 /* 以下状态标志 1 表示正常， 0 表示异常 */
 uint8_t b_usb = 0;   /* USB是否需要初始化及连接 */
-uint8_t b_tf = 0;	/* TF卡状态是否正常 */
+uint8_t b_tf = 0;   /* TF卡状态是否正常 */
 uint8_t b_mcp = 0;  /* 功率IC是否正常 */
-uint8_t b_fs = 1;	/* 文件系统是否正常 */
+uint8_t b_fs = 1;   /* 文件系统是否正常 */
 uint8_t fs_try_cnt = 0;
 
 /* Extern variables ----------------------------------------------------------*/
@@ -64,10 +64,10 @@ static void RCC_Config(void);
 *******************************************************************************/
 void Set_System(void)
 {
-	__IO uint32_t tmp;
-	uint8_t cnt;
-	
-	
+    __IO uint32_t tmp;
+    uint8_t cnt;
+    
+    
 #if defined (STM32F37X) || defined (STM32F30X)
   GPIO_InitTypeDef  GPIO_InitStructure;
 #elif defined(USB_USE_EXTERNAL_PULLUP)
@@ -76,9 +76,9 @@ void Set_System(void)
   GPIO_InitTypeDef  GPIO_InitStructure;
 #endif /*STM32L1XX_XD */
 
-	 RCC_Config();
+     RCC_Config();
 #if 0
-	 RCC_AHBPeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
+     RCC_AHBPeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   //GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -101,11 +101,11 @@ void Set_System(void)
       /* Configure the EXTI line 18 connected internally to the USB IP */
 //  if (b_usb)
 //  {
-	  EXTI_ClearITPendingBit(EXTI_Line18);
-	  EXTI_InitStructure.EXTI_Line = EXTI_Line18;
-	  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
-	  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-	  EXTI_Init(&EXTI_InitStructure);
+      EXTI_ClearITPendingBit(EXTI_Line18);
+      EXTI_InitStructure.EXTI_Line = EXTI_Line18;
+      EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+      EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+      EXTI_Init(&EXTI_InitStructure);
 //  }
 #endif
   
@@ -121,9 +121,9 @@ void Set_System(void)
 *******************************************************************************/
 void Set_USBClock(void)
 {
-//	if (!b_usb)
-//		return;
-	
+//  if (!b_usb)
+//      return;
+    
 #if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)
   /* Enable USB clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, ENABLE);
@@ -235,12 +235,12 @@ void Interrupts_Config(void)
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_Init(&NVIC_InitStructure);
 
-	//Step2.中断NVIC设置：允许中断，设置优先级
-	NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;     //更新事件
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;    //抢占优先级0
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;           //响应优先级1
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;              //允许中断
-	NVIC_Init(&NVIC_InitStructure);                              //写入设置
+    //Step2.中断NVIC设置：允许中断，设置优先级
+    NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;     //更新事件
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;    //抢占优先级0
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;           //响应优先级1
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;              //允许中断
+    NVIC_Init(&NVIC_InitStructure);                              //写入设置
 
  
 }
@@ -278,7 +278,7 @@ void Led_Config(void)
 *******************************************************************************/
 void Led_RW_ON(void)
 {
-	
+    
   //STM_EVAL_LEDOn(LED2);
   return;
 }
@@ -292,7 +292,7 @@ void Led_RW_ON(void)
 *******************************************************************************/
 void Led_RW_OFF(void)
 {
-	
+    
   //STM_EVAL_LEDOff(LED2);
   return;
 }
@@ -308,7 +308,7 @@ static void RCC_Config(void)
    __IO uint32_t wait_tm;
 
   /* RCC system reset(for debug purpose) */
-  RCC_DeInit();	   //将RCC寄存器设备缺省值
+  RCC_DeInit();    //将RCC寄存器设备缺省值
 
   /* Enable HSE */
   RCC_HSEConfig(RCC_HSE_ON);  //外部高速振荡器HSE 开启
@@ -316,45 +316,45 @@ static void RCC_Config(void)
   for (wait_tm = 0; wait_tm < 0x5000; wait_tm++);
   
   /* Wait till HSE is ready */
-  HSEStartUpStatus = RCC_WaitForHSEStartUp();	//等待HSE启动
+  HSEStartUpStatus = RCC_WaitForHSEStartUp();   //等待HSE启动
 
-  if (HSEStartUpStatus == SUCCESS)	  //如果HSE晶振稳定且就绪
+  if (HSEStartUpStatus == SUCCESS)    //如果HSE晶振稳定且就绪
   {
     /* Enable Prefetch Buffer */
     //FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);  //预取指缓存使能
 
     /* Flash 2 wait state */
-    //FLASH_SetLatency(FLASH_Latency_2);	//设置FLASH存储器延时时钟周期数为2延时周期
+    //FLASH_SetLatency(FLASH_Latency_2);    //设置FLASH存储器延时时钟周期数为2延时周期
 
     /* HCLK = SYSCLK */
     RCC_HCLKConfig(RCC_SYSCLK_Div1);  //设置AHB时钟＝系统时钟
 
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1);	 //设置APB2时钟 ＝ HCLK
+    RCC_PCLK2Config(RCC_HCLK_Div1);  //设置APB2时钟 ＝ HCLK
 
     /* PCLK1 = HCLK/2 */
-    RCC_PCLK1Config(RCC_HCLK_Div2);	   //设置APB1时钟 ＝ HCLK/2
+    RCC_PCLK1Config(RCC_HCLK_Div2);    //设置APB1时钟 ＝ HCLK/2
 
     /* ADCCLK = PCLK2/6 */
-    RCC_ADCCLKConfig(RCC_PCLK2_Div6);	//设置ADC时钟＝PCLK/6
+    RCC_ADCCLKConfig(RCC_PCLK2_Div6);   //设置ADC时钟＝PCLK/6
 
-	//PLL设置
-	//PLL输入时钟＝HSE时钟频率   输出 9倍频（HSE×9）
+    //PLL设置
+    //PLL输入时钟＝HSE时钟频率   输出 9倍频（HSE×9）
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);     //72M
 
     /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
-    while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)	 //等待PLL就绪
+    while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)  //等待PLL就绪
     {}
 
     /* Select PLL as system clock source */
-    RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);	//选择PLL作为系统时钟
+    RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);  //选择PLL作为系统时钟
 
     /* Wait till PLL is used as system clock source */
-	//等待设置系统时钟为PLL成功
-	//返回值为	00：HSI  04：HSE  08：PLL
+    //等待设置系统时钟为PLL成功
+    //返回值为  00：HSI  04：HSE  08：PLL
     while (RCC_GetSYSCLKSource() != 0x08)  
     {}
 
@@ -372,7 +372,7 @@ static void RCC_Config(void)
 *******************************************************************************/
 void USB_Configured_LED(void)
 {
-	//return;
+    //return;
   //STM_EVAL_LEDOn(LED1);
 }
 
@@ -385,7 +385,7 @@ void USB_Configured_LED(void)
 *******************************************************************************/
 void USB_NotConfigured_LED(void)
 {
-	//return;
+    //return;
   //STM_EVAL_LEDOff(LED1);
 }
 
@@ -420,13 +420,13 @@ void USB_Cable_Config (FunctionalState NewState)
     SYSCFG_USBPuCmd(DISABLE);
   }
 #else /* stm32F10x */
-	if (NewState != DISABLE)
+    if (NewState != DISABLE)
   {
-    GPIO_ResetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);	  //连接USB
+    GPIO_ResetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);   //连接USB
   }
   else
   {
-    GPIO_SetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);	  //断开USB
+    GPIO_SetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);     //断开USB
   }
 #endif /* STM32L1XX_MD */
 }
@@ -434,7 +434,7 @@ void USB_Cable_Config (FunctionalState NewState)
 
 void USB_Set(void)
 {
-	
+    
 
   Set_USBClock();
   USB_Interrupts_Config();
@@ -457,32 +457,32 @@ void USB_Set(void)
 *******************************************************************************/
 void TM_Config(void)
 {
-	
-	TIM_TimeBaseInitTypeDef TIM_BaseInitStructure;
+    
+    TIM_TimeBaseInitTypeDef TIM_BaseInitStructure;
 
-	// 时钟设置：启动TIM1
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
-	//TIM1 使用内部时钟
-	//TIM_InternalClockConfig(TIM1);
-	//TIM1基本设置
-	//设置预分频器分频系数71，即APB2=72M, TIM1_CLK=72/72=1MHz
-	//TIM_Period（TIM1_ARR）=10000，计数器向上计数到10000后产生更新事件，计数值归零
-	//向上计数模式
-	//TIM_RepetitionCounter(TIM1_RCR)=0，每次向上溢出都产生更新事件
-	TIM_BaseInitStructure.TIM_Period = 1000;
-	TIM_BaseInitStructure.TIM_Prescaler = 71;
-	TIM_BaseInitStructure.TIM_ClockDivision = 0;
-	TIM_BaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_BaseInitStructure.TIM_RepetitionCounter = 0;
-	TIM_TimeBaseInit(TIM1, &TIM_BaseInitStructure);
-	//清中断，以免一启用中断后立即产生中断
-	TIM_ClearFlag(TIM1, TIM_FLAG_Update);
-	//使能TIM1中断源
-	TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
-	//TIM1总开关：开启
-	TIM_Cmd(TIM1, ENABLE);
-	
-	
+    // 时钟设置：启动TIM1
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+    //TIM1 使用内部时钟
+    //TIM_InternalClockConfig(TIM1);
+    //TIM1基本设置
+    //设置预分频器分频系数71，即APB2=72M, TIM1_CLK=72/72=1MHz
+    //TIM_Period（TIM1_ARR）=10000，计数器向上计数到10000后产生更新事件，计数值归零
+    //向上计数模式
+    //TIM_RepetitionCounter(TIM1_RCR)=0，每次向上溢出都产生更新事件
+    TIM_BaseInitStructure.TIM_Period = 1000;
+    TIM_BaseInitStructure.TIM_Prescaler = 71;
+    TIM_BaseInitStructure.TIM_ClockDivision = 0;
+    TIM_BaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_BaseInitStructure.TIM_RepetitionCounter = 0;
+    TIM_TimeBaseInit(TIM1, &TIM_BaseInitStructure);
+    //清中断，以免一启用中断后立即产生中断
+    TIM_ClearFlag(TIM1, TIM_FLAG_Update);
+    //使能TIM1中断源
+    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
+    //TIM1总开关：开启
+    TIM_Cmd(TIM1, ENABLE);
+    
+    
 }
 
 
@@ -525,10 +525,10 @@ void USART_Config_Default(void)
   /* Configure and enable the USART */
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
   USART_ClearITPendingBit(EVAL_COM1,USART_FLAG_RXNE);
-	USART_ClearITPendingBit(EVAL_COM1,USART_FLAG_TXE);
+    USART_ClearITPendingBit(EVAL_COM1,USART_FLAG_TXE);
   USART_ClearFlag(EVAL_COM1,USART_FLAG_RXNE);
    USART_ClearFlag(EVAL_COM1,USART_FLAG_TXE);
-	
+    
   /* Enable the USART Receive interrupt */
  // USART_ITConfig(EVAL_COM1, USART_IT_RXNE /*| USART_IT_TXE */, ENABLE);
 }
@@ -664,7 +664,7 @@ void USB_Disconnect_Config(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
 #else
-	/* Enable the USB disconnect GPIO clock */
+    /* Enable the USB disconnect GPIO clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIO_DISCONNECT, ENABLE);
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_ALLGPIO, ENABLE);
   
