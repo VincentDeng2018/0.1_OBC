@@ -52,51 +52,50 @@
 
 __packed typedef struct ConfigData_s
 {
-	U16 I1;
-	U16 I2;
-	U16 I3;
-	U16 i4;
-	U16 I5;
-	U16 I6;
-	U16 u0;
-	U16 u1;
-	U16 Ucv;
-	U16 U5;
-	U16 U6;
-	U16 T1;
-	U16 T2;
-	U16 T3;
-	U16 T4;
-	U16 To;
-	U16 T5;
-	U16 T6;
-	CHAR acName[CONFIG_NAME_LEN];
-	U16 bValid;		/* 有效: 0x55 */
-	U16 ChkSum;
+    U16 I1;
+    U16 I2;
+    U16 I3;
+    U16 i4;
+    U16 I5;
+    U16 I6;
+    U16 u0;
+    U16 u1;
+    U16 Ucv;
+    U16 U5;
+    U16 U6;
+    U16 T1;
+    U16 T2;
+    U16 T3;
+    U16 T4;
+    U16 To;
+    U16 T5;
+    U16 T6;
+    CHAR acName[CONFIG_NAME_LEN];
+    U16 bValid;		/* 有效: 0x55 */
+    U16 ChkSum;
 } ConfigData_t;
 
 typedef struct ChargeCfgData_s
 {
-	U16 I1;
-	U16 I2;
-	U16 I3;
-	U16 i4;
-	U16 I5;
-	U16 I6;
-	U16 u0;
-	U16 u1;
-	U16 Ucv;
-	U16 U5;
-	U16 U6;
-	U16 T1;
-	U16 T2;
-	U16 T3;
-	U16 T4;
-	U16 To;
-	U16 T5;
-	U16 T6;
-	CHAR acName[CONFIG_NAME_LEN];
-	
+    U16 I1;
+    U16 I2;
+    U16 I3;
+    U16 i4;
+    U16 I5;
+    U16 I6;
+    U16 u0;
+    U16 u1;
+    U16 Ucv;
+    U16 U5;
+    U16 U6;
+    U16 T1;
+    U16 T2;
+    U16 T3;
+    U16 T4;
+    U16 To;
+    U16 T5;
+    U16 T6;
+    CHAR acName[CONFIG_NAME_LEN];
 } ChargeCfgData_t;
 
 
@@ -179,42 +178,42 @@ typedef struct UIT_s
 
 enum DBError_e
 {
-	DB_ERR_NO_ERROR	= 0,
-	DB_ERR_NO_CFG_DATA_FILE,
-	DB_ERR_NO_CFG_SET_FILE,
-	DB_ERR_NO_UIT_DATA_SET_FILE,
-	DB_ERR_NO_UIT_DATA_FILE,
-
-	DB_ERR_READ_CFG_DATA_FILE,
-	DB_ERR_READ_CFG_SET_FILE,
-	DB_ERR_READ_UIT_DATA_SET_FILE,
-	DB_ERR_READ_UIT_DATA_FILE,
-	DB_ERR_READ_UIT_DATA_FILE_OUT_OF_RANGE,
-
-	DB_ERR_CFG_DATA_FILE_DMG,
-	DB_ERR_CFG_SET_FILE_DMG,
-	DB_ERR_UIT_DATA_SET_FILE_DMG,
-	DB_ERR_UIT_DATA_FILE_DMG,
-
-	DB_ERR_CFG_DATA_INVALID,
-	DB_ERR_CFG_SET_INVALID,
-	DB_ERR_UIT_DATA_SET_INVALID,
-
-	DB_ERR_CFG_DATA_FILE_CREATE,
-	DB_ERR_CFG_SET_FILE_CREATE,
-	DB_ERR_UIT_DATA_SET_FILE_CREATE,
-	DB_ERR_UIT_DATA_FILE_CREATE,
-
-	DB_ERR_CFG_DATA_FILE_WR,
-	DB_ERR_CFG_SET_FILE_WR,
-	DB_ERR_UIT_DATA_SET_FILE_WR,
-	DB_ERR_UIT_DATA_FILE_WR,
-
-	DB_ERR_CFG_INDEX_OUT_RANGE,
-	DB_ERR_UIT_FILE_INDEX_OUT_RANGE,
-
-	DB_ERR_LOAD_CALIB_VAL,
-	DB_ERR_SAVE_CALIB_VAL
+    DB_ERR_NO_ERROR	= 0,
+    DB_ERR_NO_CFG_DATA_FILE,
+    DB_ERR_NO_CFG_SET_FILE,
+    DB_ERR_NO_UIT_DATA_SET_FILE,
+    DB_ERR_NO_UIT_DATA_FILE,
+    
+    DB_ERR_READ_CFG_DATA_FILE,
+    DB_ERR_READ_CFG_SET_FILE,
+    DB_ERR_READ_UIT_DATA_SET_FILE,
+    DB_ERR_READ_UIT_DATA_FILE,
+    DB_ERR_READ_UIT_DATA_FILE_OUT_OF_RANGE,
+    
+    DB_ERR_CFG_DATA_FILE_DMG,
+    DB_ERR_CFG_SET_FILE_DMG,
+    DB_ERR_UIT_DATA_SET_FILE_DMG,
+    DB_ERR_UIT_DATA_FILE_DMG,
+    
+    DB_ERR_CFG_DATA_INVALID,
+    DB_ERR_CFG_SET_INVALID,
+    DB_ERR_UIT_DATA_SET_INVALID,
+    
+    DB_ERR_CFG_DATA_FILE_CREATE,
+    DB_ERR_CFG_SET_FILE_CREATE,
+    DB_ERR_UIT_DATA_SET_FILE_CREATE,
+    DB_ERR_UIT_DATA_FILE_CREATE,
+    
+    DB_ERR_CFG_DATA_FILE_WR,
+    DB_ERR_CFG_SET_FILE_WR,
+    DB_ERR_UIT_DATA_SET_FILE_WR,
+    DB_ERR_UIT_DATA_FILE_WR,
+    
+    DB_ERR_CFG_INDEX_OUT_RANGE,
+    DB_ERR_UIT_FILE_INDEX_OUT_RANGE,
+    
+    DB_ERR_LOAD_CALIB_VAL,
+    DB_ERR_SAVE_CALIB_VAL
 
 };
 
@@ -238,17 +237,18 @@ INT DBInit(void);
 INT DBSaveUITemp(UIT_t *pUIT, U32 dwCnt);
 INT DBGetUIFileSize(U16 wdFileIndex, U32 *pdwdFileSize, U32 *pdwdCnt);
 INT DBLoadUI(U16 wdFileIndex, 
-				U32 dwdDataIdxBegin, 
-				U32 dwdDataNum, 
-				U32 dwdSpace,
-				U16 *pUData,
-				U16 *pIData);
+    U32 dwdDataIdxBegin, 
+    U32 dwdDataNum, 
+    U32 dwdSpace,
+    U16 *pUData,
+    U16 *pIData);
+
 INT DBReadUIFile(U16 wdFileIndex, 
-				U8 *pData,
-				U32 dwdOffset,
-				U32 dwdLen, 
-				U32 *pdwdReadLen
-				);
+    U8 *pData,
+    U32 dwdOffset,
+    U32 dwdLen, 
+    U32 *pdwdReadLen
+    );
 INT DBLoadUITemp(U16 wdFileIndex, U32 dwdDataIndex, UIT_t *pUIT);
 INT DBSaveUITSet(U16 Index, U16 Num, U32 TotalNum);
 INT DBLoadUITSet(U16 *pIndex, U16 *pNum, U32 *pTotalNum);

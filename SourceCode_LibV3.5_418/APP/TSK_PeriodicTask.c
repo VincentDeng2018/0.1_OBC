@@ -33,6 +33,7 @@
 #include "CanOpenBasic.h"
 #include "lcd.h"
 #include "communication.h"
+#include "WD_Globals.h"
 
 /********************************************************************************************************
 * Global DECLARATIONS
@@ -143,7 +144,7 @@ void TSK_PeriodicTaskHandler(void)
 ****************************************************************************/
 static void PeriodTask_5ms(void)
 {
-    Communicate();
+    //Communicate();
 }
 
 
@@ -162,15 +163,15 @@ static void PeriodTask_5ms(void)
 ****************************************************************************/
 static void PeriodTask_10ms(void)
 {
-    IWDG_ReloadCounter();
-    Ctrl_ADC();
-    KeyScan();
-    KeyFilt();
-    KeyProc();
-    GetInputState();
-    LoadRefresh();
+    WD_FeedDog();
+    //Ctrl_ADC();
+    //KeyScan();
+    //KeyFilt();
+    //KeyProc();
+    //GetInputState();
+    //LoadRefresh();
     //Display();
-    LEDDisp();
+    //LEDDisp();
 }
 
 
@@ -245,8 +246,8 @@ static void PeriodTask_100ms(void)
 static void PeriodTask_500ms(void)
 {
     GPIO_TogglePin(GPIOC, GPIO_Pin_0);
-    Ctrl();
-    CommunicateWDG();
+    //Ctrl();
+    //CommunicateWDG();
 }
 
 

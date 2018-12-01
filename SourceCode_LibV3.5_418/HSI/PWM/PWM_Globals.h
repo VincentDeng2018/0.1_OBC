@@ -28,7 +28,7 @@
 #define I_PWM   0u
 #define U_PWM   1u
 
-#define PWM_VAL_MAX     3000
+#define PWM_VAL_MAX     9600
 #define PWM_STEP_VAL    (PWM_VAL_MAX / 100)
 #define PWM_CNT_0_1_DUTY    (PWM_VAL_MAX / 1000)
 

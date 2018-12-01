@@ -56,6 +56,7 @@ static void f_ISetFilterCb(enAdcIndex adcIndex);
 static void f_CSetFilterCb(enAdcIndex adcIndex);
 static void f_USetFilterCb(enAdcIndex adcIndex);
 static void f_BattTempFilterCb(enAdcIndex adcIndex);
+static void f_BattCurrentSlowFilterCb(enAdcIndex adcIndex);
 
 
 /********************************************************************************
@@ -89,7 +90,7 @@ stAdcFilter_t stAdcFilter[ADC_U_BAT_NEG] =
     {0, 2,    0,      0,      0,      0,         6,       0,      0,  0,  &f_KeyPressedFilterCb},       //ADC_KEY
     {0, 1,    0,      0,      0,      0,         4,       0,      0,  0,  &f_ISetFilterCb},    //ADC_I_SET
     {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_CSetFilterCb},    //ADC_C_SET
-    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattVoltsSlowFilterCb},    //ADC_I_CHG
+    {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattCurrentSlowFilterCb},    //ADC_I_CHG
     {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_USetFilterCb},    //ADC_U_SET_TEST
     {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattTempFilterCb},    //ADC_TEMP1
     {0, 2,    0,      0,      0,      0,         3,       0,      0,  0,  &f_BattTempFilterCb},    //ADC_TEMP2
@@ -255,7 +256,7 @@ void f_AdcSlowFilter(enAdcIndex index)
     /* Average counter has arrived, then call cb function to handle them */
     if(stAdcFilter[index].SlowAvgAccCnt >=  (1 << stAdcFilter[index].SlowAvgShift))
     {
-        stAdcFilter[index].SlowAvgCnt = (uint16_t)(stAdcFilter[adcIndex].SlowAvgSum >> stAdcFilter[adcIndex].SlowAvgShift); 
+        stAdcFilter[index].SlowAvgCnt = (uint16_t)(stAdcFilter[index].SlowAvgSum >> stAdcFilter[index].SlowAvgShift); 
         if(NULL != stAdcFilter[index].SlowFilterCb)
         {
             stAdcFilter[index].SlowFilterCb(index);
@@ -297,7 +298,7 @@ void ADC_EnableAutoZero(uint16_t enableOrNot)
 /* call back function to convert ADC counter to physical value */
 static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex)
 {
-    uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     
     /* 3.3V --> 16830mV */
     tempVal = (tempVal * 16830) >> 12;
@@ -316,11 +317,22 @@ static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex)
     }
 }
 
+static void f_BattCurrentSlowFilterCb(enAdcIndex adcIndex)
+{
+    uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
+    
+    /* 1.3V --> MaxCurrent */
+    tempVal = (tempVal * 5000) / 1616;
+    
+
+    stAdcMeters.I_Charge_mA = (uint16_t)tempVal;
+}
+
 
 /* call back function to convert ADC counter to physical value */
 static void f_BattTempFilterCb(enAdcIndex adcIndex)
 {
-    int32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    int32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     int32_t a = 0;
     
     uint16_t i = 0;
@@ -365,7 +377,7 @@ static void f_BattTempFilterCb(enAdcIndex adcIndex)
 
 static void f_KeyPressedFilterCb(enAdcIndex adcIndex)
 {
-    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     
     //No Key= 4096 
     //Key1  = 3097
@@ -398,7 +410,7 @@ static void f_KeyPressedFilterCb(enAdcIndex adcIndex)
 
 static void f_ISetFilterCb(enAdcIndex adcIndex)
 {
-    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     
     //0 0    4096
     //0 1    2707
@@ -426,7 +438,7 @@ static void f_ISetFilterCb(enAdcIndex adcIndex)
 
 static void f_CSetFilterCb(enAdcIndex adcIndex)
 {
-    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     
     //0 0    4096
     //0 1    2707
@@ -454,7 +466,7 @@ static void f_CSetFilterCb(enAdcIndex adcIndex)
 
 static void f_USetFilterCb(enAdcIndex adcIndex)
 {
-    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt);
+    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     
     //0 0    4096
     //0 1    2707
@@ -477,4 +489,9 @@ static void f_USetFilterCb(enAdcIndex adcIndex)
     {
         stAdcMeters.USetup = SETUP_3;
     }
+}
+
+uint16_t f_GetAdcFilterResult(enAdcIndex index)
+{
+    return stAdcFilter[index].SlowAvgCnt;
 }

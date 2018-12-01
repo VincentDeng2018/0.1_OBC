@@ -71,23 +71,40 @@ void ADC_TaskHandler(void *pvParameters)
                  /* Battery and charger voltage */
                 case 0u:
                 {
-                    /* 16.83V = 4096 */
-                    //stAdcMeters.U_Batt_mV = DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG];
+                    f_AdcFastFilter(DMA_AdcResult[ADC_KEY],    ADC_KEY, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_PACK], ADC_U_PACK, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG], ADC_U_BAT_POS, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_TEMP1], ADC_TEMP1, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_TEMP2], ADC_TEMP2, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_SET], ADC_I_SET, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_C_SET], ADC_C_SET, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_SET_TEST], ADC_U_SET_TEST, 0);
                     break;
                 }
 
                 case 1u:
-                    
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
                     break;
 
                 case 2u:
+                    f_AdcFastFilter(DMA_AdcResult[ADC_KEY],    ADC_KEY, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_PACK], ADC_U_PACK, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
                     break;
 
 
                 case 3u:
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
                     break;
                 
                 case 4u:
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
                     ADC_ConverterPhase = 0;
                     break;
 

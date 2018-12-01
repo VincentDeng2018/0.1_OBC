@@ -1,0 +1,1247 @@
+###############################################################################
+#
+# IAR ELF Linker V7.80.4.12462/W32 for ARM                01/Dec/2018  01:50:11
+# Copyright 2007-2017 IAR Systems AB.
+#
+#    Output file  =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Exe\OBC_OnV3.5.out
+#    Map file     =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\List\OBC_OnV3.5.map
+#    Command line =  
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\ADC_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\ADC_TaskHandler.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CAN_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CAN_HandlerRTOS.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CanOpenBasic.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CanOpenLifeguard.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CanOpenNmt.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CanOpenSDO.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CanOpenState.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\CiA418_Profile.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\core_cm3.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\croutine.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\db.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\diskio.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\display.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\event_groups.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\ff.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\ff_gen_drv.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\GPIO_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\heap_2.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\hw_config.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\lcd.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\LCD_TaskHandler.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\list.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\main.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\mass_mal.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\METER_AdcSample.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\misc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\port.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\portasm.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\PWM_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\queue.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\sd_diskio.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\SM_CommonApi.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\SPI_MSD0_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\startup_stm32f10x_cl.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm3210x_eval.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm3210x_eval_sdio_sd.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_adc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_bkp.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_can.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_cec.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_crc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_dac.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_dbgmcu.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_dma.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_exti.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_flash.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_fsmc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_gpio.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_i2c.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_it.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_iwdg.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_pwr.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_rcc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_rtc.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_sdio.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_spi.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_tim.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_usart.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\stm32f10x_wwdg.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\SYS_StateMachine.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\syscall.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\system_stm32f10x.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\tasks.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\TIM_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\timers.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\TSK_PeriodicTask.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\TSK_TaskCommonApi.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\UART_Driver.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\unicode.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_core.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_init.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_int.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_mem.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_regs.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\usb_sil.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\UserDefineIsr.o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj\WD_Driver.o
+#        -o
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Exe\OBC_OnV3.5.out
+#        --map
+#        E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\List\OBC_OnV3.5.map
+#        --config "E:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\config\linker\ST\stm32f105xB.icf" --semihosting --entry
+#        __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__CPP_Language  = EC++
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x0801ffff] { ro };
+"P2":  place in [from 0x20000000 to 0x20007fff] { rw, block CSTACK, block HEAP };
+initialize by copy { rw };
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A0":                                      0x150
+  .intvec            ro code  0x08000000   0x150  startup_stm32f10x_cl.o [1]
+                            - 0x08000150   0x150
+
+"P1":                                     0x8abd
+  .text              ro code  0x08000150  0x15d6  ff.o [1]
+  .text              ro code  0x08001726     0xa  xsprout.o [3]
+  .text              ro code  0x08001730    0xf6  diskio.o [1]
+  .rodata            const    0x08001826     0x2  heap_2.o [1]
+  .text              ro code  0x08001828    0x94  unicode.o [1]
+  .text              ro code  0x080018bc    0x10  syscall.o [1]
+  .text              ro code  0x080018cc   0x864  SPI_MSD0_Driver.o [1]
+  .text              ro code  0x08002130  0x14f4  dlmalloc.o [3]
+  .text              ro code  0x08003624    0x36  strlen.o [4]
+  .rodata            const    0x0800365a     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x0800365c    0x34  sprintf.o [3]
+  .text              ro code  0x08003690    0x24  printf.o [3]
+  .text              ro code  0x080036b4   0x1bc  stm32f10x_rcc.o [1]
+  .text              ro code  0x08003870   0x168  stm32f10x_gpio.o [1]
+  .text              ro code  0x080039d8    0x5a  stm32f10x_spi.o [1]
+  .rodata            const    0x08003a32     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x08003a34    0x28  SPI_MSD0_Driver.o [1]
+  .text              ro code  0x08003a5c     0x6  abort.o [3]
+  .rodata            const    0x08003a62     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x08003a64    0x2c  xgetmemchunk.o [3]
+  .text              ro code  0x08003a90   0x14e  xprintftiny.o [3]
+  .rodata            const    0x08003bde     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x08003be0    0x14  exit.o [5]
+  .text              ro code  0x08003bf4   0x7d8  tasks.o [1]
+  .text              ro code  0x080043cc   0x130  heap_2.o [1]
+  .text              ro code  0x080044fc    0x98  list.o [1]
+  .text              ro code  0x08004594    0xe4  port.o [1]
+  CODE               ro code  0x08004678    0x88  portasm.o [1]
+  .rodata            const    0x08004700   0x600  lcd.o [1]
+  .text              ro code  0x08004d00   0x520  LCD_TaskHandler.o [1]
+  .text              ro code  0x08005220   0x4ac  lcd.o [1]
+  .text              ro code  0x080056cc   0x4c8  stm32f10x_can.o [1]
+  .text              ro code  0x08005b94   0x4b0  queue.o [1]
+  .text              ro code  0x08006044    0x76  ABImemcpy_unaligned.o [4]
+  .rodata            const    0x080060ba     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x080060bc   0x3b4  METER_AdcSample.o [1]
+  .text              ro code  0x08006470   0x230  CanOpenSDO.o [1]
+  .text              ro code  0x080066a0    0x66  ABImemset.o [4]
+  .rodata            const    0x08006706     0x2  TSK_PeriodicTask.o [1]
+  .text              ro code  0x08006708   0x210  CAN_HandlerRTOS.o [1]
+  .text              ro code  0x08006918   0x160  CiA418_Profile.o [1]
+  .text              ro code  0x08006a78    0x98  TIM_Driver.o [1]
+  .text              ro code  0x08006b10    0x82  CanOpenBasic.o [1]
+  .rodata            const    0x08006b92     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08006b93     0x1  CiA418_Profile.o [1]
+  .text              ro code  0x08006b94   0x124  stm32f10x_tim.o [1]
+  .text              ro code  0x08006cb8    0x80  misc.o [1]
+  .text              ro code  0x08006d38    0x54  CanOpenState.o [1]
+  .text              ro code  0x08006d8c    0x80  CanOpenLifeguard.o [1]
+  .text              ro code  0x08006e0c    0xa8  CanOpenNmt.o [1]
+  .rodata            const    0x08006eb4   0x1e0  unicode.o [1]
+  .rodata            const    0x08007094   0x1e0  unicode.o [1]
+  .text              ro code  0x08007274   0x1d4  stm32f10x_dma.o [1]
+  .text              ro code  0x08007448   0x1c8  ADC_Driver.o [1]
+  .text              ro code  0x08007610   0x1a4  stm32f10x_adc.o [1]
+  .text              ro code  0x080077b4   0x178  ADC_TaskHandler.o [1]
+  .text              ro code  0x0800792c   0x198  system_stm32f10x.o [1]
+  .text              ro code  0x08007ac4   0x178  GPIO_Driver.o [1]
+  .text              ro code  0x08007c3c   0x130  CAN_Driver.o [1]
+  .text              ro code  0x08007d6c   0x112  TSK_PeriodicTask.o [1]
+  .text              ro code  0x08007e7e    0x2a  WD_Driver.o [1]
+  .text              ro code  0x08007ea8    0x38  stm32f10x_iwdg.o [1]
+  .text              ro code  0x08007ee0   0x104  UART_Driver.o [1]
+  .text              ro code  0x08007fe4    0xfe  stm32f10x_usart.o [1]
+  .rodata            const    0x080080e2     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080080e3     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080080e4   0x100  unicode.o [1]
+  .text              ro code  0x080081e4    0xa0  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x08008284    0x80  ff.o [1]
+  .text              ro code  0x08008304    0x78  lz77_init_single.o [4]
+  .rodata            const    0x0800837c    0x54  UART_Driver.o [1]
+  .rodata            const    0x080083d0    0x54  UART_Driver.o [1]
+  .text              ro code  0x08008424    0x40  zero_init3.o [4]
+  .text              ro code  0x08008464    0x3e  main.o [1]
+  .rodata            const    0x080084a2     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080084a3     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080084a4    0x30  SPI_MSD0_Driver.o [1]
+  .text              ro code  0x080084d4    0x28  data_init.o [4]
+  .rodata            const    0x080084fc    0x24  SPI_MSD0_Driver.o [1]
+  .rodata            const    0x08008520    0x24  SPI_MSD0_Driver.o [1]
+  .rodata            const    0x08008544    0x24  SPI_MSD0_Driver.o [1]
+  .iar.init_table    const    0x08008568    0x20  - Linker created -
+  .rodata            const    0x08008588    0x20  LCD_TaskHandler.o [1]
+  .text              ro code  0x080085a8    0x20  stm32f10x_it.o [1]
+  .text              ro code  0x080085c8    0x1a  cmain.o [4]
+  .text              ro code  0x080085e2     0x4  low_level_init.o [3]
+  .text              ro code  0x080085e6     0x4  exit.o [3]
+  .rodata            const    0x080085ea     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080085eb     0x1  CiA418_Profile.o [1]
+  .text              ro code  0x080085ec     0xa  cexit.o [4]
+  .rodata            const    0x080085f6     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080085f7     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x080085f8    0x18  SPI_MSD0_Driver.o [1]
+  .rodata            const    0x08008610    0x18  SPI_MSD0_Driver.o [1]
+  .text              ro code  0x08008628    0x16  xprout.o [3]
+  .rodata            const    0x0800863e     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x0800863f     0x1  CiA418_Profile.o [1]
+  .text              ro code  0x08008640     0xc  putchar.o [3]
+  .rodata            const    0x0800864c    0x14  LCD_TaskHandler.o [1]
+  .rodata            const    0x08008660    0x14  SPI_MSD0_Driver.o [1]
+  .rodata            const    0x08008674    0x14  SPI_MSD0_Driver.o [1]
+  .rodata            const    0x08008688    0x10  ff.o [1]
+  .text              ro code  0x08008698    0x10  startup_stm32f10x_cl.o [1]
+  .rodata            const    0x080086a8     0xc  CanOpenSDO.o [1]
+  .rodata            const    0x080086b4     0xc  ff.o [1]
+  .rodata            const    0x080086c0     0xc  LCD_TaskHandler.o [1]
+  .rodata            const    0x080086cc     0xc  LCD_TaskHandler.o [1]
+  .rodata            const    0x080086d8     0xc  LCD_TaskHandler.o [1]
+  .rodata            const    0x080086e4     0xc  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x080086f0     0xc  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x080086fc     0xc  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x08008708     0xc  UART_Driver.o [1]
+  .text              ro code  0x08008714     0xc  cstartup_M.o [4]
+  .rodata            const    0x08008720     0x8  ff.o [1]
+  .rodata            const    0x08008728     0x8  LCD_TaskHandler.o [1]
+  .rodata            const    0x08008730     0x8  LCD_TaskHandler.o [1]
+  .rodata            const    0x08008738     0x8  LCD_TaskHandler.o [1]
+  .rodata            const    0x08008740     0x8  tasks.o [1]
+  .rodata            const    0x08008748     0x8  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x08008750     0x8  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x08008758     0x8  TSK_TaskCommonApi.o [1]
+  .rodata            const    0x08008760     0x4  CanOpenSDO.o [1]
+  .text              ro code  0x08008764     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008768     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800876c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008770     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008774     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008778     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800877c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008780     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008784     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008788     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800878c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008790     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008794     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008798     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800879c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087a0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087a4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087a8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087ac     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087b0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087b4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087b8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087bc     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087c0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087c4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087c8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087cc     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087d0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087d4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087d8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087dc     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087e0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087e4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087e8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087ec     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087f0     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087f4     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087f8     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x080087fc     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008800     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008804     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008808     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800880c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008810     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008814     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008818     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800881c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008820     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008824     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008828     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800882c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008830     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008834     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008838     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0800883c     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008840     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008844     0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x08008848     0x4  startup_stm32f10x_cl.o [1]
+  .rodata            const    0x0800884c     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x0800884d     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x0800884e     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x0800884f     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08008850     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08008851     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08008852     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08008853     0x1  CiA418_Profile.o [1]
+  .rodata            const    0x08008854     0x0  zero_init3.o [4]
+  .rodata            const    0x08008854     0x0  lz77_init_single.o [4]
+  Initializer bytes  const    0x08008854   0x3b9  <for P2-1>
+                            - 0x08008c0d  0x8abd
+
+"P2", part 1 of 3:                         0x965
+  P2-1                        0x20000000   0x965  <Init block>
+    .data            inited   0x20000000     0xc  CanOpenSDO.o [1]
+    .data            inited   0x2000000c     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000010     0x8  CiA418_Profile.o [1]
+    .data            inited   0x20000018     0x8  CiA418_Profile.o [1]
+    .data            inited   0x20000020     0x8  CiA418_Profile.o [1]
+    .data            inited   0x20000028     0x8  CiA418_Profile.o [1]
+    .data            inited   0x20000030     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000034     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000038     0x4  CiA418_Profile.o [1]
+    .data            inited   0x2000003c     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000040    0x28  CiA418_Profile.o [1]
+    .data            inited   0x20000068    0x20  CiA418_Profile.o [1]
+    .data            inited   0x20000088     0x4  CiA418_Profile.o [1]
+    .data            inited   0x2000008c    0x38  CiA418_Profile.o [1]
+    .data            inited   0x200000c4     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200000c8    0x10  CiA418_Profile.o [1]
+    .data            inited   0x200000d8     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200000dc    0x38  CiA418_Profile.o [1]
+    .data            inited   0x20000114     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000118     0x4  CiA418_Profile.o [1]
+    .data            inited   0x2000011c    0x18  CiA418_Profile.o [1]
+    .data            inited   0x20000134     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000138    0x38  CiA418_Profile.o [1]
+    .data            inited   0x20000170     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000174     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000178    0x18  CiA418_Profile.o [1]
+    .data            inited   0x20000190     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000194    0x38  CiA418_Profile.o [1]
+    .data            inited   0x200001cc     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200001d0     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200001d4     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200001d8    0x20  CiA418_Profile.o [1]
+    .data            inited   0x200001f8     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200001fc    0x38  CiA418_Profile.o [1]
+    .data            inited   0x20000234     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000238     0x4  CiA418_Profile.o [1]
+    .data            inited   0x2000023c     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000240    0x20  CiA418_Profile.o [1]
+    .data            inited   0x20000260     0x4  CiA418_Profile.o [1]
+    .data            inited   0x20000264    0x38  CiA418_Profile.o [1]
+    .data            inited   0x2000029c     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200002a0     0x4  CiA418_Profile.o [1]
+    .data            inited   0x200002a4    0x18  CiA418_Profile.o [1]
+    .data            inited   0x200002bc     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200002c4     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200002cc     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200002d4    0x28  CiA418_Profile.o [1]
+    .data            inited   0x200002fc    0x20  CiA418_Profile.o [1]
+    .data            inited   0x2000031c    0x28  CiA418_Profile.o [1]
+    .data            inited   0x20000344    0x28  CiA418_Profile.o [1]
+    .data            inited   0x2000036c    0x28  CiA418_Profile.o [1]
+    .data            inited   0x20000394     0x8  CiA418_Profile.o [1]
+    .data            inited   0x2000039c     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003a4     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003ac     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003b4    0x18  CiA418_Profile.o [1]
+    .data            inited   0x200003cc     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003d4     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003dc     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003e4     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003ec     0x8  CiA418_Profile.o [1]
+    .data            inited   0x200003f4   0x120  CiA418_Profile.o [1]
+    .data            inited   0x20000514     0x4  heap_2.o [1]
+    .data            inited   0x20000518    0x40  METER_AdcSample.o [1]
+    .data            inited   0x20000558   0x118  METER_AdcSample.o [1]
+    .data            inited   0x20000670     0x4  port.o [1]
+    .data            inited   0x20000674   0x200  SPI_MSD0_Driver.o [1]
+    .data            inited   0x20000874    0x10  stm32f10x_rcc.o [1]
+    .data            inited   0x20000884     0x4  stm32f10x_rcc.o [1]
+    .data            inited   0x20000888    0x90  TSK_TaskCommonApi.o [1]
+    .data            inited   0x20000918    0x40  xfiles.o [3]
+    .data            inited   0x20000958     0x2  CiA418_Profile.o [1]
+    .data            inited   0x2000095a     0x1  CanOpenSDO.o [1]
+    .data            inited   0x2000095b     0x1  CiA418_Profile.o [1]
+    .data            inited   0x2000095c     0x1  CiA418_Profile.o [1]
+    .data            inited   0x2000095d     0x1  CiA418_Profile.o [1]
+    .data            inited   0x2000095e     0x1  CiA418_Profile.o [1]
+    .data            inited   0x2000095f     0x1  CiA418_Profile.o [1]
+    .data            inited   0x20000960     0x1  CiA418_Profile.o [1]
+    .data            inited   0x20000961     0x1  CiA418_Profile.o [1]
+    .data            inited   0x20000962     0x1  CiA418_Profile.o [1]
+    .data            inited   0x20000963     0x1  CiA418_Profile.o [1]
+    .data            inited   0x20000964     0x1  CiA418_Profile.o [1]
+                            - 0x20000965   0x965
+
+"P2", part 2 of 3:                        0x1800
+  CSTACK                      0x20000968   0x800  <Block>
+    CSTACK           uninit   0x20000968   0x800  <Block tail>
+  HEAP                        0x20001168  0x1000  <Block>
+    HEAP             uninit   0x20001168  0x1000  <Block tail>
+                            - 0x20002168  0x1800
+
+"P2", part 3 of 3:                        0x4f70
+  .bss               zero     0x20002168  0x4400  heap_2.o [1]
+  .bss               zero     0x20006568   0x230  SPI_MSD0_Driver.o [1]
+  .bss               zero     0x20006798   0x1fc  CanOpenSDO.o [1]
+  .bss               zero     0x20006994   0x1d8  dlmalloc.o [3]
+  .bss               zero     0x20006b6c   0x100  SPI_MSD0_Driver.o [1]
+  .bss               zero     0x20006c6c    0xc8  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x20006d34    0x78  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x20006dac    0x64  tasks.o [1]
+  .bss               zero     0x20006e10    0x58  SPI_MSD0_Driver.o [1]
+  .bss               zero     0x20006e68    0x50  xfiles.o [3]
+  .bss               zero     0x20006eb8    0x2c  ADC_Driver.o [1]
+  .bss               zero     0x20006ee4    0x18  ADC_Driver.o [1]
+  .bss               zero     0x20006efc    0x18  ff.o [1]
+  .bss               zero     0x20006f14    0x18  METER_AdcSample.o [1]
+  .bss               zero     0x20006f2c    0x18  dlmalloc.o [3]
+  .bss               zero     0x20006f44    0x14  ADC_Driver.o [1]
+  .bss               zero     0x20006f58    0x14  CanOpenBasic.o [1]
+  .bss               zero     0x20006f6c    0x14  tasks.o [1]
+  .bss               zero     0x20006f80    0x14  tasks.o [1]
+  .bss               zero     0x20006f94    0x14  tasks.o [1]
+  .bss               zero     0x20006fa8    0x14  tasks.o [1]
+  .bss               zero     0x20006fbc    0x14  tasks.o [1]
+  .bss               zero     0x20006fd0     0xc  LCD_TaskHandler.o [1]
+  .bss               zero     0x20006fdc     0x8  heap_2.o [1]
+  .bss               zero     0x20006fe4     0x8  heap_2.o [1]
+  .bss               zero     0x20006fec     0x4  ADC_TaskHandler.o [1]
+  .bss               zero     0x20006ff0     0x4  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x20006ff4     0x4  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x20006ff8     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20006ffc     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007000     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007004     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007008     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x2000700c     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007010     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007014     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007018     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x2000701c     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007020     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007024     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007028     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x2000702c     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007030     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007034     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007038     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x2000703c     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007040     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007044     0x4  CiA418_Profile.o [1]
+  .bss               zero     0x20007048     0x4  ff.o [1]
+  .bss               zero     0x2000704c     0x4  heap_2.o [1]
+  .bss               zero     0x20007050     0x4  tasks.o [1]
+  .bss               zero     0x20007054     0x4  tasks.o [1]
+  .bss               zero     0x20007058     0x4  tasks.o [1]
+  .bss               zero     0x2000705c     0x4  tasks.o [1]
+  .bss               zero     0x20007060     0x4  tasks.o [1]
+  .bss               zero     0x20007064     0x4  tasks.o [1]
+  .bss               zero     0x20007068     0x4  tasks.o [1]
+  .bss               zero     0x2000706c     0x4  tasks.o [1]
+  .bss               zero     0x20007070     0x4  tasks.o [1]
+  .bss               zero     0x20007074     0x4  tasks.o [1]
+  .bss               zero     0x20007078     0x4  tasks.o [1]
+  .bss               zero     0x2000707c     0x4  tasks.o [1]
+  .bss               zero     0x20007080     0x4  tasks.o [1]
+  .bss               zero     0x20007084     0x4  tasks.o [1]
+  .bss               zero     0x20007088     0x4  tasks.o [1]
+  .bss               zero     0x2000708c     0x4  xgetmemchunk.o [3]
+  .bss               zero     0x20007090     0x2  CanOpenSDO.o [1]
+  .bss               zero     0x20007092     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x20007094     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x20007096     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x20007098     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x2000709a     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x2000709c     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x2000709e     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070a0     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070a2     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070a4     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070a6     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070a8     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070aa     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070ac     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070ae     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070b0     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070b2     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070b4     0x2  CiA418_Profile.o [1]
+  .bss               zero     0x200070b6     0x2  ff.o [1]
+  .bss               zero     0x200070b8     0x2  TIM_Driver.o [1]
+  .bss               zero     0x200070ba     0x2  TSK_PeriodicTask.o [1]
+  .bss               zero     0x200070bc     0x2  TSK_PeriodicTask.o [1]
+  .bss               zero     0x200070be     0x2  TSK_PeriodicTask.o [1]
+  .bss               zero     0x200070c0     0x2  TSK_PeriodicTask.o [1]
+  .bss               zero     0x200070c2     0x2  TSK_PeriodicTask.o [1]
+  .bss               zero     0x200070c4     0x1  ADC_TaskHandler.o [1]
+  .bss               zero     0x200070c5     0x1  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x200070c6     0x1  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x200070c7     0x1  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x200070c8     0x1  CAN_HandlerRTOS.o [1]
+  .bss               zero     0x200070c9     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070ca     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070cb     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070cc     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070cd     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070ce     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070cf     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070d0     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070d1     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070d2     0x1  CiA418_Profile.o [1]
+  .bss               zero     0x200070d3     0x1  SPI_MSD0_Driver.o [1]
+  .bss               zero     0x200070d4     0x1  TSK_TaskCommonApi.o [1]
+                            - 0x200070d5  0x4f6d
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x4f6d:
+          0x20002168  0x4f6d
+
+Copy/lz77 (__iar_lz77_init_single3)
+    1 source range, total size 0x3b9 (39% of destination):
+          0x08008854   0x3b9
+    1 destination range, total size 0x965:
+          0x20000000   0x965
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj: [1]
+    ADC_Driver.o                456                88
+    ADC_TaskHandler.o           376                 5
+    CAN_Driver.o                304
+    CAN_HandlerRTOS.o           528               332
+    CanOpenBasic.o              130                20
+    CanOpenLifeguard.o          128
+    CanOpenNmt.o                168
+    CanOpenSDO.o                560       21      523
+    CanOpenState.o               84
+    CiA418_Profile.o            352      536    1 426
+    GPIO_Driver.o               376
+    LCD_TaskHandler.o         1 312      112       12
+    METER_AdcSample.o           948      137      368
+    SPI_MSD0_Driver.o         2 188      447    1 417
+    TIM_Driver.o                152                 2
+    TSK_PeriodicTask.o          274       12       10
+    TSK_TaskCommonApi.o         160      117      145
+    UART_Driver.o               260      180
+    WD_Driver.o                  42
+    diskio.o                    246
+    ff.o                      5 590      164       30
+    heap_2.o                    304        3   17 432
+    lcd.o                     1 196    1 536
+    list.o                      152
+    main.o                       62
+    misc.o                      128
+    port.o                      228        1        4
+    portasm.o                   136
+    queue.o                   1 200
+    startup_stm32f10x_cl.o      584
+    stm32f10x_adc.o             420
+    stm32f10x_can.o           1 224
+    stm32f10x_dma.o             468
+    stm32f10x_gpio.o            360
+    stm32f10x_it.o               32
+    stm32f10x_iwdg.o             56
+    stm32f10x_rcc.o             444        8       20
+    stm32f10x_spi.o              90
+    stm32f10x_tim.o             292
+    stm32f10x_usart.o           254
+    syscall.o                    16
+    system_stm32f10x.o          408
+    tasks.o                   2 008        8      260
+    unicode.o                   148    1 216
+    -------------------------------------------------
+    Total:                   24 844    4 498   22 094
+
+command line: [2]
+    -------------------------------------------------
+    Total:
+
+dl7M_tlf.a: [3]
+    abort.o                       6
+    dlmalloc.o                5 364               496
+    exit.o                        4
+    low_level_init.o              4
+    printf.o                     36
+    putchar.o                    12
+    sprintf.o                    52
+    xfiles.o                              25      144
+    xgetmemchunk.o               44                 4
+    xprintftiny.o               334
+    xprout.o                     22
+    xsprout.o                    10
+    -------------------------------------------------
+    Total:                    5 888       25      644
+
+rt7M_tl.a: [4]
+    ABImemcpy_unaligned.o       118
+    ABImemset.o                 102
+    cexit.o                      10
+    cmain.o                      26
+    cstartup_M.o                 12
+    data_init.o                  40
+    lz77_init_single.o          120
+    strlen.o                     54
+    zero_init3.o                 64
+    -------------------------------------------------
+    Total:                      546
+
+shb_l.a: [5]
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
+
+    Linker created                        32    6 144
+-----------------------------------------------------
+    Grand Total:             31 298    4 555   28 882
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address    Size  Type      Object
+-----                      -------    ----  ----      ------
+.iar.init_table$$Base   0x08008568           --   Gb  - Linker created -
+.iar.init_table$$Limit  0x08008588           --   Gb  - Linker created -
+?main                   0x080085c9          Code  Gb  cmain.o [4]
+ADCPrescTable           0x20000884     0x4  Data  Lc  stm32f10x_rcc.o [1]
+ADC_Cmd                 0x0800765f    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_ConverterPhase      0x200070c4     0x1  Data  Lc  ADC_TaskHandler.o [1]
+ADC_DMACmd              0x08007679    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_DMA_IRQHandler      0x08007609     0x8  Code  Gb  ADC_Driver.o [1]
+ADC_GetCalibrationStatus
+                        0x080076bb    0x14  Code  Gb  stm32f10x_adc.o [1]
+ADC_GetResetCalibrationStatus
+                        0x0800769d    0x14  Code  Gb  stm32f10x_adc.o [1]
+ADC_Init                0x08007611    0x4e  Code  Gb  stm32f10x_adc.o [1]
+ADC_InitStructure       0x20006f44    0x14  Data  Gb  ADC_Driver.o [1]
+ADC_Initial             0x08007449   0x15e  Code  Gb  ADC_Driver.o [1]
+ADC_NVIC_Configuration  0x080075df    0x2a  Code  Gb  ADC_Driver.o [1]
+ADC_RCC_Configuration   0x080075c1    0x1e  Code  Gb  ADC_Driver.o [1]
+ADC_RegularChannelConfig
+                        0x080076e9    0xc4  Code  Gb  stm32f10x_adc.o [1]
+ADC_ResetCalibration    0x08007693     0xa  Code  Gb  stm32f10x_adc.o [1]
+ADC_SoftwareStartConvCmd
+                        0x080076cf    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_StartCalibration    0x080076b1     0xa  Code  Gb  stm32f10x_adc.o [1]
+ADC_TaskHandler         0x080077b5   0x158  Code  Gb  ADC_TaskHandler.o [1]
+ADC_TaskSem             0x20006fec     0x4  Data  Lc  ADC_TaskHandler.o [1]
+ADC_TaskTrigger         0x0800790d    0x12  Code  Gb  ADC_TaskHandler.o [1]
+APBAHBPrescTable        0x20000874    0x10  Data  Lc  stm32f10x_rcc.o [1]
+BlockWrite              0x0800546f    0x4e  Code  Gb  lcd.o [1]
+BusFault_Handler        0x080085af     0x2  Code  Gb  stm32f10x_it.o [1]
+CAN2_Config             0x08007c4d   0x116  Code  Gb  CAN_Driver.o [1]
+CAN2_RX1_IRQHandler     0x08006877    0x78  Code  Gb  CAN_HandlerRTOS.o [1]
+CAN_DeInit              0x080056cd    0x36  Code  Gb  stm32f10x_can.o [1]
+CAN_FilterInit          0x0800581b   0x112  Code  Gb  stm32f10x_can.o [1]
+CAN_ITConfig            0x08005b61    0x18  Code  Gb  stm32f10x_can.o [1]
+CAN_Init                0x08005703   0x118  Code  Gb  stm32f10x_can.o [1]
+CAN_Initial             0x08007c3d    0x10  Code  Gb  CAN_Driver.o [1]
+CAN_Receive             0x08005a79    0xe8  Code  Gb  stm32f10x_can.o [1]
+CAN_RequestSend         0x080067f9    0x7e  Code  Gb  CAN_HandlerRTOS.o [1]
+CAN_RxHandlerTask       0x08006741    0x60  Code  Gb  CAN_HandlerRTOS.o [1]
+CAN_StructInit          0x0800592d    0x2e  Code  Gb  stm32f10x_can.o [1]
+CAN_Transmit            0x0800595b   0x11e  Code  Gb  stm32f10x_can.o [1]
+CAN_TxHandlerTask       0x080067a1    0x58  Code  Gb  CAN_HandlerRTOS.o [1]
+CSTACK$$Base            0x20000968           --   Gb  - Linker created -
+CSTACK$$Limit           0x20001168           --   Gb  - Linker created -
+CanNodeID               0x2000095a     0x1  Data  Lc  CanOpenSDO.o [1]
+CanOpenInitial          0x08006b11    0x1e  Code  Gb  CanOpenBasic.o [1]
+CanOpenRxCmdHandler     0x08006b2f    0x50  Code  Gb  CanOpenBasic.o [1]
+CanOpenTimerDispatch    0x08006b85     0xe  Code  Gb  CanOpenBasic.o [1]
+CanRxMsgBuf             0x20006d34    0x78  Data  Gb  CAN_HandlerRTOS.o [1]
+CanRxReadIndex          0x200070c8     0x1  Data  Gb  CAN_HandlerRTOS.o [1]
+CanRxSaveIndex          0x200070c7     0x1  Data  Gb  CAN_HandlerRTOS.o [1]
+CanTxMsgBuf             0x20006c6c    0xc8  Data  Gb  CAN_HandlerRTOS.o [1]
+CanTxReadIndex          0x200070c6     0x1  Data  Gb  CAN_HandlerRTOS.o [1]
+CanTxSaveIndex          0x200070c5     0x1  Data  Gb  CAN_HandlerRTOS.o [1]
+ChargeDataScreen        0x08005061    0x80  Code  Lc  LCD_TaskHandler.o [1]
+ClearScreen             0x080054fd    0x3c  Code  Gb  lcd.o [1]
+ConverterNumToString    0x080051e5    0x3c  Code  Lc  LCD_TaskHandler.o [1]
+DMA1_Channel1_IRQHandler
+                        0x080085b5    0x14  Code  Gb  stm32f10x_it.o [1]
+DMA_AdcResult           0x20006ee4    0x18  Data  Gb  ADC_Driver.o [1]
+DMA_ClearFlag           0x080073ef    0x10  Code  Gb  stm32f10x_dma.o [1]
+DMA_ClearITPendingBit   0x080073ff    0x10  Code  Gb  stm32f10x_dma.o [1]
+DMA_Cmd                 0x080073bb    0x1c  Code  Gb  stm32f10x_dma.o [1]
+DMA_DeInit              0x08007275   0x10a  Code  Gb  stm32f10x_dma.o [1]
+DMA_ITConfig            0x080073d7    0x18  Code  Gb  stm32f10x_dma.o [1]
+DMA_Init                0x0800737f    0x3c  Code  Gb  stm32f10x_dma.o [1]
+DMA_InitStructure       0x20006eb8    0x2c  Data  Gb  ADC_Driver.o [1]
+DebugMon_Handler        0x080085b3     0x2  Code  Gb  stm32f10x_it.o [1]
+Delay                   0x0800516f     0xa  Code  Gb  LCD_TaskHandler.o [1]
+DispColor               0x080054bd    0x40  Code  Gb  lcd.o [1]
+DispOneChar             0x0800559b    0x6a  Code  Gb  lcd.o [1]
+DispStr                 0x08005605    0x58  Code  Gb  lcd.o [1]
+DrawCurveCoordinate     0x08004e23   0x23e  Code  Lc  LCD_TaskHandler.o [1]
+DrawLine                0x08005673    0x4e  Code  Gb  lcd.o [1]
+ExCvt                   0x08008284    0x80  Data  Lc  ff.o [1]
+ExpeditedSDOReturnCS    0x08008760     0x4  Data  Gb  CanOpenSDO.o [1]
+FatFs                   0x20007048     0x4  Data  Lc  ff.o [1]
+Files                   0x20006efc    0x18  Data  Lc  ff.o [1]
+Fsid                    0x200070b6     0x2  Data  Lc  ff.o [1]
+GPIO_Init               0x08003871    0xca  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_Initial            0x08007ac5   0x178  Code  Gb  GPIO_Driver.o [1]
+GPIO_PinRemapConfig     0x08003951    0x80  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_ResetBits          0x08003941     0x6  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_SetBits            0x0800393b     0x6  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_TogglePin          0x08003947     0xa  Code  Gb  stm32f10x_gpio.o [1]
+GetKeyPressed           0x08004d01     0xa  Code  Lc  LCD_TaskHandler.o [1]
+GetNodeState            0x08006d41     0x8  Code  Gb  CanOpenState.o [1]
+HEAP$$Base              0x20001168           --   Gb  - Linker created -
+HEAP$$Limit             0x20002168           --   Gb  - Linker created -
+HardFault_Handler       0x080085ab     0x2  Code  Gb  stm32f10x_it.o [1]
+HeardBeatClearCounter   0x08006d9d     0x8  Code  Gb  CanOpenLifeguard.o [1]
+HeardBeatInitial        0x08006d8d    0x10  Code  Gb  CanOpenLifeguard.o [1]
+HeartBeatHandler        0x08006da5    0x62  Code  Gb  CanOpenLifeguard.o [1]
+HomeScreen              0x08004d35    0x3c  Code  Lc  LCD_TaskHandler.o [1]
+HomeScreenStaticFrame   0x08004d71    0xb2  Code  Lc  LCD_TaskHandler.o [1]
+IWDG_Enable             0x08007ecb     0xa  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_ReloadCounter      0x08007ec1     0xa  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_SetPrescaler       0x08007eb1     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_SetReload          0x08007eb9     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_WriteAccessCmd     0x08007ea9     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+LCD_Init                0x080052b3   0x1bc  Code  Gb  lcd.o [1]
+LCD_TaskHandler         0x08005141    0x2e  Code  Gb  LCD_TaskHandler.o [1]
+LcdTaskInit             0x08005179    0x30  Code  Lc  LCD_TaskHandler.o [1]
+LfnOfs                  0x08008688    0x10  Data  Lc  ff.o [1]
+MSD0_Init               0x08001af9   0x234  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_ReadMultiBlock     0x08001df7    0x76  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_ReadSingleBlock    0x08001db1    0x46  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_SPIHighSpeed       0x08001a99    0x5a  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_SPI_Configuration  0x080019e1    0xb8  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_WriteMultiBlock    0x08001f1b    0xf4  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_WriteSingleBlock   0x08001e6d    0xae  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_read_buffer        0x08001d31    0x80  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_send_command       0x0800200f    0x72  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_send_command_hold  0x08002081    0x66  Code  Gb  SPI_MSD0_Driver.o [1]
+MSD0_spi_read_write     0x08003a35    0x28  Code  Gb  SPI_MSD0_Driver.o [1]
+MemManage_Handler       0x080085ad     0x2  Code  Gb  stm32f10x_it.o [1]
+NMI_Handler             0x080085a9     0x2  Code  Gb  stm32f10x_it.o [1]
+NVIC_Init               0x08006cc3    0x60  Code  Gb  misc.o [1]
+NVIC_PriorityGroupConfig
+                        0x08006cb9     0xa  Code  Gb  misc.o [1]
+NavigateScreen          0x080050e1    0x14  Code  Lc  LCD_TaskHandler.o [1]
+OBJ6000_BattStatus      0x200070d0     0x1  Data  Gb  CiA418_Profile.o [1]
+OBJ6010_BattTemperature
+                        0x200070d1     0x1  Data  Gb  CiA418_Profile.o [1]
+OBJ6020_AhCap           0x200070a6     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6020_BattType        0x200070a4     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6020_CellNum         0x200070aa     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6020_HighestSubIndex
+                        0x0800884e     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6020_MaxChgCurrent   0x200070a8     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6030_HighestSubIndex
+                        0x0800884f     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6030_SerialNum0      0x20007000     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6030_SerialNum1      0x20007004     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6030_SerialNum2      0x20007008     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6031_HighestSubIndex
+                        0x08008850     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6031_ID0             0x2000700c     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6031_ID1             0x20007010     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6031_ID2             0x20007014     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6031_ID3             0x20007018     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6040_HighestSubIndex
+                        0x08008851     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6040_SerialNum0      0x2000701c     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6040_SerialNum1      0x20007020     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6040_SerialNum2      0x20007024     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6040_SerialNum3      0x20007028     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6041_HighestSubIndex
+                        0x08008852     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6041_ID0             0x2000702c     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6041_ID1             0x20007030     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6041_ID2             0x20007034     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6041_ID3             0x20007038     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6050_CumulativeTotal_AH
+                        0x2000703c     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6051_LastExpended_0_125_AH
+                        0x200070ac     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6052_LastChg_0_125_AH
+                        0x200070ae     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6053_LastEqual_0_125_AH
+                        0x200070b0     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6054_DayOfLastEqual  0x200070b4     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6054_MinuteOfLastEqual
+                        0x200070b2     0x2  Data  Gb  CiA418_Profile.o [1]
+OBJ6054_SubHighestIndex
+                        0x08008853     0x1  Data  Lc  CiA418_Profile.o [1]
+OBJ6060_BatteryVolts_Q10V
+                        0x20007040     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6070_ChargeCurrntRequest_Q4A
+                        0x20007044     0x4  Data  Gb  CiA418_Profile.o [1]
+OBJ6080_ChargeSOC       0x20000963     0x1  Data  Gb  CiA418_Profile.o [1]
+OBJ6081_BatterySOC      0x20000964     0x1  Data  Gb  CiA418_Profile.o [1]
+OBJ6090_WaterLevelStatus
+                        0x200070d2     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerRPDO1_ms
+                        0x20007092     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerRPDO2_ms
+                        0x20007098     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerRPDO3_ms
+                        0x2000709e     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerTPDO1_ms
+                        0x20007096     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerTPDO2_ms
+                        0x2000709c     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16EventTimerTPDO3_ms
+                        0x200070a2     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16HeartBeat_ms      0x20000958     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16InhibitTimerTPDO2_us
+                        0x2000709a     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u16InhibitTimerTPDO3_us
+                        0x200070a0     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1600      0x200000c4     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1601      0x20000170     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1602      0x20000234     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1A00      0x20000114     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1A01      0x200001cc     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj1_1A02      0x2000029c     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj2_1601      0x20000174     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj2_1602      0x20000238     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj2_1A00      0x20000118     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj2_1A01      0x200001d0     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj2_1A02      0x200002a0     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj3_1602      0x2000023c     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32AppObj3_1A01      0x200001d4     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByRPDO1  0x20000088     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByRPDO2  0x20000134     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByRPDO3  0x200001f8     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByTPDO1  0x200000d8     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByTPDO2  0x20000190     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32CobIdUsedByTPDO3  0x20000260     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32DeviceType        0x2000000c     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32ProductCode       0x20000034     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32RevisionNum       0x20000038     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32SerialNum         0x2000003c     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32TimeStamp         0x20006ffc     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u32VendorId          0x20000030     0x4  Data  Gb  CiA418_Profile.o [1]
+OD_u8ErrorBehavior_01   0x200070c9     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8ErrorBehavior_02   0x2000095b     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8ErrorBehavior_03   0x2000095c     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8InhibitTImeTPDO1_us
+                        0x20007094     0x2  Data  Gb  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1018   0x08006b92     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1029   0x08006b93     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1400   0x080080e2     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1401   0x080085ea     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1402   0x0800863e     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1600   0x080080e3     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1601   0x080085eb     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1602   0x0800863f     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1800   0x080084a2     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1801   0x080085f6     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1802   0x0800884c     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1A00   0x080084a3     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1A01   0x080085f7     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8MaxSubIndex_1A02   0x0800884d     0x1  Data  Lc  CiA418_Profile.o [1]
+OD_u8SyncStartValRPDO1  0x200070ca     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8SyncStartValRPDO2  0x200070cc     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8SyncStartValRPDO3  0x200070ce     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8SyncStartValTPDO1  0x200070cb     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8SyncStartValTPDO2  0x200070cd     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8SyncStartValTPDO3  0x200070cf     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeRPDO1
+                        0x2000095d     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeRPDO2
+                        0x2000095f     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeRPDO3
+                        0x20000961     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeTPDO1
+                        0x2000095e     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeTPDO2
+                        0x20000960     0x1  Data  Gb  CiA418_Profile.o [1]
+OD_u8TransmissionTypeTPDO3
+                        0x20000962     0x1  Data  Gb  CiA418_Profile.o [1]
+PeriodTask_100ms        0x08007e3d     0x2  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_10ms         0x08007e31     0x8  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_1s           0x08007e7d     0x2  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_20ms         0x08007e39     0x2  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_500ms        0x08007e3f     0xc  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_50ms         0x08007e3b     0x2  Code  Lc  TSK_PeriodicTask.o [1]
+PeriodTask_5ms          0x08007e2f     0x2  Code  Lc  TSK_PeriodicTask.o [1]
+PollingMsg              0x20000000     0xc  Data  Lc  CanOpenSDO.o [1]
+PollingNodeDeviceProfileType
+                        0x08006483    0x64  Code  Gb  CanOpenSDO.o [1]
+ProceedExpSdoRxData     0x08006593    0xf0  Code  Gb  CanOpenSDO.o [1]
+ProcessNmtCommand       0x08006e0d    0xa4  Code  Gb  CanOpenNmt.o [1]
+PutPixel                0x0800565d    0x16  Code  Gb  lcd.o [1]
+RCC_ADCCLKConfig        0x080036b5    0x12  Code  Gb  stm32f10x_rcc.o [1]
+RCC_AHBPeriphClockCmd   0x080037c9    0x20  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB1PeriphClockCmd  0x08003809    0x20  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB1PeriphResetCmd  0x08003829    0x20  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB2PeriphClockCmd  0x080037e9    0x20  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetClocksFreq       0x080036c7   0x102  Code  Gb  stm32f10x_rcc.o [1]
+ReadOdMap               0x08006919    0x9e  Code  Gb  CiA418_Profile.o [1]
+Region$$Table$$Base     0x08008568           --   Gb  - Linker created -
+Region$$Table$$Limit    0x08008588           --   Gb  - Linker created -
+SD0_CardInfo            0x20006e10    0x58  Data  Gb  SPI_MSD0_Driver.o [1]
+SDOCyclicHandler        0x080064e7    0xac  Code  Gb  CanOpenSDO.o [1]
+SDOCyclicHandler::CyclicCounter
+                        0x20007090     0x2  Data  Lc  CanOpenSDO.o [1]
+SDOInitial              0x08006471    0x12  Code  Gb  CanOpenSDO.o [1]
+SD_TotalSize            0x08001981    0x60  Code  Gb  SPI_MSD0_Driver.o [1]
+SPI_Cmd                 0x08003a17    0x1c  Code  Gb  stm32f10x_spi.o [1]
+SPI_Init                0x080039d9    0x3e  Code  Gb  stm32f10x_spi.o [1]
+SendDataSPI             0x08005221    0x40  Code  Gb  lcd.o [1]
+SetNodeState            0x08006d49    0x40  Code  Gb  CanOpenState.o [1]
+SetSysClock             0x0800798b     0x8  Code  Lc  system_stm32f10x.o [1]
+SetSysClockTo72         0x08007993   0x110  Code  Lc  system_stm32f10x.o [1]
+ShowTitle               0x08004d0b    0x2a  Code  Lc  LCD_TaskHandler.o [1]
+StateInitial            0x08006d39     0x8  Code  Gb  CanOpenState.o [1]
+SystemInit              0x0800792d    0x5e  Code  Gb  system_stm32f10x.o [1]
+TIM5_IRQHandler         0x08006ae1    0x26  Code  Gb  TIM_Driver.o [1]
+TIM_ClearITPendingBit   0x08006c87     0x8  Code  Gb  stm32f10x_tim.o [1]
+TIM_Cmd                 0x08006c27    0x1c  Code  Gb  stm32f10x_tim.o [1]
+TIM_DisableTimerInterrupt
+                        0x08006709    0x10  Code  Lc  CAN_HandlerRTOS.o [1]
+TIM_EnableTimerInterrupt
+                        0x08006719     0xe  Code  Lc  CAN_HandlerRTOS.o [1]
+TIM_GetCounter          0x08006c5b     0x4  Code  Gb  stm32f10x_tim.o [1]
+TIM_GetITStatus         0x08006c5f    0x28  Code  Gb  stm32f10x_tim.o [1]
+TIM_ITConfig            0x08006c43    0x18  Code  Gb  stm32f10x_tim.o [1]
+TIM_Initial             0x08006a79    0x68  Code  Gb  TIM_Driver.o [1]
+TIM_TimeBaseInit        0x08006b95    0x92  Code  Gb  stm32f10x_tim.o [1]
+TSK_100msTaskBaseOn5ms  0x08003bde     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_10msTaskBaseOn5ms   0x0800365a     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_1sTaskBaseOn5ms     0x08006706     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_20msTaskBaseOn5ms   0x08003a32     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_500msTaskBaseOn5ms  0x080060ba     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_50msTaskBaseOn5ms   0x08003a62     0x2  Data  Gb  TSK_PeriodicTask.o [1]
+TSK_CreateTasks         0x080081e5    0x72  Code  Gb  TSK_TaskCommonApi.o [1]
+TSK_PeriodicTaskHandler
+                        0x08007d6d    0xc2  Code  Gb  TSK_PeriodicTask.o [1]
+TSK_PeriodicTaskHandler::TSK_u16TimerCnt100msOn5ms
+                        0x200070be     0x2  Data  Lc  TSK_PeriodicTask.o [1]
+TSK_PeriodicTaskHandler::TSK_u16TimerCnt1sOn5ms
+                        0x200070c2     0x2  Data  Lc  TSK_PeriodicTask.o [1]
+TSK_PeriodicTaskHandler::TSK_u16TimerCnt500msOn5ms
+                        0x200070c0     0x2  Data  Lc  TSK_PeriodicTask.o [1]
+TSK_PeriodicTaskHandler::TSK_u16TimerCnt50msOn5ms
+                        0x200070bc     0x2  Data  Lc  TSK_PeriodicTask.o [1]
+TSK_PeriodicTaskHandler::TSK_u16TimerCntOn5ms
+                        0x200070ba     0x2  Data  Lc  TSK_PeriodicTask.o [1]
+Tbl                     0x080080e4   0x100  Data  Lc  unicode.o [1]
+ToOrd                   0x0800554d    0x4e  Code  Gb  lcd.o [1]
+USART_Cmd               0x080080a5    0x1c  Code  Gb  stm32f10x_usart.o [1]
+USART_Configuration     0x08007f31    0x76  Code  Gb  UART_Driver.o [1]
+USART_GPIO_Configuration
+                        0x08007ef7    0x3a  Code  Gb  UART_Driver.o [1]
+USART_GetFlagStatus     0x080080c9    0x1a  Code  Gb  stm32f10x_usart.o [1]
+USART_Init              0x08007fe5    0xba  Code  Gb  stm32f10x_usart.o [1]
+USART_RCC_Configuration
+                        0x08007ee1    0x16  Code  Gb  UART_Driver.o [1]
+USART_SendData          0x080080c1     0x8  Code  Gb  stm32f10x_usart.o [1]
+UpdateKeyState          0x080050fd    0x3e  Code  Lc  LCD_TaskHandler.o [1]
+UsageFault_Handler      0x080085b1     0x2  Code  Gb  stm32f10x_it.o [1]
+WD_FeedDog              0x08007ea1     0x8  Code  Gb  WD_Driver.o [1]
+WD_Initial              0x08007e7f    0x22  Code  Gb  WD_Driver.o [1]
+WriteComm               0x08005261    0x2c  Code  Gb  lcd.o [1]
+WriteData               0x0800528d    0x26  Code  Gb  lcd.o [1]
+WriteOdMap              0x080069b7    0xbc  Code  Gb  CiA418_Profile.o [1]
+WriteOneDot             0x08005539    0x14  Code  Gb  lcd.o [1]
+_PrintfTiny             0x08003aa9   0x136  Code  Gb  xprintftiny.o [3]
+_Prout                  0x08008629    0x16  Code  Gb  xprout.o [3]
+_SProut                 0x08001727     0xa  Code  Gb  xsprout.o [3]
+__aeabi_memset          0x080066a1          Code  Gb  ABImemset.o [4]
+__cmain                 0x080085c9          Code  Gb  cmain.o [4]
+__data_GetMemChunk      0x08003a65    0x2c  Code  Gb  xgetmemchunk.o [3]
+__data_GetMemChunk::start
+                        0x2000708c     0x4  Data  Lc  xgetmemchunk.o [3]
+__exit                  0x08003be1    0x14  Code  Gb  exit.o [5]
+__iar_Memset            0x080066a1          Code  Gb  ABImemset.o [4]
+__iar_Memset_word       0x080066a9          Code  Gb  ABImemset.o [4]
+__iar_Stdout            0x20000918    0x40  Data  Gb  xfiles.o [3]
+__iar_data_init3        0x080084d5    0x28  Code  Gb  data_init.o [4]
+__iar_dlfree            0x08003103   0x51a  Code  Gb  dlmalloc.o [3]
+__iar_dlmalloc          0x08002e4d   0x2aa  Code  Gb  dlmalloc.o [3]
+__iar_lz77_init_single3
+                        0x08008305    0x78  Code  Gb  lz77_init_single.o [4]
+__iar_program_start     0x08008715          Code  Gb  cstartup_M.o [4]
+__iar_unaligned___aeabi_memcpy
+                        0x08006045          Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned___aeabi_memcpy4
+                        0x08006065          Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned___aeabi_memcpy8
+                        0x08006065          Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_zero_init3        0x08008425    0x40  Code  Gb  zero_init3.o [4]
+__low_level_init        0x080085e3     0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000          Data  Gb  startup_stm32f10x_cl.o [1]
+_call_main              0x080085d5          Code  Gb  cmain.o [4]
+_exit                   0x080085ed          Code  Gb  cexit.o [4]
+_gm_                    0x20006994   0x1d8  Data  Lc  dlmalloc.o [3]
+_main                   0x080085df          Code  Gb  cmain.o [4]
+abort                   0x08003a5d     0x6  Code  Gb  abort.o [3]
+ascii                   0x08004700   0x600  Data  Gb  lcd.o [1]
+check_fs                0x08000fbf    0x7e  Code  Lc  ff.o [1]
+chk_chr                 0x08000181    0x1a  Code  Lc  ff.o [1]
+clear_lock              0x08000299    0x2e  Code  Lc  ff.o [1]
+clust2sect              0x0800035f    0x1e  Code  Gb  ff.o [1]
+cmp_lfn                 0x08000875    0x96  Code  Lc  ff.o [1]
+create_chain            0x0800055b    0xd2  Code  Lc  ff.o [1]
+create_name             0x08000c8f   0x252  Code  Lc  ff.o [1]
+dir_find                0x0800099d   0x112  Code  Lc  ff.o [1]
+dir_next                0x080006f3   0x15e  Code  Lc  ff.o [1]
+dir_read                0x08000aaf    0xf6  Code  Lc  ff.o [1]
+dir_sdi                 0x0800062d    0xc6  Code  Lc  ff.o [1]
+disk_initialize         0x08001731    0x34  Code  Gb  diskio.o [1]
+disk_read               0x08001783    0x52  Code  Gb  diskio.o [1]
+disk_status             0x08001765    0x1e  Code  Gb  diskio.o [1]
+disk_write              0x080017d5    0x52  Code  Gb  diskio.o [1]
+exit                    0x080085e7     0x4  Code  Gb  exit.o [3]
+f_AdcFastFilter         0x080060bd    0x60  Code  Gb  METER_AdcSample.o [1]
+f_AdcSlowFilter         0x0800611d   0x10e  Code  Gb  METER_AdcSample.o [1]
+f_BattCurrentSlowFilterCb
+                        0x0800625f    0x20  Code  Lc  METER_AdcSample.o [1]
+f_BattTempFilterCb      0x0800627f    0xae  Code  Lc  METER_AdcSample.o [1]
+f_BattVoltsSlowFilterCb
+                        0x0800622b    0x34  Code  Lc  METER_AdcSample.o [1]
+f_CSetFilterCb          0x080063d1    0x48  Code  Lc  METER_AdcSample.o [1]
+f_CanBufferInit         0x08006727    0x1a  Code  Lc  CAN_HandlerRTOS.o [1]
+f_ISetFilterCb          0x08006389    0x48  Code  Lc  METER_AdcSample.o [1]
+f_KeyPressedFilterCb    0x0800632d    0x5c  Code  Lc  METER_AdcSample.o [1]
+f_StateMachineTask      0x0800827b     0xa  Code  Gb  TSK_TaskCommonApi.o [1]
+f_TimerTask             0x08008261    0x1a  Code  Gb  TSK_TaskCommonApi.o [1]
+f_USetFilterCb          0x08006419    0x48  Code  Lc  METER_AdcSample.o [1]
+f_getfree               0x08001625   0x102  Code  Gb  ff.o [1]
+f_mount                 0x08001435    0x66  Code  Gb  ff.o [1]
+f_opendir               0x080014bd    0xde  Code  Gb  ff.o [1]
+f_readdir               0x0800159b    0x8a  Code  Gb  ff.o [1]
+ff_convert              0x08001829    0x52  Code  Gb  unicode.o [1]
+ff_memalloc             0x080018bd     0x8  Code  Gb  syscall.o [1]
+ff_memfree              0x080018c5     0x8  Code  Gb  syscall.o [1]
+ff_wtoupper             0x0800187b    0x34  Code  Gb  unicode.o [1]
+ff_wtoupper::tbl_lower  0x08006eb4   0x1e0  Data  Lc  unicode.o [1]
+ff_wtoupper::tbl_upper  0x08007094   0x1e0  Data  Lc  unicode.o [1]
+find_volume             0x08001045   0x3aa  Code  Lc  ff.o [1]
+follow_path             0x08000ee1    0x8c  Code  Lc  ff.o [1]
+fputc                   0x08007fa7    0x20  Code  Gb  UART_Driver.o [1]
+fs1                     0x20006568   0x230  Data  Gb  SPI_MSD0_Driver.o [1]
+get_fat                 0x0800037d    0xd6  Code  Gb  ff.o [1]
+get_fileinfo            0x08000ba5    0xea  Code  Lc  ff.o [1]
+get_ldnumber            0x08000f6d    0x52  Code  Lc  ff.o [1]
+heapSTRUCT_SIZE         0x08001826     0x2  Data  Lc  heap_2.o [1]
+inc_lock                0x0800019b    0xfe  Code  Lc  ff.o [1]
+init_mparams            0x0800214d    0x32  Code  Lc  dlmalloc.o [3]
+init_top                0x0800217f    0x34  Code  Lc  dlmalloc.o [3]
+ld_clust                0x08000851    0x24  Code  Lc  ff.o [1]
+main                    0x08008465    0x3e  Code  Gb  main.o [1]
+mem_cmp                 0x08000161    0x20  Code  Lc  ff.o [1]
+mem_set                 0x08000151    0x10  Code  Lc  ff.o [1]
+move_window             0x08000325    0x3a  Code  Lc  ff.o [1]
+mparams                 0x20006f2c    0x18  Data  Lc  dlmalloc.o [3]
+obuf                    0x20006e68    0x50  Data  Lc  xfiles.o [3]
+out                     0x08003a91    0x18  Code  Lc  xprintftiny.o [3]
+path0                   0x20000674   0x200  Data  Gb  SPI_MSD0_Driver.o [1]
+pick_lfn                0x0800090b    0x6c  Code  Lc  ff.o [1]
+prepend_alloc           0x080021b3   0x372  Code  Lc  dlmalloc.o [3]
+printf                  0x08003691    0x24  Code  Gb  printf.o [3]
+prvAddCurrentTaskToDelayedList
+                        0x08004309    0x80  Code  Lc  tasks.o [1]
+prvAddNewTaskToReadyList
+                        0x08003ced    0xb8  Code  Lc  tasks.o [1]
+prvCheckTasksWaitingTermination
+                        0x08004249    0x56  Code  Lc  tasks.o [1]
+prvCopyDataFromQueue    0x08005f73    0x2a  Code  Lc  queue.o [1]
+prvCopyDataToQueue      0x08005f01    0x72  Code  Lc  queue.o [1]
+prvDeleteTCB            0x0800429f    0x12  Code  Lc  tasks.o [1]
+prvHeapInit             0x080044bb    0x2a  Code  Lc  heap_2.o [1]
+prvIdleTask             0x080041d1    0x22  Code  Lc  tasks.o [1]
+prvInitialiseNewQueue   0x08005c49    0x1c  Code  Lc  queue.o [1]
+prvInitialiseNewTask    0x08003c6b    0x82  Code  Lc  tasks.o [1]
+prvInitialiseTaskLists  0x080041f3    0x56  Code  Lc  tasks.o [1]
+prvIsQueueEmpty         0x0800600b    0x1c  Code  Lc  queue.o [1]
+prvIsQueueFull          0x08006027    0x1e  Code  Lc  queue.o [1]
+prvResetNextTaskUnblockTime
+                        0x080042b1    0x2c  Code  Lc  tasks.o [1]
+prvTaskExitError        0x080045b5    0x10  Code  Lc  port.o [1]
+prvUnlockQueue          0x08005f9d    0x6e  Code  Lc  queue.o [1]
+put_fat                 0x08000453   0x108  Code  Gb  ff.o [1]
+putchar                 0x08008641     0xc  Code  Gb  putchar.o [3]
+pvPortMalloc            0x080043cd    0xb2  Code  Gb  heap_2.o [1]
+pvPortMalloc::xHeapHasBeenInitialised
+                        0x2000704c     0x4  Data  Lc  heap_2.o [1]
+pxCurrentTCB            0x20007050     0x4  Data  Gb  tasks.o [1]
+pxDelayedTaskList       0x20007054     0x4  Data  Lc  tasks.o [1]
+pxOverflowDelayedTaskList
+                        0x20007058     0x4  Data  Lc  tasks.o [1]
+pxPortInitialiseStack   0x08004595    0x20  Code  Gb  port.o [1]
+pxReadyTasksLists       0x20006dac    0x64  Data  Lc  tasks.o [1]
+recv_sem                0x20006ff0     0x4  Data  Lc  CAN_HandlerRTOS.o [1]
+res                     0x200070d3     0x1  Data  Gb  SPI_MSD0_Driver.o [1]
+s_TSK_u8OsStarted       0x200070d4     0x1  Data  Gb  TSK_TaskCommonApi.o [1]
+s_arrayUserDefineTasks  0x20000888    0x90  Data  Gb  TSK_TaskCommonApi.o [1]
+scan_files              0x080018cd    0xb4  Code  Gb  SPI_MSD0_Driver.o [1]
+scan_files::lfn         0x20006b6c   0x100  Data  Lc  SPI_MSD0_Driver.o [1]
+segment_holding         0x08002131    0x1c  Code  Lc  dlmalloc.o [3]
+sprintf                 0x0800365d    0x34  Code  Gb  sprintf.o [3]
+stAdcFilter             0x20000558   0x118  Data  Gb  METER_AdcSample.o [1]
+stAdcMeters             0x20006f14    0x18  Data  Gb  METER_AdcSample.o [1]
+stCanOpenDate           0x20006f58    0x14  Data  Gb  CanOpenBasic.o [1]
+stErrorRegister         0x20006ff8     0x4  Data  Gb  CiA418_Profile.o [1]
+stNodeDeviceProfile     0x20006798   0x1fc  Data  Gb  CanOpenSDO.o [1]
+stOb1000_DeviceType     0x20000010     0x8  Data  Gb  CiA418_Profile.o [1]
+stOb1001_ErrorRegister  0x20000018     0x8  Data  Gb  CiA418_Profile.o [1]
+stOb1012_TimeStamp      0x20000020     0x8  Data  Gb  CiA418_Profile.o [1]
+stOb1017_HeartBeat      0x20000028     0x8  Data  Gb  CiA418_Profile.o [1]
+stOb1017_Identify       0x20000040    0x28  Data  Gb  CiA418_Profile.o [1]
+stOb1029_ErrorBehavior  0x20000068    0x20  Data  Gb  CiA418_Profile.o [1]
+stOb1400_RPDO1          0x2000008c    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1401_RPDO2          0x20000138    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1402_RPDO3          0x200001fc    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1600_RPDO1          0x200000c8    0x10  Data  Gb  CiA418_Profile.o [1]
+stOb1601_RPDO2          0x20000178    0x18  Data  Gb  CiA418_Profile.o [1]
+stOb1602_RPDO3          0x20000240    0x20  Data  Gb  CiA418_Profile.o [1]
+stOb1800_TPDO1          0x200000dc    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1801_TPDO2          0x20000194    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1802_TPDO3          0x20000264    0x38  Data  Gb  CiA418_Profile.o [1]
+stOb1A00_TPDO1          0x2000011c    0x18  Data  Gb  CiA418_Profile.o [1]
+stOb1A01_TPDO2          0x200001d8    0x20  Data  Gb  CiA418_Profile.o [1]
+stOb1A02_TPDO3          0x200002a4    0x18  Data  Gb  CiA418_Profile.o [1]
+stObIndex6000           0x200002bc     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6001           0x200002c4     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6010           0x200002cc     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6020           0x200002d4    0x28  Data  Gb  CiA418_Profile.o [1]
+stObIndex6030           0x200002fc    0x20  Data  Gb  CiA418_Profile.o [1]
+stObIndex6031           0x2000031c    0x28  Data  Gb  CiA418_Profile.o [1]
+stObIndex6040           0x20000344    0x28  Data  Gb  CiA418_Profile.o [1]
+stObIndex6041           0x2000036c    0x28  Data  Gb  CiA418_Profile.o [1]
+stObIndex6050           0x20000394     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6051           0x2000039c     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6052           0x200003a4     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6053           0x200003ac     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6054           0x200003b4    0x18  Data  Gb  CiA418_Profile.o [1]
+stObIndex6060           0x200003cc     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6070           0x200003d4     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6080           0x200003dc     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6081           0x200003e4     0x8  Data  Gb  CiA418_Profile.o [1]
+stObIndex6090           0x200003ec     0x8  Data  Gb  CiA418_Profile.o [1]
+stOdSubInfoMap_CiA418   0x200003f4   0x120  Data  Gb  CiA418_Profile.o [1]
+stScreenInfo            0x20006fd0     0xc  Data  Gb  LCD_TaskHandler.o [1]
+stTemperatureTable      0x20000518    0x40  Data  Gb  METER_AdcSample.o [1]
+strlen                  0x08003625          Code  Gb  strlen.o [4]
+sum_sfn                 0x0800097d    0x20  Code  Lc  ff.o [1]
+sync_window             0x080002c7    0x5e  Code  Lc  ff.o [1]
+sys_alloc               0x08002525   0x388  Code  Lc  dlmalloc.o [3]
+tmalloc_large           0x080028b9   0x380  Code  Lc  dlmalloc.o [3]
+tmalloc_small           0x08002c39   0x206  Code  Lc  dlmalloc.o [3]
+tran_sem                0x20006ff4     0x4  Data  Lc  CAN_HandlerRTOS.o [1]
+u16TimerLast            0x200070b8     0x2  Data  Lc  TIM_Driver.o [1]
+ucHeap                  0x20002168  0x4400  Data  Lc  heap_2.o [1]
+uxCriticalNesting       0x20000670     0x4  Data  Lc  port.o [1]
+uxCurrentNumberOfTasks  0x20007060     0x4  Data  Lc  tasks.o [1]
+uxDeletedTasksWaitingCleanUp
+                        0x2000705c     0x4  Data  Lc  tasks.o [1]
+uxListRemove            0x0800456f    0x26  Code  Gb  list.o [1]
+uxPendedTicks           0x20007070     0x4  Data  Lc  tasks.o [1]
+uxSchedulerSuspended    0x20007088     0x4  Data  Lc  tasks.o [1]
+uxTaskNumber            0x2000707c     0x4  Data  Lc  tasks.o [1]
+uxTopReadyPriority      0x20007068     0x4  Data  Lc  tasks.o [1]
+vListInitialise         0x080044fd    0x1e  Code  Gb  list.o [1]
+vListInitialiseItem     0x0800451b     0x6  Code  Gb  list.o [1]
+vListInsert             0x08004539    0x36  Code  Gb  list.o [1]
+vListInsertEnd          0x08004521    0x18  Code  Gb  list.o [1]
+vPortEnterCritical      0x080045f1    0x1a  Code  Gb  port.o [1]
+vPortExitCritical       0x0800460b    0x1a  Code  Gb  port.o [1]
+vPortFree               0x0800447f    0x3c  Code  Gb  heap_2.o [1]
+vPortSVCHandler         0x080046bf          Code  Gb  portasm.o [1]
+vPortSetupTimerInterrupt
+                        0x0800465d    0x1c  Code  Wk  port.o [1]
+vPortStartFirstTask     0x080046df          Code  Gb  portasm.o [1]
+vTaskDelay              0x08003e05    0x32  Code  Gb  tasks.o [1]
+vTaskDelayUntil         0x08003da5    0x60  Code  Gb  tasks.o [1]
+vTaskMissedYield        0x080041c7     0xa  Code  Gb  tasks.o [1]
+vTaskPlaceOnEventList   0x080040d9    0x1a  Code  Gb  tasks.o [1]
+vTaskSetTimeOutState    0x0800415b    0x12  Code  Gb  tasks.o [1]
+vTaskStartScheduler     0x08003e37    0x50  Code  Gb  tasks.o [1]
+vTaskSuspendAll         0x08003e87    0x10  Code  Gb  tasks.o [1]
+vTaskSwitchContext      0x08004085    0x54  Code  Gb  tasks.o [1]
+validate                0x080013ef    0x46  Code  Lc  ff.o [1]
+xDelayedTaskList1       0x20006f6c    0x14  Data  Lc  tasks.o [1]
+xDelayedTaskList2       0x20006f80    0x14  Data  Lc  tasks.o [1]
+xEnd                    0x20006fe4     0x8  Data  Lc  heap_2.o [1]
+xFreeBytesRemaining     0x20000514     0x4  Data  Lc  heap_2.o [1]
+xIdleTaskHandle         0x20007084     0x4  Data  Lc  tasks.o [1]
+xNextTaskUnblockTime    0x20007080     0x4  Data  Lc  tasks.o [1]
+xNumOfOverflows         0x20007078     0x4  Data  Lc  tasks.o [1]
+xPendingReadyList       0x20006f94    0x14  Data  Lc  tasks.o [1]
+xPortPendSVHandler      0x08004679          Code  Gb  portasm.o [1]
+xPortStartScheduler     0x080045c5    0x2c  Code  Gb  port.o [1]
+xPortSysTickHandler     0x08004625    0x28  Code  Gb  port.o [1]
+xQueueGenericCreate     0x08005c13    0x36  Code  Gb  queue.o [1]
+xQueueGenericReceive    0x08005dc7   0x134  Code  Gb  queue.o [1]
+xQueueGenericReset      0x08005b95    0x7e  Code  Gb  queue.o [1]
+xQueueGenericSend       0x08005c65   0x108  Code  Gb  queue.o [1]
+xQueueGiveFromISR       0x08005d6d    0x5a  Code  Gb  queue.o [1]
+xSchedulerRunning       0x2000706c     0x4  Data  Lc  tasks.o [1]
+xStart                  0x20006fdc     0x8  Data  Lc  heap_2.o [1]
+xSuspendedTaskList      0x20006fbc    0x14  Data  Lc  tasks.o [1]
+xTaskCheckForTimeOut    0x0800416d    0x5a  Code  Gb  tasks.o [1]
+xTaskCreate             0x08003bf5    0x76  Code  Gb  tasks.o [1]
+xTaskGetTickCount       0x08003f77     0x8  Code  Gb  tasks.o [1]
+xTaskIncrementTick      0x08003f7f   0x106  Code  Gb  tasks.o [1]
+xTaskRemoveFromEventList
+                        0x080040f3    0x68  Code  Gb  tasks.o [1]
+xTaskResumeAll          0x08003e97    0xe0  Code  Gb  tasks.o [1]
+xTasksWaitingTermination
+                        0x20006fa8    0x14  Data  Lc  tasks.o [1]
+xTickCount              0x20007064     0x4  Data  Lc  tasks.o [1]
+xYieldPending           0x20007074     0x4  Data  Lc  tasks.o [1]
+
+
+[1] = E:\DYH\01_EmbeddedSoftware\Github\0.1_OBC\SourceCode_LibV3.5_418\Debug\Obj
+[2] = command line
+[3] = dl7M_tlf.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+  31 298 bytes of readonly  code memory
+   4 555 bytes of readonly  data memory
+  28 882 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

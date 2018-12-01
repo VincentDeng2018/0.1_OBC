@@ -42,10 +42,10 @@ extern void ADC_TaskHandler(void *pvParameters);
 * Macros
 *******************************************************************************/
 /* Define priority for every task, higher priority, the number is higher */
-#define TIMER_TASK_PRIORITY                 ( tskIDLE_PRIORITY + 1 )
-#define SM_TASK_PRIORITY                    ( tskIDLE_PRIORITY + 2 )
+#define TIMER_TASK_PRIORITY                 ( tskIDLE_PRIORITY + 2 )
+#define SM_TASK_PRIORITY                    ( tskIDLE_PRIORITY + 3 )
 #define CAN_RX_TASK_PRIORITY                ( tskIDLE_PRIORITY + 4 )
-#define CAN_TX_TASK_PRIORITY                ( tskIDLE_PRIORITY + 3 )
+#define CAN_TX_TASK_PRIORITY                ( tskIDLE_PRIORITY + 5 )
 #define LCD_TASK_PRIORITY                ( tskIDLE_PRIORITY + 1 )
 #define ADC_TASK_PRIORITY                ( tskIDLE_PRIORITY + 1 )
 

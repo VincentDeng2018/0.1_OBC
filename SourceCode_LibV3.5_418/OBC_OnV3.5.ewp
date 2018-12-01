@@ -326,6 +326,7 @@
           <state>$PROJ_DIR$\HSI\LCD</state>
           <state>$PROJ_DIR$\HSI\Timer</state>
           <state>$PROJ_DIR$\HSI\PWM</state>
+          <state>$PROJ_DIR$\HSI\WD</state>
           <state>$PROJ_DIR$\MCAL</state>
           <state>$PROJ_DIR$\MCAL\CoreSupport</state>
           <state>$PROJ_DIR$\MCAL\DeviceSupport</state>
@@ -339,6 +340,7 @@
           <state>$PROJ_DIR$\Module\Display</state>
           <state>$PROJ_DIR$\Module\Control</state>
           <state>$PROJ_DIR$\Module\USB</state>
+          <state>$PROJ_DIR$\Module\StateMachine</state>
           <state>$PROJ_DIR$\Module\FatFs\inc</state>
         </option>
         <option>
@@ -3191,6 +3193,15 @@
         <name>$PROJ_DIR$\HSI\UART\UART_Globals.h</name>
       </file>
     </group>
+    <group>
+      <name>WD</name>
+      <file>
+        <name>$PROJ_DIR$\HSI\WD\WD_Driver.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\HSI\WD\WD_Globals.h</name>
+      </file>
+    </group>
     <file>
       <name>$PROJ_DIR$\HSI\hw_config.c</name>
     </file>
@@ -3489,6 +3500,9 @@
       <name>Control</name>
       <file>
         <name>$PROJ_DIR$\Module\Control\ctrl.c</name>
+        <excluded>
+          <configuration>Debug</configuration>
+        </excluded>
       </file>
       <file>
         <name>$PROJ_DIR$\Module\Control\db.c</name>
@@ -3585,7 +3599,28 @@
       </file>
     </group>
     <group>
+      <name>StateMachine</name>
+      <file>
+        <name>$PROJ_DIR$\Module\StateMachine\SM_CommonApi.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\StateMachine\SM_CommonApi.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\StateMachine\SM_Config.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\StateMachine\SYS_StateMachine.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\StateMachine\SYS_StateMachine.h</name>
+      </file>
+    </group>
+    <group>
       <name>USB</name>
+      <excluded>
+        <configuration>Debug</configuration>
+      </excluded>
       <file>
         <name>$PROJ_DIR$\Module\USB\communication.c</name>
       </file>

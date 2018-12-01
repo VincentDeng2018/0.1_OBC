@@ -26,6 +26,7 @@
 #include "GPIO_Globals.h"
 #include "ADC_Globals.h"
 #include "SPI_MSD0_Driver.h"
+#include "WD_Globals.h"
 
 extern void CAN_Initial(void);
 
@@ -38,6 +39,7 @@ int main(void)
     CAN_Initial();
     ADC_Initial();
     USART_Configuration();
+    WD_Initial();
     //USB_Set();
     
     MSD0_SPI_Configuration();

@@ -53,14 +53,14 @@ extern uint8_t CTRL_MosCmd;
 **********************************************************************************************/
 static inline uint8_t AcLowActive(void)
 {
-    return GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
+    return (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 0u);
 }
 
 
 
 static inline uint8_t AcOffActive(void)
 {
-    return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_13);
+    return (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_13) == 1u);
 }
 
 
@@ -175,13 +175,13 @@ static inline void ControlMos(uint8_t MosState)
 
 static inline uint8_t BatteryNormalConnected(void)
 {
-    return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_9);
+    return (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_9) == 0);
 }
 
 
 static inline uint8_t BatteryReverseConnected(void)
 {
-    return GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_10);
+    return (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_10) == 0);
 }
 
 static inline void ControlFan(uint8_t FanState)

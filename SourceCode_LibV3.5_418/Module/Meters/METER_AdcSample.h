@@ -126,5 +126,6 @@ extern uint16_t ISampleAutoZero(void);
 extern void ADC_FilterIniital(void);
 extern void f_AdcSlowFilter(enAdcIndex index);
 extern void ADC_EnableAutoZero(uint16_t enableOrNot);
+extern uint16_t f_GetAdcFilterResult(enAdcIndex index);
 
 #endif

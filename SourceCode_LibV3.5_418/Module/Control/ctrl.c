@@ -1589,8 +1589,6 @@ void LoadRefresh(void)
 {
     static U8 div = 0;
 
-    
-
     if (bTurnOn)
     {
         switch (bySWCnt)
@@ -1929,8 +1927,15 @@ void Ctrl(void)
         dwdTmp /= wdCurCalib;
         wdCurrent = dwdTmp;
 #endif
+
+#ifdef STM32F10X_CL 
+        //cTemp1 = stAdcMeters.T_BattMeter_100mC / 10;
+        //cTemp2 = stAdcMeters.T_ChargeMeter_100mC / 10;
+#else
         cTemp1 = GetTempCelVal(awdADCVal[E_ADC_INDEX_VTM1]);
         cTemp2 = GetTempCelVal(awdADCVal[E_ADC_INDEX_VTM2]);
+#endif
+        
 
         
     }
