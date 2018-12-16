@@ -54,12 +54,12 @@ typedef enum
 
 typedef enum
 {
-    CHG_PRECHARGE = 0x0,
-    CHG_CC1,
-    CHG_CC2,
-    CHG_CV,
-    CHG_PULL,
-    CHG_FLOAT,
+    CHG_PRECHARGE = 0x0,  // 0
+    CHG_CC1,              // 1
+    CHG_CC2,              // 2
+    CHG_CV,               // 3
+    CHG_PULL,             // 4
+    CHG_FLOAT,            // 5
 }enChargePhase_t;
 
 typedef struct
@@ -85,8 +85,8 @@ extern SystemStateInfo_t SystemStateInfo;
 
 typedef struct
 {
-    uint16_t PWM_U_DutyX1000; /* e.g.-->20% duty then this value is 20 */
-    uint16_t PWM_I_DutyX1000;
+    uint16_t PWM_U_Duty_x10; /* e.g.-->20% duty then this value is 20 */
+    uint16_t PWM_I_Duty_x10;
     int16_t  U_FilterCnt;
     int16_t  I_FilterCnt;
     
@@ -96,10 +96,13 @@ typedef struct
     uint16_t FanOnCmd: 1;
 
     uint16_t StopTimerAcc: 1;
-    uint16_t Reserved: 11;
+    uint16_t PWM_I_RampDone:1;
+    uint16_t PWM_U_RampDone:1;
+    uint16_t Reserved: 9;
 }ChargeCtrl_t;
 
-extern ChargeCtrl_t stChargeCtrl;
+extern ChargeCtrl_t stChargeCtrlNow;
+extern ChargeCtrl_t stChargeCtrlPre;
 
 /*********************************************************************************
 * Global DECLARATIONS

@@ -25,7 +25,7 @@
 /* Chip lib include */
 /* user include */
 #include "METER_AdcSample.h"
-
+#include "SM_CommonApi.h"
 
 #define ADC_VBATT_MAX_MV        16500L
 #define ADC_LVOUT_MAX_10MV      6600L
@@ -118,20 +118,20 @@ static uint16_t ADC_EnableAutoZeroFlag = 0;
 *
 *  Returns        :   Nothing
 *
-*  Description    :   
+*  Description    :
 *
 ****************************************************************************/
 void ADC_FilterIniital(void)
 {
     uint16_t i = 0;
-    
+
     for(i = 0; i < ADC_END; i++)
     {
         if((stAdcFilter[i].SlowAvgShift == 0) || ((1 << stAdcFilter[i].SlowAvgShift) >= 1024))
         {
             stAdcFilter[i].SlowAvgShift = 5;
         }
-        
+
         stAdcFilter[i].SlowAvgAccCnt = 0;
         stAdcFilter[i].SlowAvgSum = 0;
     }
@@ -256,7 +256,7 @@ void f_AdcSlowFilter(enAdcIndex index)
     /* Average counter has arrived, then call cb function to handle them */
     if(stAdcFilter[index].SlowAvgAccCnt >=  (1 << stAdcFilter[index].SlowAvgShift))
     {
-        stAdcFilter[index].SlowAvgCnt = (uint16_t)(stAdcFilter[index].SlowAvgSum >> stAdcFilter[index].SlowAvgShift); 
+        stAdcFilter[index].SlowAvgCnt = (uint16_t)(stAdcFilter[index].SlowAvgSum >> stAdcFilter[index].SlowAvgShift);
         if(NULL != stAdcFilter[index].SlowFilterCb)
         {
             stAdcFilter[index].SlowFilterCb(index);
@@ -297,12 +297,14 @@ void ADC_EnableAutoZero(uint16_t enableOrNot)
 
 /* call back function to convert ADC counter to physical value */
 static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex)
-{
+{  
+#define ADC_TO_MV_GAIN (2353 * 4095 / 3300)
+
     uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
-    /* 3.3V --> 16830mV */
-    tempVal = (tempVal * 16830) >> 12;
-    
+
+    tempVal *= (awdVoltTypeValue[stAdcMeters.USetup] * 10);
+    tempVal /= ADC_TO_MV_GAIN;
+
     if(adcIndex == ADC_U_PACK)
     {
         stAdcMeters.U_Pack_mV = (uint16_t)tempVal;
@@ -318,12 +320,14 @@ static void f_BattVoltsSlowFilterCb(enAdcIndex adcIndex)
 }
 
 static void f_BattCurrentSlowFilterCb(enAdcIndex adcIndex)
-{
+{  
+#define ADC_TO_MA_GAIN (1300 * 4095 / 3300)
+
     uint32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
+
     /* 1.3V --> MaxCurrent */
-    tempVal = (tempVal * 5000) / 1616;
-    
+    tempVal = (tempVal * awdCurTypeValue[stAdcMeters.ISetup] * 10) / 1614 ;
+
 
     stAdcMeters.I_Charge_mA = (uint16_t)tempVal;
 }
@@ -334,22 +338,22 @@ static void f_BattTempFilterCb(enAdcIndex adcIndex)
 {
     int32_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
     int32_t a = 0;
-    
+
     uint16_t i = 0;
-    
+
     int16_t *pTemperature = &stAdcMeters.T_BattMeter_100mC;
-    
+
     if(adcIndex == ADC_TEMP1)
     {
         pTemperature = &stAdcMeters.T_ChargeMeter_100mC;
     }
-    
+
     /* Y = aX + b: Y = NewTemperature_100mc, X = newAdcCounter - stTemperatureTable[i].AdcCounter
     a = (stTemperatureTable[i+1].TBatt_100mc - stTemperatureTable[i].TBatt_100mc) /
         (stTemperatureTable[i+1].AdcCounter - stTemperatureTable[i].AdcCounter)
     b = stTemperatureTable[i].TBatt_100mc
     */
-        
+
     if(tempVal >= stTemperatureTable[0].AdcCounter)
     {
         *pTemperature = stTemperatureTable[0].TBatt_100mc;
@@ -372,19 +376,19 @@ static void f_BattTempFilterCb(enAdcIndex adcIndex)
             }
         }
     }
-       
+
 }
 
 static void f_KeyPressedFilterCb(enAdcIndex adcIndex)
 {
     uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
-    //No Key= 4096 
+
+    //No Key= 4096
     //Key1  = 3097
-    //Key2  = 2048       
-    //Key3  = 1084 
-    //Key4  = 0           
-          
+    //Key2  = 2048
+    //Key3  = 1084
+    //Key4  = 0
+
     if(tempVal > 3596)
     {
         stAdcMeters.enKeyPressed = KEY_NONE;
@@ -411,87 +415,101 @@ static void f_KeyPressedFilterCb(enAdcIndex adcIndex)
 static void f_ISetFilterCb(enAdcIndex adcIndex)
 {
     uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
+
     //0 0    4096
     //0 1    2707
-    //1 0    2048
+    //1 0    3510
     //1 1    1630
 
     if(tempVal > 3900)
     {
         stAdcMeters.ISetup = SETUP_0;
     }
-    else if(tempVal > 2600)
-    {
-        stAdcMeters.ISetup = SETUP_1;
-    }
-    else if(tempVal > 1800)
+    else if(tempVal > 3200)
     {
         stAdcMeters.ISetup = SETUP_2;
+    }
+    else if(tempVal > 2400)
+    {
+        stAdcMeters.ISetup = SETUP_1;
     }
     else
     {
         stAdcMeters.ISetup = SETUP_3;
     }
+
+    stAdcMeters.ISetup = SETUP_4;
 }
 
 
 static void f_CSetFilterCb(enAdcIndex adcIndex)
 {
     uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
+
     //0 0    4096
     //0 1    2707
-    //1 0    2048
+    //1 0    3510
     //1 1    1630
 
     if(tempVal > 3900)
     {
-        stAdcMeters.USetup = SETUP_0;
+        stAdcMeters.CSetup = SETUP_0;
     }
-    else if(tempVal > 2600)
+    else if(tempVal > 3200)
     {
-        stAdcMeters.USetup = SETUP_1;
+        stAdcMeters.CSetup = SETUP_2;
     }
-    else if(tempVal > 1800)
+    else if(tempVal > 2400)
     {
-        stAdcMeters.USetup = SETUP_2;
+        stAdcMeters.CSetup = SETUP_1;
     }
     else
     {
-        stAdcMeters.USetup = SETUP_3;
+        stAdcMeters.CSetup = SETUP_3;
     }
 }
 
 
 static void f_USetFilterCb(enAdcIndex adcIndex)
 {
-    uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
-    
-    //0 0    4096
-    //0 1    2707
-    //1 0    2048
-    //1 1    1630
+    //uint16_t tempVal = stAdcFilter[adcIndex].SlowAvgCnt;
+    /* TODO: add more user code here for different product */
+    stAdcMeters.USetup = SETUP_1;
 
-    if(tempVal > 3900)
-    {
-        stAdcMeters.USetup = SETUP_0;
-    }
-    else if(tempVal > 2600)
-    {
-        stAdcMeters.USetup = SETUP_1;
-    }
-    else if(tempVal > 1800)
-    {
-        stAdcMeters.USetup = SETUP_2;
-    }
-    else
-    {
-        stAdcMeters.USetup = SETUP_3;
-    }
 }
 
 uint16_t f_GetAdcFilterResult(enAdcIndex index)
 {
     return stAdcFilter[index].SlowAvgCnt;
+}
+
+
+void METER_PirntMeters(void)
+{
+    float temp;
+    /* Print ADC couter and physical value if have */
+
+    printf("ADC_KEY = %d\r\n", stAdcFilter[ADC_KEY].SlowAvgCnt);
+    //printf("ADC_I_SET = %d-->%d\r\n", stAdcFilter[ADC_I_SET].SlowAvgCnt, stAdcMeters.ISetup);
+    //printf("ADC_C_SET = %d-->%d\r\n", stAdcFilter[ADC_C_SET].SlowAvgCnt, stAdcMeters.CSetup);
+
+    //printf("ADC_U_SET_TEST = %d\r\n", stAdcFilter[ADC_U_SET_TEST].SlowAvgCnt);
+
+    temp = stAdcMeters.T_BattMeter_100mC / 10.0;
+    printf("ADC_TEMP1 = %d-->%f c\r\n", stAdcFilter[ADC_TEMP1].SlowAvgCnt, temp);
+
+    temp = stAdcMeters.T_ChargeMeter_100mC / 10.0;
+    printf("ADC_TEMP2 = %d-->%f c\r\n", stAdcFilter[ADC_TEMP2].SlowAvgCnt, temp);
+
+    temp = stAdcMeters.U_Pack_mV / 1000.0;
+    printf("ADC_U_PACK = %d-->%fV\r\n", stAdcFilter[ADC_U_PACK].SlowAvgCnt, temp);
+    
+    temp = stAdcMeters.U_ChgOutput_mV / 1000.0;
+    printf("U_ChgOutput_mV = %d-->%fV\r\n", stAdcFilter[ADC_U_OUT].SlowAvgCnt, temp);
+
+    //printf("ADC_U_OUT = %d\r\n", stAdcFilter[ADC_U_OUT].SlowAvgCnt);
+    //printf("ADC_U_BAT_POS = %d\r\n", stAdcFilter[ADC_U_BAT_POS].SlowAvgCnt);
+
+    temp = stAdcMeters.I_Charge_mA / 1000.0;
+    printf("ADC_I_CHG = %d-->%fA\r\n", stAdcFilter[ADC_I_CHG].SlowAvgCnt, temp);
 }

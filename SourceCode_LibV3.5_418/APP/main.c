@@ -27,6 +27,8 @@
 #include "ADC_Globals.h"
 #include "SPI_MSD0_Driver.h"
 #include "WD_Globals.h"
+#include "PWM_Globals.h"
+#include "UART_Globals.h"
 
 extern void CAN_Initial(void);
 
@@ -40,9 +42,10 @@ int main(void)
     ADC_Initial();
     USART_Configuration();
     WD_Initial();
+    PWM_Initial();
     //USB_Set();
     
-    MSD0_SPI_Configuration();
+    //MSD0_SPI_Configuration();
     
     /* disable interrupt until task create finish */
     TSK_CreateTasks();

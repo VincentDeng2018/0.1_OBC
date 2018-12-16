@@ -50,6 +50,7 @@ typedef enum
     SETUP_1,
     SETUP_2,
     SETUP_3,
+    SETUP_4,
 }enProductSetup;
 
 
@@ -69,8 +70,8 @@ typedef struct
     
     uint16_t  U_ISet_10mV;
     enProductSetup ISetup;
-    enProductSetup USetup;
-    uint16_t  U_CSet_10mV;
+    enProductSetup USetup; 
+    enProductSetup CSetup; 
     
     uint16_t  I_Charge_mA;
     uint16_t  U_Test_10mV;

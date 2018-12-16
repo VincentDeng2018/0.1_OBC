@@ -1,13 +1,7 @@
 /******************************************************************************************************
 *            SM_CommonApi.h
 ******************************************************************************************************
-******************************************************************************************************
-*
-* THIS INFORMATION IS PROPRIETARY TO BYD Corporation
-*
-******************************************************************************************************
-*
-*
+
 ******************************************************************************************************
 ******************************************************************************************************
 *    FILE NAME: SM_CommonApi.h
@@ -26,7 +20,7 @@
 #define _SM_COMMONAPI_H
 
 #include <stdint.h>
-
+#include "SM_Config.h"
 /**********************************************************************************************
 * Macros
 **********************************************************************************************/
@@ -37,7 +31,7 @@ typedef struct
     uint32_t BattOV:1;
     uint32_t BattUV:1;
     uint32_t BattAbsUV:1;   /* can't recover */
-    uint32_t Reserved1:1;
+    uint32_t ForceStayInInit:1;
     
     /* Bit4-Bit7*/
     uint32_t BattOT:1;
@@ -55,7 +49,7 @@ typedef struct
     uint32_t BattConnectOk: 1;
     uint32_t BattConnectReverse: 1;
     uint32_t TestModeFinish: 1;
-    uint32_t EnterTest:1;
+    uint32_t EnterFCT:1;
         
     /* Bit16-Bit31*/
     uint32_t AllowStayChg:1;
@@ -100,5 +94,7 @@ extern const uint16_t awdCurTypeValue[CURRENT_TYPE_NUM];
 * Global Functions
 **********************************************************************************************/
 extern void SM_SystemStateBitsUpdate(void);
+extern void ActuatorStateUpdate(void);
+extern void SM_PrintfString(char *string);
 
 #endif

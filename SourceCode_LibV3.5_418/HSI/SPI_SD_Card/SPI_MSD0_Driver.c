@@ -17,6 +17,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "SPI_MSD0_Driver.h"
 #include <stdio.h>
+#include <string.h>
 #include "ff.h"
 /* Private define ------------------------------------------------------------*/
 //#define PRINT_INFO  1 

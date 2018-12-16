@@ -2,8 +2,8 @@
 /* Integer type definitions for FatFs module */
 /*-------------------------------------------*/
 
-#ifndef _FF_INTEGER
-#define _FF_INTEGER
+#ifndef _INTEGER_H
+#define _INTEGER_H
 
 #ifdef _WIN32	/* FatFs development platform */
 

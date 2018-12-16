@@ -318,6 +318,7 @@
           <state>$PROJ_DIR$\FreeRTOS\include</state>
           <state>$PROJ_DIR$\FreeRTOS\portable\IAR</state>
           <state>$PROJ_DIR$\HSI</state>
+          <state>$PROJ_DIR$\HSI\UART</state>
           <state>$PROJ_DIR$\HSI\SPI_SD_Card</state>
           <state>$PROJ_DIR$\HSI\ADC</state>
           <state>$PROJ_DIR$\HSI\CAN</state>
@@ -342,6 +343,7 @@
           <state>$PROJ_DIR$\Module\USB</state>
           <state>$PROJ_DIR$\Module\StateMachine</state>
           <state>$PROJ_DIR$\Module\FatFs\inc</state>
+          <state>$PROJ_DIR$\Module\RTC</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -3578,6 +3580,15 @@
       </file>
       <file>
         <name>$PROJ_DIR$\Module\Meters\METER_AdcSample.h</name>
+      </file>
+    </group>
+    <group>
+      <name>RTC</name>
+      <file>
+        <name>$PROJ_DIR$\Module\RTC\RTC_Calendar.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\RTC\RTC_Calendar.h</name>
       </file>
     </group>
     <group>

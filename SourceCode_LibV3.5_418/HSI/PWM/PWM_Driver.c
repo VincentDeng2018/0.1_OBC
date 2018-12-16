@@ -45,8 +45,6 @@ uint16_t PWM_GetPwmDuty(uint8_t PwmChannel);
 /*******************************************************************************
 * Local Variables
 *******************************************************************************/
-uint16_t PWM_IRefDuty = 0;
-uint16_t PWM_URefDuty = 0;
 
 
 /****************************************************************************
@@ -104,8 +102,8 @@ void PWM_Initial(void)
     TIM_ClearFlag(TIM4, TIM_FLAG_Update); //必须先清除配置时候产生的更新标志,
     TIM_Cmd(TIM4, ENABLE); //使能定时器,
     
-    PWM_URefUpdate(200);
-    PWM_IRefUpdate(500);
+    //PWM_URefUpdate(200);
+    //PWM_IRefUpdate(500);
 }
 
 
@@ -127,11 +125,21 @@ void PWM_IRefUpdate(uint16_t dutyX10)
 {
     uint16_t newCompareVal = 0;
     
-    if(dutyX10 != PWM_IRefDuty)
+    if(dutyX10 != 0)
     {
         newCompareVal = dutyX10 * PWM_CNT_0_1_DUTY;
-        PWM_IRefDuty = dutyX10;
+        
+        if(newCompareVal > PWM_VAL_MAX)
+        {
+            newCompareVal = PWM_VAL_MAX;
+        }
+        TIM_Cmd(TIM4, ENABLE); //使能定时器,
         TIM_SetCompare3(TIM4, newCompareVal);
+    }
+    else
+    {
+        TIM_SetCompare3(TIM4, 0);
+        TIM_Cmd(TIM4, DISABLE); //使能定时器,
     }
 }
 
@@ -153,27 +161,20 @@ void PWM_URefUpdate(uint16_t dutyX10)
 {
     uint16_t newCompareVal = 0;
     
-    if(dutyX10 != PWM_IRefDuty)
+    if(dutyX10 != 0)
     {
         newCompareVal = dutyX10 * PWM_CNT_0_1_DUTY;
-        PWM_URefDuty = dutyX10;
         
+        if(newCompareVal > PWM_VAL_MAX)
+        {
+            newCompareVal = PWM_VAL_MAX;
+        }
+        TIM_Cmd(TIM4, ENABLE); //使能定时器,
         TIM_SetCompare4(TIM4, newCompareVal);
-    }
-}
-
-uint16_t PWM_GetPwmDuty(uint8_t PwmChannel)
-{
-    uint16_t result = 0;
-    
-    if(PwmChannel == I_PWM)
-    {
-        result = PWM_IRefDuty;
     }
     else
     {
-        result = PWM_URefDuty;
+        TIM_SetCompare4(TIM4, 0);
+        TIM_Cmd(TIM4, DISABLE); //使能定时器,
     }
-    
-    return result;
 }

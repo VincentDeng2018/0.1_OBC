@@ -21,6 +21,7 @@
 #include "task.h"
 #include "TSK_TaskCommonApi.h"
 #include "CanOpenBasic.h"
+#include "RTC_Calendar.h"
 
 /*********************************************************************************
 * Global Functions
@@ -209,6 +210,8 @@ void f_TimerTask(void *pvParameters)
     const TickType_t xPeriod = pdMS_TO_TICKS( 5 );
 
     xLastWakeTime = xTaskGetTickCount();
+    
+    RTC_ConfigInit();
 
     /* Enter the loop that defines the task behavior. */
     for( ;; )

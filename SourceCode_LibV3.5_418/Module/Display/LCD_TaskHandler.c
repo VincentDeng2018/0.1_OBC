@@ -317,6 +317,8 @@ static void UpdateKeyState(void)
 
 void LCD_TaskHandler(void *pvParameters)
 {
+    extern void METER_PirntMeters(void); 
+    static uint16_t Task1s_Counter = 0;
     LcdTaskInit();
 
     for(;;)
@@ -324,7 +326,7 @@ void LCD_TaskHandler(void *pvParameters)
         vTaskDelay(10);
 
         UpdateKeyState();
-
+        
         switch(stScreenInfo.CurrentScreen)
         {
             case CHARGE_DATA_SCREEN:
@@ -338,6 +340,12 @@ void LCD_TaskHandler(void *pvParameters)
             default:
                 HomeScreen();
                 break;
+        }
+        
+        if(++Task1s_Counter >= 100)
+        {
+            Task1s_Counter = 0;
+            METER_PirntMeters();
         }
     }
 }

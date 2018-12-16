@@ -27,6 +27,8 @@
 #define RELAY_ON   1u
 #define RELAY_OFF  0u
 
+#define MOS_ON   1u
+#define MOS_OFF  0u
 
 #define POWER_ON   1u
 #define POWER_OFF  0u
@@ -143,6 +145,7 @@ static inline void ControlOutRelay(uint8_t relayState)
 }
 
 
+
 static inline void ControlChgPowerOn(uint8_t powerState)
 {
     if(powerState == POWER_OFF)
@@ -160,7 +163,7 @@ static inline void ControlChgPowerOn(uint8_t powerState)
 
 static inline void ControlMos(uint8_t MosState)
 {
-    if(MosState == RELAY_OFF)
+    if(MosState == MOS_OFF)
     {
         GPIO_ResetBits(GPIOA, GPIO_Pin_8);
     }

@@ -4088,6 +4088,15 @@
       </file>
     </group>
     <group>
+      <name>RTC</name>
+      <file>
+        <name>$PROJ_DIR$\Module\RTC\RTC_Calendar.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\Module\RTC\RTC_Calendar.h</name>
+      </file>
+    </group>
+    <group>
       <name>SDCard</name>
       <file>
         <name>$PROJ_DIR$\Module\SDCard\mass_mal.c</name>

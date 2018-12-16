@@ -63,10 +63,8 @@ void ADC_TaskHandler(void *pvParameters)
     {
         xSemaphoreTake(ADC_TaskSem, portMAX_DELAY);
         {
-            ADC_ConverterPhase++;
-            
-            /* some ADC result don't need to update every sample */ 
-            switch(ADC_ConverterPhase)
+            /* some ADC result don't need to update every sample */
+            switch(ADC_ConverterPhase++)
             {
                  /* Battery and charger voltage */
                 case 0u:
@@ -74,8 +72,15 @@ void ADC_TaskHandler(void *pvParameters)
                     f_AdcFastFilter(DMA_AdcResult[ADC_KEY],    ADC_KEY, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_U_PACK], ADC_U_PACK, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
-                    f_AdcFastFilter(DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG], ADC_U_BAT_POS, 0);
-                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
+                    if(DMA_AdcResult[ADC_U_BAT_POS] > DMA_AdcResult[ADC_U_BAT_NEG])
+                    {
+                        f_AdcFastFilter(DMA_AdcResult[ADC_U_BAT_POS] - DMA_AdcResult[ADC_U_BAT_NEG], ADC_U_BAT_POS, 0);
+                    }
+                    else
+                    {
+                        f_AdcFastFilter(0, ADC_U_BAT_POS, 0);
+                    }
+                    f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, ISampleAutoZero());
                     f_AdcFastFilter(DMA_AdcResult[ADC_TEMP1], ADC_TEMP1, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_TEMP2], ADC_TEMP2, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_I_SET], ADC_I_SET, 0);
@@ -101,17 +106,19 @@ void ADC_TaskHandler(void *pvParameters)
                     f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
                     break;
-                
+
                 case 4u:
                     f_AdcFastFilter(DMA_AdcResult[ADC_I_CHG], ADC_I_CHG, 0);
                     f_AdcFastFilter(DMA_AdcResult[ADC_U_OUT],  ADC_U_OUT, 0);
-                    ADC_ConverterPhase = 0;
                     break;
 
-                default:
+                case 20:
                     ADC_ConverterPhase = 0;
                     break;
+                default:
+                    break;
             }
+            xSemaphoreGive(ADC_TaskSem);
         }
     }
 }

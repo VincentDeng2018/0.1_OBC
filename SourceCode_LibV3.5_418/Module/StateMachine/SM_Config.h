@@ -44,19 +44,19 @@
 
 
 /************************* Signal debounce detection counter ****************************/
-#define BATT_ABS_UV_ACTIVE_CNT    60u
-#define BATT_UV_ACTIVE_CNT        10u
-#define BATT_OV_ACTIVE_CNT        10u
-#define FAN_FAIL_ACTIVE_CNT       10u
-#define RELAY_FAIL_ACTIVE_CNT     10u
-#define BATT_OT_ACTIVE_CNT        10u
-#define BATT_UT_ACTIVE_CNT        10u
-#define BATT_OC_ACTIVE_CNT        10u
-#define CHGBOARD_OT_ACTIVE_CNT    10u
-#define AC_LOW_ACTIVE_CNT         10u
-#define AC_OFF_ACTIVE_CNT         10u
-#define CONN_OK_ACTIVE_CNT        10u
-#define CONN_REVERSE_ACTIVE_CNT   10u
+#define BATT_ABS_UV_ACTIVE_CNT    60
+#define BATT_UV_ACTIVE_CNT        10
+#define BATT_OV_ACTIVE_CNT        10
+#define FAN_FAIL_ACTIVE_CNT       10
+#define RELAY_FAIL_ACTIVE_CNT     10
+#define BATT_OT_ACTIVE_CNT        10
+#define BATT_UT_ACTIVE_CNT        10
+#define BATT_OC_ACTIVE_CNT        10
+#define CHGBOARD_OT_ACTIVE_CNT    10
+#define AC_LOW_ACTIVE_CNT         10
+#define AC_OFF_ACTIVE_CNT         10
+#define CONN_OK_ACTIVE_CNT        10
+#define CONN_REVERSE_ACTIVE_CNT   10
 /************************* Signal debounce detection counter end ****************************/
 
 
@@ -65,6 +65,13 @@
 #define PRECHARGE_DUTY_X100   10  // ?
 #define T_CHAGE_FILTER_TIME_MS   10000u
 #define T_DELAY_DETECTION_MS    5000u
+#define U_BATT_UV_MV            9000
+#define U_BATT_UV_RESUME_MV     10000
+
+#define U_BATT_OV_MV            16000
+#define U_BATT_OV_RESUME_MV    15000
+
+#define U_ATT_ABSUV_MV          7000u
 /************************* Charge settings end ****************************/
 
 

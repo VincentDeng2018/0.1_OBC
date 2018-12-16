@@ -38,6 +38,5 @@
 extern void PWM_Initial(void);
 extern void PWM_IRefUpdate(uint16_t dutyX10);
 extern void PWM_URefUpdate(uint16_t dutyX10);
-extern uint16_t PWM_GetPwmDuty(uint8_t PwmChannel);
 
 #endif

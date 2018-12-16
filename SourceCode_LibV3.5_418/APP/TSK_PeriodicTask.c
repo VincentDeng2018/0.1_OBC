@@ -34,6 +34,8 @@
 #include "lcd.h"
 #include "communication.h"
 #include "WD_Globals.h"
+#include "RTC_Calendar.h"
+#include "SM_CommonApi.h"
 
 /********************************************************************************************************
 * Global DECLARATIONS
@@ -145,6 +147,7 @@ void TSK_PeriodicTaskHandler(void)
 static void PeriodTask_5ms(void)
 {
     //Communicate();
+    USART_RxDataPolling();
 }
 
 
@@ -172,6 +175,7 @@ static void PeriodTask_10ms(void)
     //LoadRefresh();
     //Display();
     //LEDDisp();
+    ActuatorStateUpdate();
 }
 
 
@@ -245,9 +249,9 @@ static void PeriodTask_100ms(void)
 ****************************************************************************/
 static void PeriodTask_500ms(void)
 {
-    GPIO_TogglePin(GPIOC, GPIO_Pin_0);
     //Ctrl();
     //CommunicateWDG();
+    SM_SystemStateBitsUpdate();
 }
 
 
@@ -267,5 +271,5 @@ static void PeriodTask_500ms(void)
 ****************************************************************************/
 static void PeriodTask_1s(void)
 {
-  
+    RTC_Timer1sCallback();
 }

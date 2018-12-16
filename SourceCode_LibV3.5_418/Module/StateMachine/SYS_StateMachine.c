@@ -28,6 +28,7 @@
 **********************************************************************************************/
 /* Standard lib include */
 #include <string.h>
+#include <stdio.h>
 
 /* Chip lib include */
 /* user include */
@@ -36,6 +37,7 @@
 #include "SM_CommonApi.h"
 #include "db.h"
 #include "METER_AdcSample.h"
+#include "RTC_Calendar.h"
 
 /********************************************************************************
 * Global DECLARATIONS
@@ -46,15 +48,16 @@ void SYS_StateMachine(void);
 * Global VARIABLES
 ********************************************************************************/
 SystemStateInfo_t SystemStateInfo;
-ChargeCtrl_t stChargeCtrl;
+ChargeCtrl_t stChargeCtrlNow;
+ChargeCtrl_t stChargeCtrlPre;
 
 /********************************************************************************
 * LOCAL FUNCTION PROTOTYPES
 ********************************************************************************/
-static void f_EnterSleepMode(void);
-static void f_ExitFromSleepMode(void);
+//static void f_EnterSleepMode(void);
+//static void f_ExitFromSleepMode(void);
 static void f_TransferSystemState(enSystemState newState);
-static void f_ClearTempVarsAndInfo(void);
+//static void f_ClearTempVarsAndInfo(void);
 static void CHG_StateMachine(uint16_t callPeriod_ms);
 static void f_TransferChgState(enChargePhase_t newState);
 
@@ -67,14 +70,17 @@ static void f_TransferChgState(enChargePhase_t newState);
 /* When system state machine enter charging state, then call this sub-charge state machine */
 static void CHG_StateMachine(uint16_t callPeriod_ms)
 {
-    uint16_t u16TempVal = 0;
     uint32_t u32TempVal = 0;
     uint32_t u32UTerminal = 0;
     uint32_t u32ITerminal = 0;
+    RTC_stTime RtcTime = {0};
 
-    stChargeCtrl.RelayOnCmd = 1;
-    stChargeCtrl.FanOnCmd = 0;
-    stChargeCtrl.PowerOnCmd = 1;
+    stChargeCtrlNow.RelayOnCmd = 1;
+    stChargeCtrlNow.FanOnCmd = 0;
+    stChargeCtrlNow.PowerOnCmd = 1;
+    stChargeCtrlNow.MosOnCmd = 1;
+
+    RTC_GetTime(&RtcTime);
 
     switch(SystemStateInfo.CurrentChgState)
     {
@@ -84,26 +90,27 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_PRECHARGE\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
             SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
 
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
-            stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I1 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I1 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
 
             /* Delay several time, make sure overshoot disappear */
             if (SystemStateInfo.ChgTimerCnt_ms > T_DELAY_DETECTION_MS)
             {
-                if (stAdcMeters.U_ChgOutput_mV >= (stChargeCfgData.u1 * 10))
+                if (stAdcMeters.U_Pack_mV >= (stChargeCfgData.u1 * 10))
                 {
-                    stChargeCtrl.U_FilterCnt++;
+                    stChargeCtrlNow.U_FilterCnt++;
                 }
                 else
                 {
-                    stChargeCtrl.U_FilterCnt = 0;
+                    stChargeCtrlNow.U_FilterCnt = 0;
                 }
 
                 /* goto next phase when timeout or voltage is reach exit value */
-                if (   (stChargeCtrl.U_FilterCnt >= VOLT_FILT_TM)
+                if (   (stChargeCtrlNow.U_FilterCnt >= VOLT_FILT_TM)
                     || (SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T1)))
                 {
                     f_TransferChgState(CHG_CC1);
@@ -111,7 +118,7 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             }
             else if(SystemStateInfo.ChgTimerCnt_ms > 1000)
             {
-                stChargeCtrl.MosOnCmd = 1;
+                stChargeCtrlNow.MosOnCmd = 1;
             }
             break;
         }
@@ -121,26 +128,27 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_CC1\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
 
             /* Generate PWM and other command */
-            stChargeCtrl.FanOnCmd = 1;
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
-            stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+            stChargeCtrlNow.FanOnCmd = 1;
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
 
             /* when AC not good or temperature high, then I down to 50%
                Also this condition don't count to charger timer */
             if (stSystemStateBits.AcLow || stSystemStateBits.BattOT)
             {
-                stChargeCtrl.PWM_I_DutyX1000 = stChargeCtrl.PWM_I_DutyX1000 >> 1;
-                stChargeCtrl.StopTimerAcc = TRUE;
+                stChargeCtrlNow.PWM_I_Duty_x10 = stChargeCtrlNow.PWM_I_Duty_x10 >> 1;
+                stChargeCtrlNow.StopTimerAcc = TRUE;
             }
             else
             {
-                stChargeCtrl.StopTimerAcc = FALSE;
+                stChargeCtrlNow.StopTimerAcc = FALSE;
             }
 
-            if(!stChargeCtrl.StopTimerAcc)
+            if(!stChargeCtrlNow.StopTimerAcc)
             {
                 SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
             }
@@ -157,33 +165,33 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
                 u32ITerminal *= 85;
                 u32ITerminal /= 100;
 
-                if (stAdcMeters.U_ChgOutput_mV >= (u32UTerminal * 10))
+                if (stAdcMeters.U_Pack_mV >= (u32UTerminal * 10))
                 {
-                    if(++stChargeCtrl.U_FilterCnt >= VOLT_FILT_TM)
+                    if(++stChargeCtrlNow.U_FilterCnt >= VOLT_FILT_TM)
                     {
-                        stChargeCtrl.U_FilterCnt = VOLT_FILT_TM;
+                        stChargeCtrlNow.U_FilterCnt = VOLT_FILT_TM;
                     }
                 }
                 else
                 {
-                    stChargeCtrl.U_FilterCnt = 0;
+                    stChargeCtrlNow.U_FilterCnt = 0;
                 }
 
                 if (stAdcMeters.I_Charge_mA <= (u32ITerminal * 10))
                 {
-                     if(++stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+                     if(++stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
                     {
-                        stChargeCtrl.I_FilterCnt = CURR_FILT_TM;
+                        stChargeCtrlNow.I_FilterCnt = CURR_FILT_TM;
                     }
                 }
                 else
                 {
-                    stChargeCtrl.I_FilterCnt = 0;
+                    stChargeCtrlNow.I_FilterCnt = 0;
                 }
 
 
-                if ((  (stChargeCtrl.U_FilterCnt >= VOLT_FILT_TM)
-                    && (stChargeCtrl.I_FilterCnt >= CURR_FILT_TM) )
+                if ((  (stChargeCtrlNow.U_FilterCnt >= VOLT_FILT_TM)
+                    && (stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM) )
                  || (SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T2)))
                 {
                     SystemStateInfo.ChgCcCvCnt_ms = SystemStateInfo.ChgTimerCnt_ms;
@@ -199,19 +207,20 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_CC2\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
             /* Generate PWM and other command */
-            stChargeCtrl.FanOnCmd = 1;
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.FanOnCmd = 1;
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
 
             /* I3 is zero for some configuration */
             if(stChargeCfgData.I3)
             {
-                stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I3 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+                stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I3 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
             }
             else
             {
-                stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+                stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
             }
 
 
@@ -219,15 +228,15 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
                Also this condition don't count to charger timer */
             if (stSystemStateBits.AcLow || stSystemStateBits.BattOT)
             {
-                stChargeCtrl.PWM_I_DutyX1000 = stChargeCtrl.PWM_I_DutyX1000 >> 1;
-                stChargeCtrl.StopTimerAcc = TRUE;
+                stChargeCtrlNow.PWM_I_Duty_x10 = stChargeCtrlNow.PWM_I_Duty_x10 >> 1;
+                stChargeCtrlNow.StopTimerAcc = TRUE;
             }
             else
             {
-                stChargeCtrl.StopTimerAcc = FALSE;
+                stChargeCtrlNow.StopTimerAcc = FALSE;
             }
 
-            if(!stChargeCtrl.StopTimerAcc)
+            if(!stChargeCtrlNow.StopTimerAcc)
             {
                 SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
             }
@@ -247,18 +256,18 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
 
                 if (stAdcMeters.I_Charge_mA <= (u32ITerminal * 10))
                 {
-                     if(++stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+                     if(++stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
                      {
-                        stChargeCtrl.I_FilterCnt = CURR_FILT_TM;
+                        stChargeCtrlNow.I_FilterCnt = CURR_FILT_TM;
                      }
                 }
                 else
                 {
-                    stChargeCtrl.I_FilterCnt = 0;
+                    stChargeCtrlNow.I_FilterCnt = 0;
                 }
 
 
-                if ((stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+                if ((stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
                  || (SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T3)))
                 {
                     SystemStateInfo.ChgCcCvCnt_ms += SystemStateInfo.ChgTimerCnt_ms;
@@ -275,19 +284,20 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_CV\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
 
             /* Generate PWM and other command */
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * (uint32_t)stChargeCfgData.U5 / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * (uint32_t)stChargeCfgData.Ucv / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
 
             /* I3 is zero for some configuration */
             if(stChargeCfgData.I3)
             {
-                stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I3 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+                stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I3 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
             }
             else
             {
-                stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+                stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
             }
 
 
@@ -295,21 +305,21 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
                Also this condition don't count to charger timer */
             if (stSystemStateBits.AcLow || stSystemStateBits.BattOT)
             {
-                stChargeCtrl.PWM_I_DutyX1000 = stChargeCtrl.PWM_I_DutyX1000 >> 1;
-                stChargeCtrl.StopTimerAcc = TRUE;
+                stChargeCtrlNow.PWM_I_Duty_x10 = stChargeCtrlNow.PWM_I_Duty_x10 >> 1;
+                stChargeCtrlNow.StopTimerAcc = TRUE;
             }
             else
             {
-                stChargeCtrl.StopTimerAcc = FALSE;
+                stChargeCtrlNow.StopTimerAcc = FALSE;
             }
 
             /* TODO: double check this condition */
             if (stAdcMeters.I_Charge_mA >= (3 * awdCurTypeValue[stProductInfo.I_Type]))
             {
-                stChargeCtrl.FanOnCmd = 1;
+                stChargeCtrlNow.FanOnCmd = 1;
             }
 
-            if(!stChargeCtrl.StopTimerAcc)
+            if(!stChargeCtrlNow.StopTimerAcc)
             {
                 SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
             }
@@ -329,18 +339,18 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
 
                 if (stAdcMeters.I_Charge_mA <= (u32ITerminal * 10))
                 {
-                     if(++stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+                     if(++stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
                      {
-                        stChargeCtrl.I_FilterCnt = CURR_FILT_TM;
+                        stChargeCtrlNow.I_FilterCnt = CURR_FILT_TM;
                      }
                 }
                 else
                 {
-                    stChargeCtrl.I_FilterCnt = 0;
+                    stChargeCtrlNow.I_FilterCnt = 0;
                 }
 
 
-                if ((stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+                if ((stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
                  || (SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T4))
                  || ((SystemStateInfo.ChgCcCvCnt_ms + SystemStateInfo.ChgTimerCnt_ms) >= CoverterMinToMs(stChargeCfgData.To)))
                 {
@@ -357,12 +367,13 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_PULL\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
             SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
             /* Generate PWM and other command */
 
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * (uint32_t)stChargeCfgData.U5 / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
-            stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I5 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * (uint32_t)stChargeCfgData.U5 / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I5 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
 
             if (stChargeCfgData.T5)
             {
@@ -384,7 +395,7 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
                 u32TempVal = 0;
             }
 
-            if ((stChargeCtrl.I_FilterCnt >= CURR_FILT_TM)
+            if ((stChargeCtrlNow.I_FilterCnt >= CURR_FILT_TM)
              || (SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T4))
              || ((SystemStateInfo.ChgCcCvCnt_ms + SystemStateInfo.ChgTimerCnt_ms) >= CoverterMinToMs(stChargeCfgData.To)))
             {
@@ -399,19 +410,20 @@ static void CHG_StateMachine(uint16_t callPeriod_ms)
             if(SystemStateInfo.ChgTimerCnt_ms == 0)
             {
                 SM_PrintfString("CHG_FLOAT\r\n");
+                printf("Time: %d:%d:%d\r\n", RtcTime.u8hour, RtcTime.u8minute, RtcTime.u8second);
             }
             SystemStateInfo.ChgTimerCnt_ms += callPeriod_ms;
 
             /* Generate PWM and other command */
-            stChargeCtrl.FanOnCmd = 0;
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * (uint32_t)stChargeCfgData.U6 / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
-            stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I6 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+            stChargeCtrlNow.FanOnCmd = 0;
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * (uint32_t)stChargeCfgData.U6 / (uint32_t)awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I6 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
 
             if (stChargeCfgData.T6 != 0xFFFF)
             {
                 if(SystemStateInfo.ChgTimerCnt_ms >= CoverterMinToMs(stChargeCfgData.T6))
                 {
-                    stChargeCtrl.PowerOnCmd = 0;
+                    stChargeCtrlNow.PowerOnCmd = 0;
                     SystemStateInfo.ChgPhaseFinish = 1;
                 }
             }
@@ -447,12 +459,12 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
         RunCounter = 0;
         SystemStateInfo.TimeSincePowerOn_s++;
     }
-    
-    stChargeCtrl.RelayOnCmd = 0;
-    stChargeCtrl.FanOnCmd = 0;
-    stChargeCtrl.PowerOnCmd = 0;
-    stChargeCtrl.MosOnCmd = 0;
-    
+
+    stChargeCtrlNow.RelayOnCmd = 0;
+    stChargeCtrlNow.FanOnCmd = 0;
+    stChargeCtrlNow.PowerOnCmd = 0;
+    stChargeCtrlNow.MosOnCmd = 0;
+
     switch(SystemStateInfo.CurrentState)
     {
         /* only arrive here when power on or software reset */
@@ -462,14 +474,23 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
             {
                 SM_PrintfString("SYS_INITIAL\r\n");
                 SYS_Initial();
+                stSystemStateBits.ForceStayInInit = 0;
+                stSystemStateBits.EnterFCT = 0;
                 //PowerOnProc();
             }
+            ProductTypeDetection();
 
             SystemStateInfo.TimerCnt_ms += callPeriod_ms;
+            //stSystemStateBits.ForceStayInInit = 1;
 
-            if(SystemStateInfo.TimerCnt_ms > 2000)
+            if(SystemStateInfo.TimerCnt_ms > 5000 && !stSystemStateBits.ForceStayInInit)
             {
-                f_TransferSystemState(SYS_SELF_TEST);
+              ADC_EnableAutoZero(0);
+              f_TransferSystemState(SYS_SELF_TEST);
+            }
+            else
+            {
+                ADC_EnableAutoZero(1);
             }
         }
         break;
@@ -483,9 +504,10 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
                 SM_PrintfString("SYS_IDLE\r\n");
             }
             SystemStateInfo.TimerCnt_ms += callPeriod_ms;
-            
+
             /* FCT test has highest priority */
-            if(stSystemStateBits.EnterTest)
+
+            if(stSystemStateBits.EnterFCT)
             {
                 f_TransferSystemState(SYS_FCT);
             }
@@ -495,33 +517,36 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
             }
             break;
         }
-        
+
         case SYS_SELF_TEST:
         {
             if(SystemStateInfo.TimerCnt_ms == 0)
             {
                 SM_PrintfString("SYS_SELF_TEST\r\n");
             }
-            
+
             SystemStateInfo.TimerCnt_ms += callPeriod_ms;
             /* TODO: double check whether we neet this */
             f_TransferSystemState(SYS_IDLE);
             break;
         }
-        
+
         case SYS_CHARGING:
         {
             if(SystemStateInfo.TimerCnt_ms == 0)
             {
                 SM_PrintfString("SYS_CHARGING\r\n");
             }
-            SystemStateInfo.TimerCnt_ms += callPeriod_ms;
-            CHG_StateMachine(callPeriod_ms);
-            
-            if(SystemStateInfo.ChgPhaseFinish == 1)
+
+            if(SystemStateInfo.ChgPhaseFinish ||
+               !stSystemStateBits.AllowStayChg)
             {
                 f_TransferSystemState(SYS_IDLE);
             }
+
+            SystemStateInfo.TimerCnt_ms += callPeriod_ms;
+            CHG_StateMachine(callPeriod_ms);
+
             break;
         }
 
@@ -534,24 +559,15 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
             }
 
             SystemStateInfo.TimerCnt_ms += callPeriod_ms;
-            
-            stChargeCtrl.PWM_U_DutyX1000 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
-            stChargeCtrl.PWM_I_DutyX1000 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
-            
-            if(SystemStateInfo.TimerCnt_ms >= 3000)
-            {
-                stChargeCtrl.RelayOnCmd = 1;
-                stChargeCtrl.FanOnCmd = 1;
-                stChargeCtrl.PowerOnCmd = 1;
-                stChargeCtrl.MosOnCmd = 1;
-            }
-            else if(SystemStateInfo.TimerCnt_ms >= 1000)
-            {
-                stChargeCtrl.RelayOnCmd = 1;
-                stChargeCtrl.FanOnCmd = 0;
-                stChargeCtrl.PowerOnCmd = 0;
-                stChargeCtrl.MosOnCmd = 0;
-            }
+
+            stChargeCtrlNow.PWM_U_Duty_x10 = 750ul * stChargeCfgData.Ucv / awdVoltTypeValue[stProductInfo.U_Type];
+            stChargeCtrlNow.PWM_I_Duty_x10 = (uint32_t)stChargeCfgData.I2 * (uint32_t)1000 / (uint32_t)awdCurTypeValue[stProductInfo.I_Type];
+
+            stChargeCtrlNow.RelayOnCmd = 1;
+            stChargeCtrlNow.FanOnCmd = 1;
+            stChargeCtrlNow.PowerOnCmd = 1;
+            stChargeCtrlNow.MosOnCmd = 1;
+
             break;
         }
 
@@ -563,10 +579,29 @@ void SYS_RunStateMachine(uint16_t callPeriod_ms)
 
 void SYS_Initial(void)
 {
+    uint16_t wdTmp = 0;
+
     /* 1. make all control signal in-active */
     /* navigate to different state based on wakeup source */
     memset(&SystemStateInfo, 0u, sizeof(SystemStateInfo_t));
     memset(&stStatusCounter, 0u, sizeof(stStatusCounter_t));
+    memcpy(&stChargeCfgData, &castChgCfgData[0], sizeof(ChargeCfgData_t));
+
+    wdTmp = stProductInfo.I_Type + 1;
+
+    stChargeCfgData.I1 = wdTmp*castChgCfgData[0].I1;
+    stChargeCfgData.I2 = wdTmp*castChgCfgData[0].I2;
+    stChargeCfgData.I3 = wdTmp*castChgCfgData[0].I3;
+    stChargeCfgData.i4 = wdTmp*castChgCfgData[0].i4;
+    stChargeCfgData.I5 = wdTmp*castChgCfgData[0].I5;
+    stChargeCfgData.I6 = wdTmp*castChgCfgData[0].I6;
+
+    wdTmp = stProductInfo.U_Type + 1;
+    stChargeCfgData.u0 = wdTmp*castChgCfgData[0].u0;
+    stChargeCfgData.u1 = wdTmp*castChgCfgData[0].u1;
+    stChargeCfgData.Ucv = wdTmp*castChgCfgData[0].Ucv;
+    stChargeCfgData.U5 = wdTmp*castChgCfgData[0].U5;
+    stChargeCfgData.U6 = wdTmp*castChgCfgData[0].U6;
 }
 
 
@@ -580,37 +615,21 @@ static void f_TransferSystemState(enSystemState newState)
 
     //SystemStateInfo.ChgPhaseFinish = 0;
 
-    f_TransferSystemState(CHG_PRECHARGE);
+    f_TransferChgState(CHG_PRECHARGE);
 }
 
 static void f_TransferChgState(enChargePhase_t newState)
 {
     SystemStateInfo.PreChgState = SystemStateInfo.CurrentChgState;
-
+    SystemStateInfo.CurrentChgState = newState;
     SystemStateInfo.ChgTimerCnt_ms = 0;
 
-    stChargeCtrl.StopTimerAcc = FALSE;
+    stChargeCtrlNow.StopTimerAcc = FALSE;
 
-    stChargeCtrl.U_FilterCnt = 0;
-    stChargeCtrl.I_FilterCnt = 0;
+    stChargeCtrlNow.U_FilterCnt = 0;
+    stChargeCtrlNow.I_FilterCnt = 0;
 }
 
-
-static void f_EnterSleepMode(void)
-{
-
-}
-
-
-static void f_ExitFromSleepMode(void)
-{
-
-}
-
-static void f_ClearTempVarsAndInfo(void)
-{
-
-}
 
 enSystemState SYS_GetSystemstate(void)
 {
