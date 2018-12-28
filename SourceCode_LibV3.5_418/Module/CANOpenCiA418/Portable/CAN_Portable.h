@@ -29,10 +29,16 @@
 
 /* CAN bus setting */
 #define MAX_CAN_NODE 127
-
+//#define CIA_418_OD
 /**********************************************************************************************
 * Global Functions
 **********************************************************************************************/
-
+extern uint8_t GetBatteryState(void);
+extern int16_t GetBatteryTemp_100mC(void);
+extern uint32_t GetTotalCharge_Ah(void);
+extern uint16_t GetLastCharge_100mAh(void);
+extern uint16_t GetBatteryVolt_10mV(void);
+extern uint16_t GetChargeCmd_10mA(void);
+extern uint16_t GetBatterySOC(void);
 
 #endif

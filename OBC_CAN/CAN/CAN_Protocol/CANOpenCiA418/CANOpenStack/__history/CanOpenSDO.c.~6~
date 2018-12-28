@@ -1,0 +1,204 @@
+/******************************************************************************************************
+*            CanOpenSDO.c
+******************************************************************************************************
+*
+*
+******************************************************************************************************
+******************************************************************************************************
+*    FILE NAME: CanOpenState.c
+*
+*    DESCRIPTION: CANOPEN protocol handler APIs
+*
+*    ORIGINATOR: DYH
+*
+*    DATE: 2018/5/10 22:34:20
+*
+*             Version   Author     Modification                            Date
+*    HISTORY:  V1.0      DYH       Initial Version                       2018/8/25 17:44:21
+******************************************************************************************************/
+#include "CanOpenBasic.h"
+#include <string.h>
+
+/*********************************************************************************
+* Global Functions
+*********************************************************************************/
+void PollingNodeDeviceProfileType(void);
+void SDOInitial(void);
+void SDOCyclicHandler(void);
+void ProceedExpSdoRxData(stCanMessage_t *pMsg);
+
+/*******************************************************************************
+* Macros
+*******************************************************************************/
+
+
+/*******************************************************************************
+* Data Struct Define
+*******************************************************************************/
+stNodeDeviceProfile_t stNodeDeviceProfile[MAX_CAN_NODE];
+
+const uint8_t ExpeditedSDOReturnCS[4] =
+{
+    EXP_READ_ONE_BYTE,
+    EXP_READ_TWO_BYTE,
+    EXP_READ_THREE_BYTE,
+    EXP_READE_FOUR_BYTE,
+};
+/*******************************************************************************
+* Local Variables
+*******************************************************************************/
+static uint8_t CanNodeID = 0x01u;
+static stCanMessage_t PollingMsg =
+{
+    0,
+    0,
+    0x08,
+    {0x40, 0, 0x10, 0, 0, 0, 0, 0}
+};
+uint16_t cob_id;	/**< message's ID */
+    uint8_t rtr;		/**< remote transmission request. (0 if not rtr message, 1 if rtr message) */
+    uint8_t len;		/**< message's length (0 to 8) */
+    uint8_t data[8]; /**< message's datas */
+
+void SDOInitial(void)
+{
+    memset(&stNodeDeviceProfile, 0, sizeof(stNodeDeviceProfile_t) * MAX_CAN_NODE);
+}
+
+
+void PollingNodeDeviceProfileType(void)
+{
+    if(CanNodeID > MAX_CAN_NODE)
+    {
+        CanNodeID = 0x01u;
+    }
+
+    if(CanNodeID != stCanOpenDate.NodeId)
+    {
+        PollingMsg.cob_id = CanNodeID + 0x600;
+        PollingMsg.data[0] = 0x40;
+        PollingMsg.data[6] = 0;
+        PollingMsg.data[7] = 0;
+        CAN_RequestSend(&PollingMsg);
+        stNodeDeviceProfile[CanNodeID].StartTimeout = 1;
+    }
+    else
+    {
+        /* skip myself */
+    }
+    CanNodeID++;
+}
+
+
+void SDOCyclicHandler(void)
+{
+    uint16_t static CyclicCounter = 0u;
+
+    /* TODO: check OD to figure out whether there is parameter to define the timeout */
+    if((++CyclicCounter % 1000) == 0x131)
+    {
+        PollingNodeDeviceProfileType();
+    }
+
+    if(stNodeDeviceProfile[CanNodeID].StartTimeout)
+    {
+        /* TODO: timeout value should remap to OD? */
+        if(stNodeDeviceProfile[CanNodeID].WaitCounter++ > 500)
+        {
+            /* when timeout response error */
+            PollingMsg.data[0] = 0x80;
+            /* todo: why 0x4 and 0x5? */
+            PollingMsg.data[6] = 4;
+            PollingMsg.data[7] = 5;
+            CAN_RequestSend(&PollingMsg);
+            stNodeDeviceProfile[CanNodeID].StartTimeout = 0;
+            stNodeDeviceProfile[CanNodeID].WaitCounter = 0;
+        }
+    }
+}
+
+
+void ProceedExpSdoRxData(stCanMessage_t *pMsg)
+{
+    uint16_t u16odIndex = (uint16_t)pMsg->data[1] + (((uint16_t)pMsg->data[2]) << 8u);
+
+    uint8_t u8csByte = pMsg->data[0];
+    uint8_t u8length = 0;
+    uint8_t result = OD_RW_SUCCESS;
+
+    stCanMessage_t stCanMessageTemp =
+    {
+        0,      //cob_id
+        0,      //rtr
+        8,      //len
+        {0}    //data[8]
+    };
+
+    stCanMessageTemp.cob_id = CanNodeID + 0x600;
+    stCanMessageTemp.data[1u] = pMsg->data[1u];
+    stCanMessageTemp.data[2u] = pMsg->data[2u];
+    stCanMessageTemp.data[3u] = pMsg->data[3u];
+
+    /* means write OD */
+    if(u8csByte & 0x20)
+    {
+        switch(u8csByte)
+        {
+            case EXP_WRITE_ONE_BYTE:
+                u8length = 1;
+                break;
+
+            case EXP_WRITE_TWO_BYTE:
+                u8length = 2;
+                break;
+
+            case EXP_WRITE_THREE_BYTE:
+                u8length = 3;
+                break;
+
+            case EXP_WRITE_FOUR_BYTE:
+                u8length = 4;
+                break;
+
+            default:
+                u8length = 1;
+                break;
+        }
+
+         /* write OD */
+        if(OD_RW_SUCCESS == WriteOdMap(u16odIndex, pMsg->data[3], u8length, &pMsg->data[4u]))
+        {
+            stCanMessageTemp.data[0] = 0x60;
+            result = OD_RW_SUCCESS;
+            
+        }
+        else
+        {
+            stCanMessageTemp.data[0] = EXP_CMD_NACK;
+            result = EXP_CMD_NACK;
+        }
+        
+        stCanMessageTemp.data[4] = pMsg->data[4u];
+        stCanMessageTemp.data[5] = pMsg->data[5u];
+        stCanMessageTemp.data[6] = pMsg->data[6u];
+        stCanMessageTemp.data[7] = pMsg->data[7u];
+    }
+    else
+    {
+        /* read OD */
+        if(OD_RW_SUCCESS == ReadOdMap(u16odIndex, pMsg->data[3], &u8length, &stCanMessageTemp.data[4u]))
+        {
+            stCanMessageTemp.data[0] = ExpeditedSDOReturnCS[u8length];
+            result = OD_RW_SUCCESS;
+        }
+        else
+        {
+            stCanMessageTemp.data[0] = EXP_CMD_NACK;
+            result = EXP_CMD_NACK;
+        }
+    }
+
+    CAN_RequestSend(&stCanMessageTemp);
+    
+    //return result;
+}

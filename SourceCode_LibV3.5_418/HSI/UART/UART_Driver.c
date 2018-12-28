@@ -16,7 +16,7 @@
 *             Version   Author     Modification                            Date
 *    HISTORY:  V1.0      DYH       Initial Version                       2018/5/24 21:51:24
 ******************************************************************************************************/
-
+#include <string.h>
 #include "UART_Globals.h"
 #include "stm32f10x_gpio.h"
 #include "SM_CommonApi.h"

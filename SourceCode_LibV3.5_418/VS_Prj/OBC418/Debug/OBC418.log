@@ -1,0 +1,56 @@
+﻿生成启动时间为 2018/9/9 20:54:25。
+     1>项目“E:\DYH\01_EmbeddedSoftware\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\VS_Prj\OBC418\OBC418.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\OBC418.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\Module\CANOpenCiA418\CANOpenStack\CanOpenSDO.c ..\..\Module\CANOpenCiA418\ProfileOD\CiA418_Profile.c
+         CiA418_Profile.c
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(565): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(565): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(566): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(566): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(567): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(567): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(568): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(568): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(569): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(569): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(570): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(570): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(571): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(571): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(572): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(572): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(573): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(573): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(574): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(574): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(575): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(575): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(576): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(576): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(577): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(577): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(578): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(578): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(582): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(582): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(583): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(583): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(584): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(584): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(585): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(585): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(586): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(586): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(591): error C2099: 初始值设定项不是常量
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\profileod\cia418_profile.c(591): warning C4305: “初始化”: 从“int”到“uint8_t”截断
+         CanOpenSDO.c
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\canopenstack\canopensdo.c(47): error C2059: 语法错误:“.”
+     1>e:\dyh\01_embeddedsoftware\svn_cloud\01_project\05_obc\sourcecode_libv3.5_418\module\canopencia418\canopenstack\canopensdo.c(49): error C2059: 语法错误:“,”
+         正在生成代码...
+     1>已完成生成项目“E:\DYH\01_EmbeddedSoftware\SVN_Cloud\01_Project\05_OBC\SourceCode_LibV3.5_418\VS_Prj\OBC418\OBC418.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.20

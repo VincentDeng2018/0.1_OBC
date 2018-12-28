@@ -3473,6 +3473,9 @@
           <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenOdTypes.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenPDO.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenSDO.c</name>
         </file>
         <file>
@@ -3480,6 +3483,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenState.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\Module\CANOpenCiA418\CANOpenStack\CanOpenSync.c</name>
         </file>
       </group>
       <group>

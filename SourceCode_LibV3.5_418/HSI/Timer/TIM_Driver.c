@@ -23,7 +23,7 @@
 /*********************************************************************************
 * Global Functions
 *********************************************************************************/
-extern uint8_t CanOpenTimerDispatch(void);
+extern uint8_t CanOpenTimerDispatch(uint16_t callPeriod);
 
 /*********************************************************************************
 * Task Call back Functions
@@ -91,7 +91,7 @@ void TIM5_IRQHandler(void)
     {
         TIM_ClearITPendingBit(TIM5, TIM_IT_CC1);
         u16TimerLast = TIM_GetCounter(TIM5);
-        CanOpenTimerDispatch();
+        CanOpenTimerDispatch(1u);
     }
 }
 

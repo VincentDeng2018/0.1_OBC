@@ -1,0 +1,208 @@
+/******************************************************************************************************
+*            CanDriver.cpp
+******************************************************************************************************
+******************************************************************************************************
+*
+* THIS INFORMATION IS PROPRIETARY TO BYD Corporation
+*
+******************************************************************************************************
+*
+*
+******************************************************************************************************
+******************************************************************************************************
+*    FILE NAME: CanDriver.cpp
+*
+*    DESCRIPTION: Initial CAN device and build up CAN operation API
+*
+*    ORIGINATOR: DYH
+*
+*    DATE: 2018/11/1 14:42:28
+*
+*             Version   Author     Modification
+*    HISTORY:  V1.0      DYH       Initial Version
+******************************************************************************************************/
+
+
+/**********************************************************************************************
+* Includes
+**********************************************************************************************/
+/* Standard lib include */
+#include <cstdlib>
+#include <iostream>
+#include <queue>
+
+using namespace std;
+#include <string.h>
+/* Chip lib include */
+/* user include */
+#include "CanOpenProtocol.h"
+
+
+/********************************************************************************
+* Global DECLARATIONS
+********************************************************************************/
+
+
+/********************************************************************************
+* Global VARIABLES
+********************************************************************************/
+CanProtocol *CanProtocolObj;
+
+queue<stCanMessage_t>CanOpenTxQueue;
+
+/********************************************************************************
+* LOCAL FUNCTION PROTOTYPES
+********************************************************************************/
+void ReceiveThread(void *param);
+void XcpHandleThread(void *param);
+
+/********************************************************************************
+* LOCAL VARIABLES
+********************************************************************************/
+AnsiString asSysteStateString[5] =
+{
+    "Initial",
+    "Idle",
+    "Charging",
+    "Self Test",
+    "FCT"
+};
+
+AnsiString asChargeStateString[6] =
+{
+    "Precharge",
+    "CC1",
+    "CC2",
+    "CV",
+    "Pull",
+    "Float"
+};
+
+
+void CanOpenRxThread(void *param)
+{
+    USHORT i = 0;
+
+    AnsiString str,tmpstr;
+
+    TListBox *box=(TListBox*)param;
+
+    while(1)
+    {
+        /* Polling CAN Rx buffer */
+        CanDriverObj->ReceiveCanMsg();
+
+        if(CanDriverObj->ReceiveLength)
+        {
+            for(i = 0; i<CanDriverObj->ReceiveLength; i++)
+            {
+                CanProtocolObj->CanOpenRxMsg.cob_id = CanDriverObj->ReceiveData[i].ID;
+                CanProtocolObj->CanOpenRxMsg.len = CanDriverObj->ReceiveData[i].DataLen;
+                
+                memcpy(&CanProtocolObj->CanOpenRxMsg.data[0], &CanDriverObj->ReceiveData[i].Data[0],
+                       CanDriverObj->ReceiveData[i].DataLen);
+                
+                CanOpenRxCmdHandler(&CanProtocolObj->CanOpenRxMsg);
+
+                str = "接收到数据帧:  ";
+                if(CanDriverObj->ReceiveData[i].TimeFlag==0)
+                {
+                    tmpstr = "时间标识:无  ";
+                }
+                else
+                {
+                    tmpstr="时间标识:0x"+IntToHex((int)CanDriverObj->ReceiveData[i].TimeStamp,1)+" ";
+                }
+                str += tmpstr;
+                tmpstr="帧ID:0x"+IntToHex((int)CanDriverObj->ReceiveData[i].ID,1)+" ";
+                str+=tmpstr;
+                str+="帧格式:";
+                if(CanDriverObj->ReceiveData[i].RemoteFlag==0)
+                {
+                    tmpstr="数据帧 ";
+                }
+                else
+                {
+                    tmpstr="远程帧 ";
+                }
+                str+=tmpstr;
+                str+="帧类型:";
+                if(CanDriverObj->ReceiveData[i].ExternFlag==0)
+                {
+                    tmpstr="标准帧 ";
+                }
+                else
+                {
+                    tmpstr="扩展帧 ";
+                }
+
+                str+=tmpstr;
+                box->Items->Add(str);
+                if(CanDriverObj->ReceiveData[i].RemoteFlag==0)
+                {
+                    str="数据:";
+                    if(CanDriverObj->ReceiveData[i].DataLen>8)
+                    {
+                        CanDriverObj->ReceiveData[i].DataLen=8;
+                    }
+
+                    for(int j=0;j<CanDriverObj->ReceiveData[i].DataLen;j++)
+                    {
+                        tmpstr=IntToHex((int)CanDriverObj->ReceiveData[i].Data[j],2)+" ";
+                        str+=tmpstr;
+                    }
+                    box->Items->Add(str);
+                }
+                }
+
+            box->ItemIndex = box->Items->Count-1;
+        }
+        Sleep(3);
+    }
+}
+
+
+/* Handler CANOPEN Tx Request */
+void CanOpenTxThread(void *param)
+{
+    while(1)
+    {
+        while(!CanOpenTxQueue.empty())
+        {
+            stCanMessage_t CanOpenTxRequestTemp = CanOpenTxQueue.front();
+            
+            /* send directly */
+
+            CanOpenTxQueue.pop();
+        }
+        
+        Sleep(2);
+    }
+}
+
+
+void CanProtocol::CreatCanThread(void *param)
+{
+    _beginthread(CanOpenRxThread, 0, param);
+    _beginthread(CanOpenTxThread, 0, param);
+}
+
+
+UINT16 CanProtocol::XcpSendData(stCanMessage_t *pCanMsg)
+{
+    RequestCanMsg.ID = pCanMsg->cob_id;
+    RequestCanMsg.SendType = 0;
+    RequestCanMsg.RemoteFlag = 0;
+    RequestCanMsg.ExternFlag = 0;
+    RequestCanMsg.DataLen = pCanMsg->len;
+    memcpy(&RequestCanMsg.Data[0], &pCanMsg->data[0], 8);
+    
+    return (CanDriverObj->TransmitCanMsg(&RequestCanMsg));
+}
+
+
+UINT16 CanProtocol::CanOpenTxRequest(stCanMessage_t CanOpenRequest)
+{
+    CanOpenTxQueue.push(CanOpenRequest);
+}
+

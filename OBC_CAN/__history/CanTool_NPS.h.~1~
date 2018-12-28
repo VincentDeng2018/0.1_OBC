@@ -1,0 +1,156 @@
+//---------------------------------------------------------------------------
+
+#ifndef CanTool_NPSH
+#define CanTool_NPSH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include "About.h"
+#include "CANSetup.h"
+#include "CanDriver.h"
+#include "CanProtocol.h"
+#include "CanTxThread.h"
+#include <Vcl.Grids.hpp>
+#include <Vcl.WinXCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include "BDC_Meters.h"
+#include "BDC_Parameter.h"
+#include "DB_Config.h"
+#include <VCLTee.Chart.hpp>
+#include <VCLTee.Series.hpp>
+#include <VclTee.TeeGDIPlus.hpp>
+#include <VCLTee.TeEngine.hpp>
+#include <VCLTee.TeeProcs.hpp>
+
+#define TOOL_MAJOR_VERSION 1u
+#define TOOL_MINOR_VERSION 0u
+
+typedef struct
+{
+    TDateTime  PresentTime;
+    EventInfo logInfo;
+}stHistoryLog_t;
+
+//---------------------------------------------------------------------------
+class TMainForm : public TForm
+{
+__published:	// IDE-managed Components
+	TMainMenu *FileOption;
+	TMenuItem *File1;
+	TMenuItem *UploadFile1;
+	TMenuItem *DownloadFile1;
+	TMenuItem *Setup1;
+	TMenuItem *CAN1;
+	TMenuItem *About1;
+	TMenuItem *oolInfo1;
+	TPageControl *MainPage;
+	TTabSheet *Control;
+	TTabSheet *HistoryLogs;
+	TLabel *CommState;
+    TLabel *L_CurveSet;
+	TGroupBox *GroupBox1;
+	TListBox *ListBox_CanMsg;
+    TStaticText *L_DateAndTime;
+    TTimer *Timer1;
+    TGroupBox *GroupBox_Target;
+    TLabel *Label_LV;
+    TLabel *Label_HV;
+    TLabel *Label_CC;
+    TLabel *Label_CV;
+    TEdit *T_LvTarget;
+    TEdit *T_HvTarget;
+    TEdit *T_CcTarget;
+    TEdit *T_CvTarget;
+    TButton *B_TargetWrite;
+    TButton *B_TargetRead;
+    TLabel *Label_V;
+    TLabel *Label_V1;
+    TLabel *Label_A;
+    TLabel *Label1;
+    TToggleSwitch *PowerSwitch;
+    TLabel *L_ProductType;
+    TChart *Chart_ChageCurve;
+    TLineSeries *Series1;
+    TLineSeries *Series2;
+    TGroupBox *GroupBox2;
+    TLabel *Label2;
+    TLabel *Label3;
+    TLabel *Label4;
+    TLabel *Label5;
+    TButton *B_BMSRefresh;
+    TLabel *Label6;
+    TLabel *Label11;
+    TLabel *Label7;
+    TLabel *Label8;
+    TLabel *Label9;
+    TLabel *Label10;
+    TEdit *Edit1;
+    TEdit *Edit_6000;
+    TEdit *Edit_6001;
+    TEdit *Edit_6040;
+    TEdit *Edit_6031;
+    TEdit *Edit_6020;
+    TEdit *Edit_6010;
+    TEdit *Edit_6030;
+    TEdit *Edit_6051;
+    TEdit *Edit_6050;
+    TEdit *Edit_6041;
+    TEdit *Edit_6090;
+    TEdit *Edit_6052;
+    TEdit *Edit_6053;
+    TEdit *Edit_6081;
+    TEdit *Edit_6080;
+    TEdit *Edit_6060;
+    TEdit *Edit_6054;
+    TEdit *Edit_6070;
+    TLabel *Label13;
+    TLabel *Label14;
+    TLabel *Label15;
+    TLabel *Label16;
+    TLabel *Label17;
+    TLabel *Label18;
+    TLabel *Label19;
+    TLabel *Label20;
+	void __fastcall oolInfo1Click(TObject *Sender);
+	void __fastcall CAN1Click(TObject *Sender);
+	void __fastcall MainFormShow(TObject *Sender);
+    void __fastcall EepReadButtonClick(TObject *Sender);
+    void __fastcall EepWriteButtonClick(TObject *Sender);
+    void __fastcall TimerTask(TObject *Sender);
+    void __fastcall B_TargetReadClick(TObject *Sender);
+    void __fastcall B_TargetWriteClick(TObject *Sender);
+    void __fastcall B_BoostReadClick(TObject *Sender);
+    void __fastcall B_BoostWriteClick(TObject *Sender);
+    void __fastcall B_BuckWriteClick(TObject *Sender);
+    void __fastcall B_BuckReadClick(TObject *Sender);
+    void __fastcall B_LoopWriteClick(TObject *Sender);
+    void __fastcall B_LoopReadClick(TObject *Sender);
+    void __fastcall EepResetButtonClick(TObject *Sender);
+    void __fastcall EepResetAllButtonClick(TObject *Sender);
+    void __fastcall PowerSwitchClick(TObject *Sender);
+    void __fastcall MainFormClose(TObject *Sender, TCloseAction &Action);
+    void __fastcall B_ClearLogsClick(TObject *Sender);
+
+
+private:	// User declarations
+public:		// User declarations
+    UINT16 DataBuffer[4];
+    UINT16 DiagBitsWords[DIAG_ID_END / 16 + 1];
+    UINT16 DiagBitsWordsPre[DIAG_ID_END / 16 + 1];
+    UINT16 LogIndex;
+    __fastcall TMainForm(TComponent* Owner);
+    void __fastcall ScreenInitial(void);
+    void __fastcall SetBdcStringGridColor(TRect &CellRect, TColor NewColor);
+    void __fastcall UpdateBdcMeters(enBdcMeterIndex MeterIndex, float value);
+    void __fastcall UpdateBdcText(enBdcMeterIndex MeterIndex, AnsiString string);
+    void __fastcall ShowEepromResult(UINT16 newValue);
+    void __fastcall InsertOneLogScreen(EventLog_tag *newLog);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TMainForm *MainForm;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,153 @@
+//---------------------------------------------------------------------------
+
+#ifndef CanTool_OBCH
+#define CanTool_OBCH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include "About.h"
+#include "CANSetup.h"
+#include "CanDriver.h"
+#include "CanTxThread.h"
+#include <Vcl.Grids.hpp>
+#include <Vcl.WinXCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <VCLTee.Chart.hpp>
+#include <VCLTee.Series.hpp>
+#include <VclTee.TeeGDIPlus.hpp>
+#include <VCLTee.TeEngine.hpp>
+#include <VCLTee.TeeProcs.hpp>
+
+#define TOOL_MAJOR_VERSION 1u
+#define TOOL_MINOR_VERSION 0u
+
+
+//---------------------------------------------------------------------------
+class TMainForm : public TForm
+{
+__published:	// IDE-managed Components
+	TMainMenu *FileOption;
+	TMenuItem *File1;
+	TMenuItem *UploadFile1;
+	TMenuItem *DownloadFile1;
+	TMenuItem *Setup1;
+	TMenuItem *CAN1;
+	TMenuItem *About1;
+	TMenuItem *oolInfo1;
+	TPageControl *MainPage;
+	TTabSheet *Control;
+	TTabSheet *HistoryLogs;
+	TLabel *CommState;
+    TLabel *L_CurveSet;
+	TGroupBox *GroupBox1;
+	TListBox *ListBox_CanMsg;
+    TStaticText *L_DateAndTime;
+    TTimer *Timer1;
+    TGroupBox *GroupBox_Target;
+    TLabel *Label_LV;
+    TLabel *Label_HV;
+    TLabel *Label_CC;
+    TLabel *Label_CV;
+
+    TLabel *Label_V;
+    TLabel *Label_V1;
+    TLabel *Label_A;
+    TLabel *Label1;
+    TLabel *L_ProductType;
+    TChart *Chart_ChageCurve;
+    TLineSeries *Series1;
+    TLineSeries *Series2;
+    TGroupBox *GroupBox2;
+    TLabel *Label2;
+    TLabel *Label3;
+    TLabel *Label4;
+    TLabel *Label5;
+    TButton *B_BMSRefresh;
+    TLabel *Label6;
+    TLabel *Label11;
+    TLabel *Label7;
+    TLabel *Label8;
+    TLabel *Label9;
+    TLabel *Label10;
+    TEdit *Edit_6000;
+    TEdit *Edit_6001;
+    TEdit *Edit_6040;
+    TEdit *Edit_6031;
+    TEdit *Edit_6020;
+    TEdit *Edit_6010;
+    TEdit *Edit_6030;
+    TEdit *Edit_6051;
+    TEdit *Edit_6050;
+    TEdit *Edit_6041;
+    TEdit *Edit_6090;
+    TEdit *Edit_6052;
+    TEdit *Edit_6053;
+    TEdit *Edit_6081;
+    TEdit *Edit_6080;
+    TEdit *Edit_6060;
+    TEdit *Edit_6054;
+    TEdit *Edit_6070;
+    TLabel *Label13;
+    TLabel *Label14;
+    TLabel *Label15;
+    TLabel *Label16;
+    TLabel *Label17;
+    TLabel *Label18;
+    TLabel *Label19;
+    TLabel *Label20;
+    TLabel *L_SystemState;
+    TGroupBox *GroupBox3;
+    TLabel *Label12;
+    TLabel *Label21;
+    TLabel *Label22;
+    TLabel *Label23;
+    TLabel *Label24;
+    TLabel *Label25;
+    TLabel *Label26;
+    TEdit *Edit_60A0;
+    TEdit *Edit_60A1_MSB;
+    TEdit *Edit_60A4_UI;
+    TEdit *Edit_60A3;
+    TEdit *Edit_60A2_U;
+    TEdit *Edit_60A1_LSB;
+    TEdit *Edit_60A2_I;
+    TEdit *Edit_60A5;
+    TEdit *Edit_60A6;
+    TEdit *Edit_60A8;
+    TEdit *Edit_60A7;
+    TLabel *Label27;
+    TLabel *Label28;
+    TLabel *Label29;
+    TLabel *Label30;
+    TToggleSwitch *Switch_Simulation;
+	TTabSheet *TabSheet_CanMsg;
+	TStringGrid *StringGrid_CanFrame;
+	TButton *Button_Clear;
+	TButton *Button_StopUpdate;
+    void __fastcall oolInfo1Click(TObject *Sender);
+    void __fastcall CAN1Click(TObject *Sender);
+    void __fastcall MainFormShow(TObject *Sender);
+    void __fastcall TimerTask(TObject *Sender);
+
+    void __fastcall MainFormClose(TObject *Sender, TCloseAction &Action);
+
+
+private:	// User declarations
+    UINT16 CanFrameIndex;
+    UINT16 StopUpdate;
+public:		// User declarations
+    UINT16 DataBuffer[4];
+    __fastcall TMainForm(TComponent* Owner);
+    void __fastcall ScreenInitial(void);
+    void __fastcall InsertOneCanFrame(VCI_CAN_OBJ *pCanMsg);
+    void __fastcall StopUpdateCanFrame(void);
+    void __fastcall ClearCanFrame(void);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TMainForm *MainForm;
+//---------------------------------------------------------------------------
+#endif

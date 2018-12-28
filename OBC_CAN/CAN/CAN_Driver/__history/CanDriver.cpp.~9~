@@ -1,0 +1,271 @@
+/******************************************************************************************************
+*            CanDriver.cpp
+******************************************************************************************************
+******************************************************************************************************
+*
+* THIS INFORMATION IS PROPRIETARY TO BYD Corporation
+*
+******************************************************************************************************
+*
+*
+******************************************************************************************************
+******************************************************************************************************
+*    FILE NAME: CanDriver.cpp
+*
+*    DESCRIPTION: Initial CAN device and build up CAN operation API
+*
+*    ORIGINATOR: DYH
+*
+*    DATE: 2018/11/1 14:42:28
+*
+*             Version   Author     Modification
+*    HISTORY:  V1.0      DYH       Initial Version
+******************************************************************************************************/
+
+
+/**********************************************************************************************
+* Includes
+**********************************************************************************************/
+/* Standard lib include */
+#include <string.h>
+
+/* Chip lib include */
+/* user include */
+#include "CanDriver.h"
+
+#include "CanProtocol.h"
+#include "CanTool_OBC.h"
+/********************************************************************************
+* Global DECLARATIONS
+********************************************************************************/
+
+
+/********************************************************************************
+* Global VARIABLES
+********************************************************************************/
+CanDriver *CanDriverObj;
+
+/********************************************************************************
+* LOCAL FUNCTION PROTOTYPES
+********************************************************************************/
+typedef struct
+{
+    BYTE Timer0;
+    BYTE Timer1;
+}stCanTimerCfg_t;
+
+typedef enum
+{
+    BAUD_125K = 0x0,
+    BAUD_250K,
+    BAUD_500K,
+    BAUD_1000K,
+    BAUD_END
+}enBaudType;
+
+const stCanTimerCfg_t stCanTimerTable[BAUD_END] =
+{
+    {0x03, 0x1C},
+    {0x01, 0x1C},
+    {0x0,  0x1C},
+    {0x0,  0x14}
+};
+
+/********************************************************************************
+* LOCAL VARIABLES
+********************************************************************************/
+void CanDriver::ReceiveCanMsg(void)
+{
+    if(ConnectAndStart)
+    {
+        ReceiveLength = VCI_Receive(DeviceType, DeviceInd, CANInd, ReceiveData, 2500, 0);
+
+        if(ReceiveLength > 0)
+        {
+    
+        }
+        else if(ReceiveLength == -1)
+        {
+            /* means CAN device is offline */
+            /* then close device, and reopen device for three times */
+        }
+    }
+}
+
+
+void CanDriver::ReleaseCanDevice(void)
+{
+    if(ConnectAndStart)
+    {
+        VCI_ResetCAN(DeviceType, DeviceInd, CANInd);
+        VCI_CloseDevice(DeviceType, DeviceInd);
+    }
+}
+/****************************************************************************
+*
+*  Function: f_AdcSampleSlowTask
+*
+*  Purpose :    Run ADC slow task, mainly for slow ADC channel, such as temperature
+*
+*  Parms Passed   :   Nothing
+*
+*  Returns        :   Nothing
+*
+*  Description    :   Suggest to run every 100ms
+*
+****************************************************************************/
+USHORT CanDriver::ConfigCanDevice(USHORT BaudTypeCfg, USHORT DeviceBrandCfg, DWORD DeviceTypeCfg, DWORD DeviceIndCfg, DWORD CANIndCfg)
+{
+    USHORT result = DEVICE_INIT_OK;
+
+    DeviceType = DeviceTypeCfg;
+    DeviceInd = DeviceIndCfg;
+    CANInd= CANIndCfg;
+    DeviceBrand = DeviceBrandCfg;
+
+    /* Load different DLL */
+    if(DeviceBrandCfg == ZLG_DEVICE)
+    {
+        DllHandler = LoadLibrary("..\\..\\DLL\\ControlCAN.dll");
+    }
+    else
+    {
+        DllHandler = LoadLibrary("..\\..\\DLL\\ControlCAN_zhuhai.dll");
+    }
+
+    /* DLL not exist, then return */
+    if(DllHandler == NULL)
+    {
+        FreeLibrary(DllHandler);
+        result = DLL_NOT_EXIST;
+    }
+    else
+    {
+        /* Initial device API */
+        VCI_OpenDevice=(LPVCI_OpenDevice)GetProcAddress(DllHandler,"VCI_OpenDevice");
+        VCI_CloseDevice=(LPVCI_CloseDevice)GetProcAddress(DllHandler,"VCI_CloseDevice");
+        VCI_InitCAN=(LPVCI_InitCan)GetProcAddress(DllHandler,"VCI_InitCAN");
+        VCI_ReadBoardInfo=(LPVCI_ReadBoardInfo)GetProcAddress(DllHandler,"VCI_ReadBoardInfo");
+
+        VCI_ReadErrInfo=(LPVCI_ReadErrInfo)GetProcAddress(DllHandler,"VCI_ReadErrInfo");
+        VCI_ReadCanStatus=(LPVCI_ReadCanStatus)GetProcAddress(DllHandler,"VCI_ReadCANStatus");
+        VCI_GetReference=(LPVCI_GetReference)GetProcAddress(DllHandler,"VCI_GetReference");
+        VCI_SetReference=(LPVCI_SetReference)GetProcAddress(DllHandler,"VCI_SetReference");
+
+        VCI_GetReceiveNum=(LPVCI_GetReceiveNum)GetProcAddress(DllHandler,"VCI_GetReceiveNum");
+        VCI_ClearBuffer=(LPVCI_ClearBuffer)GetProcAddress(DllHandler,"VCI_ClearBuffer");
+        VCI_StartCAN=(LPVCI_StartCAN)GetProcAddress(DllHandler,"VCI_StartCAN");
+        VCI_ResetCAN=(LPVCI_ResetCAN)GetProcAddress(DllHandler,"VCI_ResetCAN");
+
+        VCI_Transmit=(LPVCI_Transmit)GetProcAddress(DllHandler,"VCI_Transmit");
+        VCI_Receive=(LPVCI_Receive)GetProcAddress(DllHandler,"VCI_Receive");
+        VCI_GetReference2=(LPVCI_GetReference2)GetProcAddress(DllHandler,"VCI_GetReference2");
+        VCI_SetReference2=(LPVCI_SetReference2)GetProcAddress(DllHandler,"VCI_SetReference2");
+
+        VCI_ResumeConfig=(LPVCI_ResumeConfig)GetProcAddress(DllHandler,"VCI_ResumeConfig");
+        VCI_ConnectDevice=(LPVCI_ConnectDevice)GetProcAddress(DllHandler,"VCI_ConnectDevice");
+        VCI_UsbDeviceReset=(LPVCI_UsbDeviceReset)GetProcAddress(DllHandler,"VCI_UsbDeviceReset");
+
+        /* RX & TX all kinds of CAN frame */
+        DeviceInitConfig.AccCode = 0;
+        DeviceInitConfig.AccMask = 0xFFFFFFFF;
+        DeviceInitConfig.Timing0 = stCanTimerTable[BaudTypeCfg].Timer0;
+        DeviceInitConfig.Timing1 = stCanTimerTable[BaudTypeCfg].Timer1;
+        DeviceInitConfig.Filter = 0;
+        DeviceInitConfig.Mode = 0;
+
+        ConnectAndStart = 0;
+
+        /* try to Open device to make sure cfg is correct*/
+        if(VCI_OpenDevice(DeviceType, DeviceInd, 0) == 1)
+        {
+            /* then initial CAN channel */
+            if(VCI_InitCAN(DeviceType, DeviceInd, CANInd, &DeviceInitConfig) == 1)
+            {
+                /* Start CAN after config ok */
+                if(VCI_StartCAN(DeviceType, DeviceInd, CANInd) == 1)
+                {
+                    ConnectAndStart = 1;
+                    
+                    /* create CAN thread to handle RX and TX */
+                    CanProtocolObj->CreatCanThread((void *)MainForm->ListBox_CanMsg);
+                    stream = fopen( "CAN Data.out", "w" ); 
+                }
+                else
+                {
+                    VCI_CloseDevice(DeviceType, DeviceInd);
+                }
+            }
+            else
+            {
+                VCI_CloseDevice(DeviceType, DeviceInd);
+                result = DEVICE_INITIAL_FAIL;
+            }
+        }
+        else
+        {
+            result = DEVICE_OPEN_FAIL;
+        }
+	}
+
+    return result;
+}
+
+
+USHORT CanDriver::TransmitCanMsg(VCI_CAN_OBJ *pMsg)
+{
+    AnsiString str,tmpstr;
+    
+    TListBox *box = MainForm->ListBox_CanMsg;
+
+    if(ConnectAndStart)
+    {
+        str = "发送: ";
+    
+        tmpstr = "时间:无 ";
+     
+        str += tmpstr;
+        tmpstr="帧ID:0x"+IntToHex((int)pMsg->ID,1)+" ";
+        str+=tmpstr;
+
+        str+=tmpstr;
+        str+="帧类型:";
+        if(pMsg->ExternFlag==0)
+        {
+            tmpstr="标准帧 ";
+        }
+        else
+        {
+            tmpstr="扩展帧 ";
+        }
+        
+		str+=tmpstr;
+		box->Items->Add(str);
+		fprintf(stream,  str.c_str());
+		fprintf(stream,  "\r\n");
+		if(pMsg->RemoteFlag==0)
+        {
+            str="数据:";
+            if(pMsg->DataLen>8)
+            {
+                pMsg->DataLen=8;
+            }
+            
+            for(int j=0;j<pMsg->DataLen;j++)
+            {
+                tmpstr=IntToHex((int)pMsg->Data[j],2)+" ";
+                str+=tmpstr;
+            }
+			box->Items->Add(str);
+            fprintf(stream,  str.c_str());
+		fprintf(stream,  "\r\n");
+        }
+    
+        box->ItemIndex = box->Items->Count-1;
+        return (VCI_Transmit(DeviceType, DeviceInd, CANInd, pMsg, 1));
+    }
+    else
+    {
+        return DEVICE_OPEN_FAIL;
+    }
+}

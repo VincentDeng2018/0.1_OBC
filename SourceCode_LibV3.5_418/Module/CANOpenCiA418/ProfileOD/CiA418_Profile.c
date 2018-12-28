@@ -210,7 +210,7 @@ stOdSubInfo_t stOb1600_RPDO1[] =
 
 /* index 0x1800 :  TPDO1 communication parameter */
 const uint8_t OD_u8MaxSubIndex_1800 = 5; /* number of stOdSubInfo_t - 1*/
-uint32_t OD_u32CobIdUsedByTPDO1 = 0x80000180 | MY_NODE_ID;
+uint32_t OD_u32CobIdUsedByTPDO1 = 0x00000180 | MY_NODE_ID;
 uint8_t OD_u8TransmissionTypeTPDO1 = 0xFF; /* 0xff */
 uint16_t OD_u8InhibitTImeTPDO1_us = 0; /* 0 */
 uint16_t OD_u16EventTimerTPDO1_ms = 0x0;  /* 0 */
@@ -341,7 +341,7 @@ stOdSubInfo_t stOb1602_RPDO3[] =
 
 /* index 0x1802 :  TPDO3 communication parameter */
 const uint8_t OD_u8MaxSubIndex_1802 = 5; /* number of stOdSubInfo_t - 1*/
-uint32_t OD_u32CobIdUsedByTPDO3 = 0x80000380 | MY_NODE_ID;
+uint32_t OD_u32CobIdUsedByTPDO3 = 0x00000380 | MY_NODE_ID;
 uint8_t OD_u8TransmissionTypeTPDO3 = 0xFF; /* 0xff */
 uint16_t OD_u16InhibitTimerTPDO3_us = 0x0;  /* 0 */
 uint16_t OD_u16EventTimerTPDO3_ms = 0x0;  /* 0 */
@@ -390,11 +390,11 @@ stOdSubInfo_t stObIndex6001[] =
 
 
 /* battery temperature */
-uint8_t OBJ6010_BattTemperature = 0u;
+int16_t OBJ6010_BattTemperature = 0u;
 
 stOdSubInfo_t stObIndex6010[] =
 {
-    { RW, UNSIGNED16, sizeof (uint16_t), (void*)&OBJ6010_BattTemperature }
+    { RW, INTEGER16, sizeof (uint16_t), (void*)&OBJ6010_BattTemperature }
 };
 
 
@@ -556,6 +556,94 @@ stOdSubInfo_t stObIndex6090[] =
 };
 
 
+/* Object 60A0h: system statebits */
+uint32_t OBJ60A0_SystemStatebits = 0;
+stOdSubInfo_t stObIndex60A0[] =
+{
+    { RW, UNSIGNED32, sizeof (uint32_t), (void*)&OBJ60A0_SystemStatebits }
+};
+
+
+/* Object 60A1h: system state machine value */
+typedef struct
+{
+    uint16_t SysState: 8;
+    uint16_t ChgState: 8;
+}stSystemState_t;
+
+stSystemState_t OBJ60A1_SystemState = {0};
+stOdSubInfo_t stObIndex60A1[] =
+{
+    { RW, UNSIGNED16, sizeof (uint16_t), (void*)&OBJ60A1_SystemState }
+};
+
+
+/* Object 60A2h: PWM compare value  */
+typedef struct
+{
+    uint32_t U_PwmX10: 16;
+    uint32_t I_PwmX10: 16;
+}stPwmValue_t;
+
+uint32_t OBJ60A2_PwmState = {0};
+stOdSubInfo_t stObIndex60A2[] =
+{
+    { RW, UNSIGNED32, sizeof (uint32_t), (void*)&OBJ60A2_PwmState }
+};
+
+/* Object 60A3h: charge current in 10mA */
+uint16_t OBJ60A3_ChargeCurrent_10mA = 0;
+stOdSubInfo_t stObIndex60A3[] =
+{
+    { RW, UNSIGNED16, sizeof (uint16_t), (void*)&OBJ60A3_ChargeCurrent_10mA }
+};
+
+
+/* Object 60A4h: system config */
+typedef struct
+{
+    uint16_t U_Config: 8;
+    uint16_t I_Config: 8;
+}stSystemConfig_t;
+
+uint16_t OBJ60A4_SystemCfg = {0};
+stOdSubInfo_t stObIndex60A4[] =
+{
+    { RW, UNSIGNED16, sizeof (uint16_t), (void*)&OBJ60A4_SystemCfg }
+};
+
+
+/* Object 60A5h: Battery temperature in 0.125 */
+int16_t OBJ60A5_TBatt_0_125C = 0;
+stOdSubInfo_t stObIndex60A5[] =
+{
+    { RW, INTEGER16, sizeof (int16_t), (void*)&OBJ60A5_TBatt_0_125C }
+};
+
+
+/* Object 60A6h: Charger temperature in 0.125 */
+int16_t OBJ60A6_TCharge_0_125C = 0;
+stOdSubInfo_t stObIndex60A6[] =
+{
+    { RW, INTEGER16, sizeof (int16_t), (void*)&OBJ60A6_TCharge_0_125C }
+};
+
+
+/* Object 60A7h: last charge duration in minute */
+uint16_t OBJ60A7_LastCharge_min = 0;
+stOdSubInfo_t stObIndex60A7[] =
+{
+    { RW, UNSIGNED16, sizeof (uint16_t), (void*)&OBJ60A7_LastCharge_min }
+};
+
+
+/* Object 60A8h: last charge duration in minute */
+uint8_t OBJ60A8_EnterChargeMode = 0;
+stOdSubInfo_t stObIndex60A8[] =
+{
+    { RW, UNSIGNED8, sizeof (uint8_t), (void*)&OBJ60A8_EnterChargeMode }
+};
+
 
 stOdSubInfoMap_t stOdSubInfoMap_CiA418[] =
 {
@@ -595,7 +683,17 @@ stOdSubInfoMap_t stOdSubInfoMap_CiA418[] =
     {(stOdSubInfo_t *)&stObIndex6070,          1u,   0x6070},
     {(stOdSubInfo_t *)&stObIndex6080,          1u,   0x6080},
     {(stOdSubInfo_t *)&stObIndex6081,          1u,   0x6081},
-    {(stOdSubInfo_t *)&stObIndex6090,          1u,   0x6090}
+    {(stOdSubInfo_t *)&stObIndex6090,          1u,   0x6090},
+    
+    {(stOdSubInfo_t *)&stObIndex60A0,          1u,   0x60A0},
+    {(stOdSubInfo_t *)&stObIndex60A1,          1u,   0x60A1},
+    {(stOdSubInfo_t *)&stObIndex60A2,          1u,   0x60A2},
+    {(stOdSubInfo_t *)&stObIndex60A3,          1u,   0x60A3},
+    {(stOdSubInfo_t *)&stObIndex60A4,          1u,   0x60A4},
+    {(stOdSubInfo_t *)&stObIndex60A5,          1u,   0x60A5},
+    {(stOdSubInfo_t *)&stObIndex60A6,          1u,   0x60A6},
+    {(stOdSubInfo_t *)&stObIndex60A7,          1u,   0x60A7},
+    {(stOdSubInfo_t *)&stObIndex60A8,          1u,   0x60A8},
 };
 
 #define CIA_418_TABLE_SIZE (sizeof(stOdSubInfoMap_CiA418) / sizeof(stOdSubInfoMap_t))
@@ -713,4 +811,154 @@ void TestOdReadWrite(void)
     write[1] = 0x02;
     WriteOdMap(0x1800, 5, 0, &write[0]);
     ReadOdMap(0x1800, 5, 0, &read[0]);
+}
+
+
+/* most of the OD are related to other module, update then in this API */
+void UpdateChargerOd(void)
+{
+    /* 6000h Battery status(Battery-->Charger): don't need to update */
+    /* 6001h Charger status(Charger-->Battery): if not in old version, then set 1 when 
+       system machine is in idle mode */
+    if(SYS_GetSystemstate() == SYS_IDLE || SYS_GetSystemstate() == SYS_CHARGING)
+    {
+        OBJ6001_ChargerStatus = 1;
+    }
+    else
+    {
+        OBJ6001_ChargerStatus = 0;
+    }
+
+    /* 6010h  */
+    /* 6020h  */
+    /* 6030h  */
+    /* 6031h  */
+    /* 6040h  */
+    /* 6041h  */
+    /* 6050h  */
+    /* 6051h  */
+
+    /* 6052h  */
+    OBJ6052_LastChg_0_125_AH = SystemStateInfo.ChargeCap_mAh / 125;
+
+    /* 6053h  */
+    OBJ6053_LastEqual_0_125_AH = SystemStateInfo.ChargeCap_mAh / 125;
+
+    /* 6054h  */
+    /* 6060h  */
+    /* 6070h  */
+    /* 6080h  */
+    OBJ6080_ChargeSOC = SystemStateInfo.ChargeCap_mAh / OBJ6020_AhCap / 100 + SystemStateInfo.ChargeSOC;
+    /* 6081h  */
+    /* 6090h  */
+
+    /********************* User define OD, don't open to customer */
+    /* 60A0h  */
+    OBJ60A0_SystemStatebits = *(uint32_t)&stSystemStateBits;
+
+    /* 60A1h  */
+    OBJ60A1_SystemState = ((uint16_t)SystemStateInfo.CurrentState << 8) + (uint16_t)SystemStateInfo.CurrentChgState;
+
+
+    /* 60A2h  */
+    OBJ60A2_PwmState = ((uint32_t)PWM_UCmdLast_x10 << 16) + PWM_ICmdLast_x10;
+
+    /* 60A3h  */
+    OBJ60A3_ChargeCurrent_10mA = stAdcMeters.I_Charge_mA / 10;
+
+    /* 60A4h  */
+    OBJ60A4_SystemCfg = ((uint16_t)stAdcMeters.USetup << 8) + (uint16_t)stAdcMeters.ISetup;
+
+    /* 60A5h  */
+    OBJ60A5_TBatt_0_125C = (int16_t)(stAdcMeters.T_BattMeter_100mC / 0.8);
+
+    /* 60A6h  */
+    OBJ60A6_TCharge_0_125C = (int16_t)(stAdcMeters.T_ChargeMeter_100mC / 0.8);
+
+    /* 60A7h  */
+    
+    /* 60A8h  */
+    OBJ60A8_EnterChargeMode = stSystemStateBits.EnterSimulationMode;
+
+}
+
+
+uint8_t GetBatteryState(void)
+{
+    return OBJ6000_BattStatus;
+}
+
+
+int16_t GetBatteryTemp_100mC(void)
+{
+    return (OBJ6010_BattTemperature * 0.8);
+}
+
+
+uint32_t GetTotalCharge_Ah(void)
+{
+    return OBJ6050_CumulativeTotal_AH;
+}
+
+
+uint16_t GetLastCharge_100mAh(void)
+{
+    return OBJ6051_LastExpended_0_125_AH;
+}
+
+
+uint16_t GetBatteryVolt_10mV(void)
+{
+    return (uint16_t)((OBJ6060_BatteryVolts_Q10V * 100) >> 10);
+}
+
+
+uint16_t GetChargeCmd_10mA(void)
+{
+    return ((OBJ6070_ChargeCurrntRequest_Q4A * (uint32_t)100u) >> 4);
+}
+
+uint16_t GetBatterySOC(void)
+{
+    return OBJ6081_BatterySOC;
+}
+
+void SaveRxPDO1(uint8_t *pData)
+{
+#ifdef CIA_418_OD
+    OBJ6001_ChargerStatus = pData[0];
+#else
+    OBJ6010_BattTemperature = (int16_t)((pData[1] << 8) | pData[0]);
+    OBJ6000_BattStatus = pData[2];
+#endif
+}
+
+
+void SaveRxPDO2(uint8_t *pData)
+{
+#ifdef CIA_418_OD
+    OBJ6001_ChargerStatus = pData[0];
+    OBJ6052_LastChg_0_125_AH = (uint16_t)pData[1] | ((uint16_t)pData[2] << 8);
+#else
+    OBJ6010_BattTemperature = (int16_t)((uin16_t)(pData[1] << 8) | pData[0]);
+    OBJ6000_BattStatus = pData[2];
+    
+    OBJ6060_BatteryVolts_Q10V = (uin32_t)pData[3] 
+                              | ((uin32_t)pData[4] << 8u)
+                              | ((uin32_t)pData[5] << 16u)
+                              | ((uin32_t)pData[6] << 24u);
+#endif
+}
+
+
+void SaveRxPDO3(uint8_t *pData)
+{
+#ifdef CIA_418_OD
+    OBJ6001_ChargerStatus = pData[0];
+    OBJ6052_LastChg_0_125_AH = (uint16_t)pData[1] | ((uint16_t)pData[2] << 8);
+    OBJ6080_ChargeSOC = pData[3];
+#else
+    OBJ6070_ChargeCurrntRequest_Q4A = (uin16_t)((uin16_t)(pData[1] << 8) | pData[0]);
+    OBJ6081_BatterySOC = pData[2];
+#endif
 }
